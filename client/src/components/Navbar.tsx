@@ -1,7 +1,11 @@
 import React from 'react';
 import { PanelLeftOpen } from 'lucide-react';
 
-const Navbar = ({ onOpenSidebar }) => {
+interface NavbarProps {
+  onOpenSidebar?: () => void;
+}
+
+const Navbar: React.FC<NavbarProps> = ({ onOpenSidebar }) => {
   const handleOpenSidebar = () => {
     if (onOpenSidebar) {
       onOpenSidebar();

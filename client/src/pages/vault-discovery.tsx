@@ -1,9 +1,13 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { VaultGrid, type Vault } from 'client/src/components/VaultGrid/VaultGrid.tsx'; // Ajuste o caminho conforme necessário
+import { VaultGrid, type Vault } from '@/components/VaultGrid/VaultGrid';
+import VaultHunting from '@/components/VaultHunting/VaultHunting';
+import Navbar from '@/components/Navbar';
+import Sidbar from '@/components/Sidbar';
 
 const VaultDiscovery: React.FC = () => {
   const [vaults, setVaults] = useState<Vault[]>([]);
   const [loading, setLoading] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   // Carrega os dados dos cofres
   useEffect(() => {
@@ -119,19 +123,46 @@ const VaultDiscovery: React.FC = () => {
     loadVaults();
   }, []);
 
+  // Handlers para sidebar
+  const handleOpenSidebar = useCallback(() => {
+    setSidebarOpen(true);
+  }, []);
+
+  const handleCloseSidebar = useCallback(() => {
+    setSidebarOpen(false);
+  }, []);
+
   // Handler para quando um cofre é clicado
   const handleVaultClick = useCallback((vault: Vault) => {
     console.log('Cofre clicado:', vault.name);
-    
-    // Aqui você pode implementar a lógica de abertura do cofre
-    // Por exemplo: abrir modal, navegar para outra página, etc.
-    
-    // Exemplo de navegação (se estiver usando React Router)
-    // navigate(`/vault/${vault.id}`);
-    
-    // Exemplo de abertura de modal
-    // setSelectedVault(vault);
-    // setShowModal(true);
+    // Implementar lógica de abertura do cofre
+  }, []);
+
+  // Handlers para o componente de caça de cofres
+  const handleVaultFound = useCallback((vault: any) => {
+    console.log('Cofre encontrado:', vault);
+    // Adicionar o cofre encontrado à lista de cofres
+    setVaults(prevVaults => [...prevVaults, {
+      id: vault.id,
+      name: vault.name,
+      items: [{ id: '1', name: `Recompensa de R$${vault.prizeAmount}`, type: 'money' as const, value: vault.prizeAmount }],
+      isLocked: true,
+      difficulty: vault.difficulty,
+      description: `Cofre encontrado em ${vault.location}`,
+      isNew: true
+    }]);
+  }, []);
+
+  const handleHuntComplete = useCallback((stats: any, foundVaults: any[]) => {
+    console.log('Caçada completa:', stats, foundVaults);
+  }, []);
+
+  const handleHuntStart = useCallback(() => {
+    console.log('Caçada iniciada');
+  }, []);
+
+  const handleHuntStop = useCallback(() => {
+    console.log('Caçada parada');
   }, []);
 
   if (loading) {
@@ -146,20 +177,49 @@ const VaultDiscovery: React.FC = () => {
   }
 
   return (
-    <VaultGrid
-      vaults={vaults}
-      onVaultClick={handleVaultClick}
-      title="Cofres Disponíveis"
-      emptyStateConfig={{
-        title: "Nenhum cofre encontrado",
-        description: "Inicie uma caçada para encontrar cofres disponíveis, ou aguarde que eles apareçam para você esporadicamente"
-      }}
-      gridConfig={{
-        cols: { sm: 2, md: 2, lg: 3, xl: 4 },
-        gap: 6
-      }}
-      showBackground={true}
-    />
+    <div className="min-h-screen bg-gray-900">
+      {/* Navbar */}
+      <Navbar onOpenSidebar={handleOpenSidebar} />
+      
+      {/* Sidebar */}
+      {sidebarOpen && (
+        <div className="fixed inset-0 z-30 lg:hidden">
+          <div className="fixed inset-0 bg-black/50" onClick={handleCloseSidebar} />
+          <div className="fixed left-0 top-0 h-full w-80 bg-slate-800">
+            <Sidbar />
+          </div>
+        </div>
+      )}
+
+      {/* Conteúdo principal */}
+      <div className="pt-16"> {/* Espaço para navbar fixa */}
+        {/* Componente de caça de cofres no topo */}
+        <div className="p-4">
+          <VaultHunting
+            onVaultFound={handleVaultFound}
+            onHuntComplete={handleHuntComplete}
+            onHuntStart={handleHuntStart}
+            onHuntStop={handleHuntStop}
+          />
+        </div>
+
+        {/* Grid de cofres abaixo */}
+        <VaultGrid
+          vaults={vaults}
+          onVaultClick={handleVaultClick}
+          title="Cofres Disponíveis"
+          emptyStateConfig={{
+            title: "Nenhum cofre encontrado",
+            description: "Inicie uma caçada para encontrar cofres disponíveis, ou aguarde que eles apareçam para você esporadicamente"
+          }}
+          gridConfig={{
+            cols: { sm: 2, md: 2, lg: 3, xl: 4 },
+            gap: 6
+          }}
+          showBackground={false} // Removemos o background do grid já que a página tem seu próprio background
+        />
+      </div>
+    </div>
   );
 };
 
