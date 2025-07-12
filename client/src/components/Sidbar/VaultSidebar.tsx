@@ -64,7 +64,7 @@ const VaultSidebar: React.FC<VaultSidebarProps> = ({
                 className="relative bg-slate-700 rounded-2xl p-4 border border-violet-500/30"
               >
                 {!showItems ? (
-                  <div className="flex items-center justify-center py-8">
+                  <div className="absolute inset-0 flex items-center justify-center bg-slate-900 rounded-2xl">
                     <div className="flex items-center space-x-2">
                       <EyeOff className="w-5 h-5 text-white" />
                       <span className="text-white font-medium">Item escondido</span>
