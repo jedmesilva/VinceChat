@@ -17,11 +17,11 @@ const Sidebar = () => {
   });
 
   const [prizes] = useState([
-    { id: 1, amount: "R$5.000" },
-    { id: 2, amount: "R$5.000" },
-    { id: 3, amount: "R$5.000" },
-    { id: 4, amount: "R$5.000" },
-    { id: 5, amount: "R$5.000" }
+    { id: 1, amount: "R$5.000", type: "Prêmio em dinheiro", rarity: "Épico" },
+    { id: 2, amount: "R$5.000", type: "Prêmio em dinheiro", rarity: "Épico" },
+    { id: 3, amount: "R$5.000", type: "Prêmio em dinheiro", rarity: "Épico" },
+    { id: 4, amount: "R$5.000", type: "Prêmio em dinheiro", rarity: "Épico" },
+    { id: 5, amount: "R$5.000", type: "Prêmio em dinheiro", rarity: "Épico" }
   ]);
 
   // Handlers que podem ser passados para os componentes filhos
@@ -44,7 +44,7 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 relative overflow-hidden w-full max-w-none">
+    <div className="min-h-screen bg-gray-900 relative overflow-hidden w-full max-w-none flex flex-col">
       {/* Background Effect */}
       <div className="absolute inset-0 w-full">
         <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-gray-900 to-black" />

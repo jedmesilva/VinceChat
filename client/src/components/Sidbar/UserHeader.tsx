@@ -1,24 +1,23 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { ChevronRight, PanelLeft, Shield, Skull } from 'lucide-react';
 
-const UserHeader = () => {
-  const [user] = useState({
-    name: "João Lukas",
-    avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=80&h=80&fit=crop&crop=face&auto=format",
-    titles: ["guardião", "saqueador"] // Títulos conquistados
-  });
-
-  const [userSectionPressed, setUserSectionPressed] = useState(false);
-
-  const handleUserClick = () => {
-    setUserSectionPressed(true);
-    setTimeout(() => setUserSectionPressed(false), 150);
-    alert('Acessar conta');
+interface UserHeaderProps {
+  user: {
+    name: string;
+    avatar: string;
+    titles: string[];
   };
+  userSectionPressed: boolean;
+  onUserClick: () => void;
+  onCloseSidebar: () => void;
+}
 
-  const handleCloseSidebar = () => {
-    alert('Abrir sidebar');
-  };
+const UserHeader: React.FC<UserHeaderProps> = ({ 
+  user, 
+  userSectionPressed, 
+  onUserClick, 
+  onCloseSidebar 
+}) => {
 
   const getTitleIcon = (title) => {
     switch(title) {
@@ -43,11 +42,11 @@ const UserHeader = () => {
   };
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-10 bg-gray-800 flex w-full max-w-none">
+    <div className="bg-gray-800 flex w-full relative z-10">
       {/* Left side - User info */}
       <div className={`flex-1 px-4 py-6 flex items-center min-h-24 transition-all duration-150 ${userSectionPressed ? 'bg-gray-700' : 'bg-gray-800'}`}>
         <button 
-          onClick={handleUserClick}
+          onClick={onUserClick}
           className="w-full flex items-center justify-between"
         >
           <div className="flex items-center space-x-3">
@@ -80,7 +79,7 @@ const UserHeader = () => {
       {/* Right side - User arrow button area */}
       <div className={`w-16 flex items-center justify-center transition-all duration-150 ${userSectionPressed ? 'bg-gray-700' : 'bg-gray-800'}`}>
         <button 
-          onClick={handleUserClick}
+          onClick={onUserClick}
           className="w-9 h-9 flex items-center justify-center hover:bg-slate-700 rounded-xl transition-all duration-200"
         >
           <ChevronRight className="w-5 h-5 text-slate-300" />
@@ -93,7 +92,7 @@ const UserHeader = () => {
       {/* Right side - Close button area */}
       <div className="w-16 bg-slate-800 flex items-center justify-center">
         <button 
-          onClick={handleCloseSidebar}
+          onClick={onCloseSidebar}
           className="w-9 h-9 bg-slate-700 rounded-xl flex items-center justify-center hover:bg-slate-600 transition-all duration-200 border border-slate-600"
         >
           <PanelLeft className="w-5 h-5 text-slate-300" />

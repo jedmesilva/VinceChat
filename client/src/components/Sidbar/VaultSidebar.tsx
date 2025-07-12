@@ -1,23 +1,32 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Lock, DollarSign, Eye, EyeOff } from 'lucide-react';
 
-const VaultSidebar = () => {
-  const [showItems, setShowItems] = useState(true);
+interface Prize {
+  id: number;
+  amount: string;
+  type: string;
+  rarity: string;
+}
 
-  const [prizes] = useState([
-    { id: 1, amount: "R$5.000", type: "Prêmio em dinheiro", rarity: "Épico" },
-    { id: 2, amount: "R$5.000", type: "Prêmio em dinheiro", rarity: "Épico" },
-    { id: 3, amount: "R$5.000", type: "Prêmio em dinheiro", rarity: "Épico" },
-    { id: 4, amount: "R$5.000", type: "Prêmio em dinheiro", rarity: "Épico" },
-    { id: 5, amount: "R$5.000", type: "Prêmio em dinheiro", rarity: "Épico" }
-  ]);
-
-  const toggleShowItems = () => {
-    setShowItems(!showItems);
+interface VaultSidebarProps {
+  user: {
+    name: string;
+    vaultItems?: number;
   };
+  prizes: Prize[];
+  showItems: boolean;
+  onToggleShowItems: () => void;
+}
+
+const VaultSidebar: React.FC<VaultSidebarProps> = ({ 
+  user, 
+  prizes, 
+  showItems, 
+  onToggleShowItems 
+}) => {
 
   return (
-    <div className="min-h-screen w-screen bg-gray-900 flex flex-col overflow-hidden">
+    <div className="flex-1 flex flex-col overflow-hidden relative z-10">
 
       {/* Header */}
       <div className="bg-slate-800 border-b border-slate-700 p-4 w-full">
@@ -33,7 +42,7 @@ const VaultSidebar = () => {
           </div>
 
           <button 
-            onClick={toggleShowItems}
+            onClick={onToggleShowItems}
             className="w-9 h-9 bg-slate-700 rounded-full flex items-center justify-center hover:bg-slate-600 transition-all duration-200 border border-slate-600"
           >
             {showItems ? (

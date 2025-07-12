@@ -186,7 +186,7 @@ const VaultDiscovery: React.FC = () => {
         <div className="fixed inset-0 z-30 lg:hidden">
           <div className="fixed inset-0 bg-black/50" onClick={handleCloseSidebar} />
           <div className="fixed left-0 top-0 h-full w-80 bg-slate-800">
-            <Sidbar onClose={handleCloseSidebar} />
+            <Sidbar />
           </div>
         </div>
       )}
