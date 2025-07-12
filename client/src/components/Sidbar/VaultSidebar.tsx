@@ -55,8 +55,8 @@ const VaultSidebar: React.FC<VaultSidebarProps> = ({
       </div>
 
       {/* Items List - Scrollable */}
-      <div className="flex-1 overflow-y-auto relative z-10">
-        <div className="p-4">
+      <div className="flex-1 overflow-y-auto relative z-10 bg-slate-800">
+        <div className="p-4"></div>
           <div className="space-y-3">
             {prizes.map((prize) => (
               <div 
