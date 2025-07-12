@@ -26,7 +26,7 @@ const VaultSidebar: React.FC<VaultSidebarProps> = ({
 }) => {
 
   return (
-    <div className="h-full flex flex-col relative z-10">
+    <div className="h-full flex flex-col relative z-10 bg-slate-800">
 
       {/* Header - Fixed */}
       <div className="flex-shrink-0 bg-slate-800 border-b border-slate-700 p-4 w-full">
@@ -43,7 +43,7 @@ const VaultSidebar: React.FC<VaultSidebarProps> = ({
 
           <button 
             onClick={onToggleShowItems}
-            className="w-9 h-9 bg-slate-700 rounded-full flex items-center justify-center hover:bg-slate-600 transition-all duration-200 border border-slate-600"
+            className="w-9 h-9 bg-slate-700 rounded-full flex items-center justify-center hover:bg-slate-600 border border-slate-600"
           >
             {showItems ? (
               <Eye className="w-5 h-5 text-white" />
@@ -61,31 +61,28 @@ const VaultSidebar: React.FC<VaultSidebarProps> = ({
             {prizes.map((prize) => (
               <div 
                 key={prize.id}
-                className="relative bg-slate-800 rounded-2xl p-4 border border-violet-500/30 hover:scale-[1.02] transition-all duration-300 group shadow-lg hover:shadow-violet-500/20"
+                className="relative bg-slate-700 rounded-2xl p-4 border border-violet-500/30"
               >
-
-                {/* Content */}
-                <div className={`flex items-center space-x-3 relative z-10 ${!showItems ? 'blur-md' : ''}`}>
-                  <div className="w-12 h-12 bg-violet-500 rounded-xl flex items-center justify-center shadow-lg shadow-violet-500/30">
-                    <DollarSign className="w-6 h-6 text-white" />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-lg font-semibold text-white">{prize.amount}</h3>
-                    <p className="text-sm text-slate-400">{prize.type}</p>
-                  </div>
-
-                  {/* Rarity badge */}
-                  <div className="px-3 py-1 rounded-full text-xs font-bold bg-violet-500/20 text-violet-300 border border-violet-400/30">
-                    {prize.rarity}
-                  </div>
-                </div>
-
-                {/* Hidden item message */}
-                {!showItems && (
-                  <div className="absolute inset-0 flex items-center justify-center bg-slate-900 rounded-2xl">
+                {!showItems ? (
+                  <div className="flex items-center justify-center py-8">
                     <div className="flex items-center space-x-2">
                       <EyeOff className="w-5 h-5 text-white" />
                       <span className="text-white font-medium">Item escondido</span>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="flex items-center space-x-3">
+                    <div className="w-12 h-12 bg-violet-500 rounded-xl flex items-center justify-center">
+                      <DollarSign className="w-6 h-6 text-white" />
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="text-lg font-semibold text-white">{prize.amount}</h3>
+                      <p className="text-sm text-slate-400">{prize.type}</p>
+                    </div>
+
+                    {/* Rarity badge */}
+                    <div className="px-3 py-1 rounded-full text-xs font-bold bg-violet-500 text-white">
+                      {prize.rarity}
                     </div>
                   </div>
                 )}
