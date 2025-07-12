@@ -170,11 +170,11 @@ const Sidbar: React.FC<SidbarProps> = ({ onClose }) => {
 
       {/* Prize List - Scrollable Content */}
       <div className="flex-1 pt-48 pb-20 overflow-y-auto relative z-0">
-        <div className="space-y-3 px-2">
+        <div className="space-y-3">
           {prizes.map((prize) => (
             <div 
               key={prize.id}
-              className="relative w-full bg-slate-800 rounded-2xl p-4 border border-violet-500/30 hover:scale-[1.02] transition-all duration-300 group shadow-lg hover:shadow-violet-500/20"
+              className="relative w-full bg-slate-800 p-4 border border-violet-500/30 hover:scale-[1.02] transition-all duration-300 group shadow-lg hover:shadow-violet-500/20"
             >
               {/* Shine effect */}
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl" />
