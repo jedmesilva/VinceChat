@@ -178,37 +178,23 @@ const VaultDiscovery: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gray-900 flex">
-      {/* Sidebar - empurra o conteúdo */}
+      {/* Sidebar que empurra o conteúdo */}
       <div 
         className={`
-          fixed top-0 left-0 h-full z-30 transform transition-transform duration-300 ease-in-out
-          ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}
-          w-80 bg-slate-800
+          h-screen bg-slate-800 transition-all duration-300 ease-in-out overflow-y-auto
+          ${sidebarOpen ? 'w-80' : 'w-0'}
         `}
       >
-        <Sidbar onClose={handleCloseSidebar} />
+        {sidebarOpen && <Sidbar onClose={handleCloseSidebar} />}
       </div>
 
-      {/* Overlay para mobile */}
-      {sidebarOpen && (
-        <div 
-          className="fixed inset-0 bg-black/50 z-20 lg:hidden"
-          onClick={handleCloseSidebar}
-        />
-      )}
-
-      {/* Container principal */}
-      <div className="flex-1 flex flex-col">
+      {/* Container principal que se ajusta automaticamente */}
+      <div className="flex-1 flex flex-col min-w-0">
         {/* Navbar */}
         <Navbar onOpenSidebar={handleOpenSidebar} />
         
-        {/* Conteúdo principal que se move com a sidebar */}
-        <div 
-          className={`
-            flex-1 transition-all duration-300 ease-in-out pt-16
-            ${sidebarOpen ? 'lg:ml-80' : 'ml-0'}
-          `}
-        >
+        {/* Conteúdo principal */}
+        <div className="flex-1 pt-16 overflow-x-auto">
           {/* Componente de caça de cofres no topo */}
           <div className="p-4">
             <VaultHunting
