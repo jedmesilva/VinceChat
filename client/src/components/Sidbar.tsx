@@ -71,7 +71,7 @@ const Sidbar: React.FC<SidbarProps> = ({ onClose }) => {
   };
 
   return (
-    <div className="min-h-screen w-full bg-gray-900 relative flex flex-col overflow-hidden">
+    <div className="min-h-screen w-full bg-gray-900 relative overflow-hidden">
       {/* Immersive Background */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-gray-900 to-black" />
@@ -84,7 +84,7 @@ const Sidbar: React.FC<SidbarProps> = ({ onClose }) => {
       </div>
 
       {/* User Section - Fixed Top */}
-      <div className="relative z-10 bg-gray-800 flex w-full flex-shrink-0">
+      <div className="fixed top-0 left-0 right-0 z-10 bg-gray-800 flex w-full">
         {/* Left side - User info */}
         <div className={`flex-1 px-4 py-6 flex items-center min-h-24 transition-all duration-150 ${userSectionPressed ? 'bg-gray-700' : 'bg-gray-800'}`}>
           <button 
@@ -143,7 +143,7 @@ const Sidbar: React.FC<SidbarProps> = ({ onClose }) => {
       </div>
 
       {/* Header - Fixed Top (abaixo do usuário) */}
-      <div className="relative z-10 bg-slate-800 border-t border-slate-700/50 w-full flex-shrink-0">
+      <div className="fixed top-24 left-0 right-0 z-10 bg-slate-800 border-t border-slate-700/50 w-full">
         <div className="flex items-center justify-between p-4">
           <div className="flex items-center space-x-3">
             <div className="w-10 h-10 bg-violet-500/20 rounded-xl flex items-center justify-center border border-violet-500/30">
@@ -169,7 +169,7 @@ const Sidbar: React.FC<SidbarProps> = ({ onClose }) => {
       </div>
 
       {/* Prize List - Scrollable Content */}
-      <div className="flex-1 px-4 py-4 overflow-y-auto relative z-0 w-full">
+      <div className="fixed top-44 bottom-20 left-0 right-0 px-4 py-4 overflow-y-auto z-0 w-full">
         <div className="space-y-3 w-full">
           {prizes.map((prize) => (
             <div 
@@ -210,7 +210,7 @@ const Sidbar: React.FC<SidbarProps> = ({ onClose }) => {
       </div>
 
       {/* Bottom Section - Fixed Bottom */}
-      <div className="relative z-10 w-full flex-shrink-0">
+      <div className="fixed bottom-0 left-0 right-0 z-10 w-full">
         {/* Ver itens button */}
         <div className="px-4 py-3 bg-slate-800">
           <button 
