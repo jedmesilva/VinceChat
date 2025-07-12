@@ -71,8 +71,8 @@ const VaultSidebar: React.FC<VaultSidebarProps> = ({
                     </div>
                   </div>
                 ) : (
-                  <div className="flex items-center space-x-3">
-                    <div className="w-12 h-12 bg-violet-500 rounded-xl flex items-center justify-center">
+                  <div className={`flex items-center space-x-3 relative z-10 ${!showItems ? 'blur-md' : ''}`}>
+                    <div className="w-12 h-12 bg-violet-500 rounded-xl flex items-center justify-center shadow-lg shadow-violet-500/30">
                       <DollarSign className="w-6 h-6 text-white" />
                     </div>
                     <div className="flex-1">
