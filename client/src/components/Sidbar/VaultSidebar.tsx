@@ -61,7 +61,7 @@ const VaultSidebar: React.FC<VaultSidebarProps> = ({
             {prizes.map((prize) => (
               <div 
                 key={prize.id}
-                className="relative bg-slate-700 rounded-2xl p-4 border border-violet-500/30"
+                className="relative bg-slate-800 rounded-2xl p-4 border border-violet-500/30 hover:scale-[1.02] transition-all duration-300 group shadow-lg hover:shadow-violet-500/20"
               >
                 {!showItems ? (
                   <div className="absolute inset-0 flex items-center justify-center bg-slate-900 rounded-2xl">
