@@ -75,10 +75,10 @@ const Sidbar: React.FC<SidbarProps> = ({ onClose }) => {
       {/* Immersive Background */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-gray-900 to-black" />
-        
+
         {/* Vault Interior Effect */}
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-slate-800/20 to-slate-900/40" />
-        
+
         {/* Metallic shine effect */}
         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent transform skew-x-12" />
       </div>
@@ -114,10 +114,10 @@ const Sidbar: React.FC<SidbarProps> = ({ onClose }) => {
             </div>
           </button>
         </div>
-        
+
         {/* Divider */}
         <div className="w-px bg-slate-600/50"></div>
-        
+
         {/* Right side - User arrow button area */}
         <div className={`w-16 flex items-center justify-center transition-all duration-150 ${userSectionPressed ? 'bg-gray-700' : 'bg-gray-800'}`}>
           <button 
@@ -127,10 +127,10 @@ const Sidbar: React.FC<SidbarProps> = ({ onClose }) => {
             <ChevronRight className="w-5 h-5 text-slate-300" />
           </button>
         </div>
-        
+
         {/* Divider */}
         <div className="w-px bg-slate-600/50"></div>
-        
+
         {/* Right side - Close button area */}
         <div className="w-16 bg-slate-800 flex items-center justify-center">
           <button 
@@ -154,7 +154,7 @@ const Sidbar: React.FC<SidbarProps> = ({ onClose }) => {
               <p className="text-sm text-slate-400">{user.vaultItems} itens</p>
             </div>
           </div>
-          
+
           <button 
             onClick={toggleShowItems}
             className="w-9 h-9 bg-slate-700 rounded-full flex items-center justify-center hover:bg-slate-600 transition-all duration-200 border border-slate-600/30"
@@ -170,15 +170,15 @@ const Sidbar: React.FC<SidbarProps> = ({ onClose }) => {
 
       {/* Prize List - Scrollable Content */}
       <div className="flex-1 pt-48 pb-20 px-4 overflow-y-auto relative z-0">
-        <div className="space-y-3 w-full">
+        <div className="space-y-3">
           {prizes.map((prize) => (
             <div 
               key={prize.id}
-              className="relative bg-slate-800 rounded-2xl p-4 border border-violet-500/30 hover:scale-[1.02] transition-all duration-300 group shadow-lg hover:shadow-violet-500/20"
+              className="relative w-full bg-slate-800 rounded-2xl p-4 border border-violet-500/30 hover:scale-[1.02] transition-all duration-300 group shadow-lg hover:shadow-violet-500/20"
             >
               {/* Shine effect */}
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl" />
-              
+
               {/* Content */}
               <div className={`flex items-center space-x-3 relative z-0 ${!showItems ? 'blur-md' : ''}`}>
                 <div className="w-12 h-12 bg-violet-500 rounded-xl flex items-center justify-center shadow-lg shadow-violet-500/30">
@@ -188,7 +188,7 @@ const Sidbar: React.FC<SidbarProps> = ({ onClose }) => {
                   <h3 className="text-lg font-semibold text-white">{prize.amount}</h3>
                   <p className="text-sm text-slate-400">Prêmio em dinheiro</p>
                 </div>
-                
+
                 {/* Rarity badge */}
                 <div className="px-3 py-1 rounded-full text-xs font-bold bg-violet-500/20 text-violet-300 border border-violet-400/30">
                   Épico
