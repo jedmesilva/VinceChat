@@ -136,7 +136,16 @@ export class MemStorage implements IStorage {
   async createVault(insertVault: InsertVault): Promise<Vault> {
     const id = this.currentVaultId++;
     const vault: Vault = { 
-      ...insertVault, 
+      name: insertVault.name,
+      description: insertVault.description ?? null,
+      itemAmount: insertVault.itemAmount,
+      isLocked: insertVault.isLocked ?? true,
+      attempts: insertVault.attempts ?? 0,
+      winners: insertVault.winners ?? 0,
+      difficulty: insertVault.difficulty,
+      lastActivity: insertVault.lastActivity ?? null,
+      isNew: insertVault.isNew ?? false,
+      isPopular: insertVault.isPopular ?? false,
       id,
       createdAt: new Date()
     };

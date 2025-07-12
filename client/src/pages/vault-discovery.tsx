@@ -420,4 +420,4 @@ const VaultGrid: React.FC = () => {
   );
 };
 
-export default VaultDiscovery;
+export default VaultGrid;
