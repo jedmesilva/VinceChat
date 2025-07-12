@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import { Lock, DollarSign, ChevronRight, Eye, EyeOff, PanelLeft, Shield, Skull } from 'lucide-react';
 
-const Sidbar = () => {
+interface SidbarProps {
+  onClose?: () => void;
+}
+
+const Sidbar: React.FC<SidbarProps> = ({ onClose }) => {
   const [user] = useState({
     name: "João Lukas",
     avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=80&h=80&fit=crop&crop=face&auto=format",
@@ -39,7 +43,9 @@ const Sidbar = () => {
   };
 
   const handleCloseSidebar = () => {
-    alert('Abrir sidebar');
+    if (onClose) {
+      onClose();
+    }
   };
 
   const getTitleIcon = (title) => {
@@ -164,7 +170,7 @@ const Sidbar = () => {
 
       {/* Prize List - Scrollable Content */}
       <div className="flex-1 pt-48 pb-20 px-4 overflow-y-auto relative z-0">
-        <div className="space-y-3 max-w-6xl mx-auto">
+        <div className="space-y-3 w-full">
           {prizes.map((prize) => (
             <div 
               key={prize.id}
