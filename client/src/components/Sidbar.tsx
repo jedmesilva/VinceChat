@@ -44,7 +44,7 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 relative overflow-hidden w-full max-w-none flex flex-col">
+    <div className="h-full bg-gray-900 relative overflow-hidden w-full max-w-none flex flex-col">
       {/* Background Effect */}
       <div className="absolute inset-0 w-full">
         <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-gray-900 to-black" />
@@ -52,26 +52,32 @@ const Sidebar = () => {
         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent transform skew-x-12" />
       </div>
 
-      {/* User Header Component */}
-      <UserHeader 
-        user={user}
-        userSectionPressed={userSectionPressed}
-        onUserClick={handleUserClick}
-        onCloseSidebar={handleCloseSidebar}
-      />
+      {/* User Header Component - Fixed at top */}
+      <div className="flex-shrink-0">
+        <UserHeader 
+          user={user}
+          userSectionPressed={userSectionPressed}
+          onUserClick={handleUserClick}
+          onCloseSidebar={handleCloseSidebar}
+        />
+      </div>
 
-      {/* Vault Sidebar Component */}
-      <VaultSidebar 
-        user={user}
-        prizes={prizes}
-        showItems={showItems}
-        onToggleShowItems={toggleShowItems}
-      />
+      {/* Vault Sidebar Component - Scrollable middle section */}
+      <div className="flex-1 overflow-hidden">
+        <VaultSidebar 
+          user={user}
+          prizes={prizes}
+          showItems={showItems}
+          onToggleShowItems={toggleShowItems}
+        />
+      </div>
 
-      {/* Footer Component */}
-      <Footer 
-        onViewItemsClick={handleViewItemsClick}
-      />
+      {/* Footer Component - Fixed at bottom */}
+      <div className="flex-shrink-0">
+        <Footer 
+          onViewItemsClick={handleViewItemsClick}
+        />
+      </div>
     </div>
   );
 };

@@ -26,10 +26,10 @@ const VaultSidebar: React.FC<VaultSidebarProps> = ({
 }) => {
 
   return (
-    <div className="flex-1 flex flex-col overflow-hidden relative z-10">
+    <div className="h-full flex flex-col relative z-10">
 
-      {/* Header */}
-      <div className="bg-slate-800 border-b border-slate-700 p-4 w-full">
+      {/* Header - Fixed */}
+      <div className="flex-shrink-0 bg-slate-800 border-b border-slate-700 p-4 w-full">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-3">
             <div className="w-10 h-10 bg-violet-500/20 rounded-xl flex items-center justify-center border border-violet-500/30">
@@ -54,47 +54,48 @@ const VaultSidebar: React.FC<VaultSidebarProps> = ({
         </div>
       </div>
 
-      {/* Items List */}
-      <div className="relative z-10 flex-1 overflow-y-auto p-4">
-        <div className="space-y-3">
-          {prizes.map((prize) => (
-            <div 
-              key={prize.id}
-              className="relative bg-slate-800 rounded-2xl p-4 border border-violet-500/30 hover:scale-[1.02] transition-all duration-300 group shadow-lg hover:shadow-violet-500/20"
-            >
-              {/* Shine effect */}
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl" />
+      {/* Items List - Scrollable */}
+      <div className="flex-1 overflow-y-auto relative z-10">
+        <div className="p-4">
+          <div className="space-y-3">
+            {prizes.map((prize) => (
+              <div 
+                key={prize.id}
+                className="relative bg-slate-800 rounded-2xl p-4 border border-violet-500/30 hover:scale-[1.02] transition-all duration-300 group shadow-lg hover:shadow-violet-500/20"
+              >
+                {/* Shine effect */}
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl" />
 
-              {/* Content */}
-              <div className={`flex items-center space-x-3 relative z-10 ${!showItems ? 'blur-md' : ''}`}>
-                <div className="w-12 h-12 bg-violet-500 rounded-xl flex items-center justify-center shadow-lg shadow-violet-500/30">
-                  <DollarSign className="w-6 h-6 text-white" />
-                </div>
-                <div className="flex-1">
-                  <h3 className="text-lg font-semibold text-white">{prize.amount}</h3>
-                  <p className="text-sm text-slate-400">{prize.type}</p>
-                </div>
+                {/* Content */}
+                <div className={`flex items-center space-x-3 relative z-10 ${!showItems ? 'blur-md' : ''}`}>
+                  <div className="w-12 h-12 bg-violet-500 rounded-xl flex items-center justify-center shadow-lg shadow-violet-500/30">
+                    <DollarSign className="w-6 h-6 text-white" />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-lg font-semibold text-white">{prize.amount}</h3>
+                    <p className="text-sm text-slate-400">{prize.type}</p>
+                  </div>
 
-                {/* Rarity badge */}
-                <div className="px-3 py-1 rounded-full text-xs font-bold bg-violet-500/20 text-violet-300 border border-violet-400/30">
-                  {prize.rarity}
-                </div>
-              </div>
-
-              {/* Hidden item message */}
-              {!showItems && (
-                <div className="absolute inset-0 flex items-center justify-center bg-slate-900/50 backdrop-blur-sm rounded-2xl">
-                  <div className="flex items-center space-x-2">
-                    <EyeOff className="w-5 h-5 text-white" />
-                    <span className="text-white font-medium">Item escondido</span>
+                  {/* Rarity badge */}
+                  <div className="px-3 py-1 rounded-full text-xs font-bold bg-violet-500/20 text-violet-300 border border-violet-400/30">
+                    {prize.rarity}
                   </div>
                 </div>
-              )}
-            </div>
-          ))}
+
+                {/* Hidden item message */}
+                {!showItems && (
+                  <div className="absolute inset-0 flex items-center justify-center bg-slate-900/50 backdrop-blur-sm rounded-2xl">
+                    <div className="flex items-center space-x-2">
+                      <EyeOff className="w-5 h-5 text-white" />
+                      <span className="text-white font-medium">Item escondido</span>
+                    </div>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
-
 
     </div>
   );
