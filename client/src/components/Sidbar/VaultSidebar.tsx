@@ -29,7 +29,7 @@ const VaultSidebar: React.FC<VaultSidebarProps> = ({
     <div className="h-full flex flex-col relative z-10">
 
       {/* Header - Fixed */}
-      <div className="flex-shrink-0 bg-slate-800 p-4 w-full">
+      <div className="flex-shrink-0 bg-slate-800 border-b border-slate-700 p-4 w-full">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-3">
             <div className="w-10 h-10 bg-violet-500/20 rounded-xl flex items-center justify-center border border-violet-500/30">
