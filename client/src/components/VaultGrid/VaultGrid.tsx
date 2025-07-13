@@ -173,12 +173,12 @@ const VaultCard: React.FC<VaultCardProps> = React.memo(({ vault, onVaultClick, i
 
   return (
     <div 
-      className={`h-full transform transition-all duration-500 ${
+      className={`transform transition-all duration-500 ${
         isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
       }`}
     >
       <div 
-        className={`relative h-full bg-slate-800/90 backdrop-blur-sm rounded-3xl p-6 border-2 ${difficulty.border} hover:scale-105 transition-all duration-300 cursor-pointer group ${difficulty.glow} flex flex-col`}
+        className={`relative min-h-[480px] bg-slate-800/90 backdrop-blur-sm rounded-3xl p-6 border-2 ${difficulty.border} hover:scale-105 transition-all duration-300 cursor-pointer group ${difficulty.glow} flex flex-col`}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         onClick={handleClick}
@@ -238,7 +238,7 @@ const VaultCard: React.FC<VaultCardProps> = React.memo(({ vault, onVaultClick, i
         </div>
 
         {/* Items Section - Flexible */}
-        <div className="flex-1 bg-slate-700/30 rounded-2xl p-4 mb-4 flex flex-col">
+        <div className="flex-1 bg-slate-700/30 rounded-2xl p-4 mb-4 flex flex-col min-h-[200px]">
           <h4 className="text-sm font-bold text-white mb-3 flex items-center gap-2">
             {vault.itemsVisible === false ? (
               <EyeOff className="h-4 w-4 text-slate-400" />
@@ -282,7 +282,7 @@ const VaultCard: React.FC<VaultCardProps> = React.memo(({ vault, onVaultClick, i
             ) : (
               // Versão normal com itens visíveis
               <div className="flex flex-col h-full">
-                <div className="flex-1 min-h-[120px] space-y-2">
+                <div className="flex-1 min-h-[80px] space-y-2">
                   {visibleItems.map((item) => {
                     const ItemIcon = getItemIcon(item.type);
                     return (
