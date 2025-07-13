@@ -1,0 +1,194 @@
+import React, { useState } from 'react';
+import { Clock, Plus, Minus, Star, Timer } from 'lucide-react';
+
+interface CheckoutSelectorTimeProps {
+  onPurchase?: (time: string, price: number) => void;
+  className?: string;
+}
+
+const CheckoutSelectorTime: React.FC<CheckoutProps> = ({ onPurchase, className = '' }) => {
+  const [selectedBlocks, setSelectedBlocks] = useState(1);
+  const [isPressed, setIsPressed] = useState(false);
+  const minutesPerBlock = 2.5;
+  const pricePerBlock = 5.99;
+
+  const totalMinutes = selectedBlocks * minutesPerBlock;
+  const totalPrice = selectedBlocks * pricePerBlock;
+
+  // Função para formatar tempo em h min s
+  const formatTime = (minutes: number) => {
+    const hours = Math.floor(minutes / 60);
+    const remainingMinutes = Math.floor(minutes % 60);
+    const seconds = Math.round((minutes - Math.floor(minutes)) * 60);
+    
+    if (hours > 0) {
+      if (seconds === 0) {
+        return `${hours}h ${remainingMinutes}min`;
+      }
+      return `${hours}h ${remainingMinutes}min ${seconds}s`;
+    } else {
+      if (seconds === 0) {
+        return `${remainingMinutes}min`;
+      }
+      return `${remainingMinutes}min ${seconds}s`;
+    }
+  };
+
+  // Função para formatar tempo no formato "2:30" ou "02:30:30"
+  const formatTimeShort = (minutes: number) => {
+    const hours = Math.floor(minutes / 60);
+    const remainingMinutes = Math.floor(minutes % 60);
+    const seconds = Math.round((minutes - Math.floor(minutes)) * 60);
+    
+    if (hours > 0) {
+      return `${hours.toString().padStart(2, '0')}:${remainingMinutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    } else {
+      return `${remainingMinutes}:${seconds.toString().padStart(2, '0')}`;
+    }
+  };
+
+  const handleDecrease = () => {
+    if (selectedBlocks > 1) {
+      setSelectedBlocks(selectedBlocks - 1);
+    }
+  };
+
+  const handleIncrease = () => {
+    setSelectedBlocks(selectedBlocks + 1);
+  };
+
+  const handlePurchase = () => {
+    const timeString = formatTime(totalMinutes);
+    
+    if (onPurchase) {
+      onPurchase(timeString, totalPrice);
+    } else {
+      console.log(`Adicionando ${timeString} por R$ ${totalPrice.toFixed(2)}`);
+      alert(`Tempo adicionado com sucesso!\nTempo: ${timeString}\nValor: R$ ${totalPrice.toFixed(2)}`);
+    }
+  };
+
+  return (
+    <div className={`w-full max-w-md mx-auto ${className}`}>
+      <div className="bg-slate-800/95 backdrop-blur-md rounded-3xl p-8 border border-slate-700/50 shadow-2xl shadow-black/50">
+        
+        {/* Header */}
+        <div className="mb-6">
+          <div className="flex items-start gap-4">
+            <div className="w-12 h-12 bg-violet-500 rounded-2xl flex items-center justify-center shadow-lg flex-shrink-0">
+              <Clock className="h-6 w-6 text-white" />
+            </div>
+            
+            <div className="flex-1">
+              <h1 className="text-2xl font-bold text-white mb-2 leading-tight">
+                Adicionar Tempo
+              </h1>
+              <p className="text-slate-400 text-base leading-relaxed">
+                Adicione mais tempo para continuar sua sessão
+              </p>
+            </div>
+          </div>
+        </div>
+
+
+
+        {/* Seletor de Tempo - Elemento Principal */}
+        <div className="mb-8">
+          <label className="block text-slate-300 text-sm font-medium mb-4">
+            Tempo a adicionar
+          </label>
+          
+          <div className="flex items-center justify-center gap-6 mb-4">
+            <button
+              onClick={handleDecrease}
+              disabled={selectedBlocks <= 1}
+              className="w-14 h-14 bg-slate-700/80 hover:bg-slate-600/80 disabled:bg-slate-800/50 disabled:opacity-50 rounded-2xl flex items-center justify-center transition-all duration-200 transform hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-violet-500/50"
+            >
+              <Minus className="w-6 h-6 text-slate-300" />
+            </button>
+            
+            <div className="text-center px-6 py-4 bg-slate-900/50 rounded-2xl border border-slate-700/30 min-w-[120px]">
+              <div className="text-4xl font-bold text-white mb-1">
+                {formatTimeShort(totalMinutes)}
+              </div>
+              <div className="text-slate-400 text-sm">
+                {formatTime(totalMinutes)}
+              </div>
+            </div>
+            
+            <button
+              onClick={handleIncrease}
+              className="w-14 h-14 bg-slate-700/80 hover:bg-slate-600/80 rounded-2xl flex items-center justify-center transition-all duration-200 transform hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-violet-500/50"
+            >
+              <Plus className="w-6 h-6 text-slate-300" />
+            </button>
+          </div>
+
+          <div className="text-center">
+            <div className="inline-flex items-center gap-2 text-slate-500 text-sm bg-slate-900/30 px-3 py-2 rounded-lg">
+              <Timer className="h-4 w-4" />
+              <span>Incrementos de {formatTimeShort(minutesPerBlock)} cada</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Resumo - Seção secundária mas importante */}
+        <div className="bg-slate-900/80 backdrop-blur-sm rounded-2xl p-6 mb-8 border border-slate-700/50">
+          <h3 className="text-slate-300 font-bold mb-4 text-lg flex items-center gap-2">
+            <Star className="h-5 w-5 text-violet-400" />
+            Resumo
+          </h3>
+          
+          <div className="space-y-3">
+
+            
+            <div className="flex justify-between items-center text-sm">
+              <span className="text-slate-400">Valor por minuto:</span>
+              <span className="text-white font-medium">
+                R$ {(pricePerBlock / minutesPerBlock).toFixed(2)}
+              </span>
+            </div>
+            
+            <div className="flex justify-between items-center text-sm">
+              <span className="text-slate-400">Tempo total:</span>
+              <span className="text-white font-medium">
+                {formatTime(totalMinutes)}
+              </span>
+            </div>
+            
+            <div className="border-t border-slate-700/50 pt-3 mt-3">
+              <div className="flex justify-between items-center">
+                <span className="text-slate-300 font-bold">Total:</span>
+                <span className="text-violet-400 font-bold text-lg">
+                  R$ {totalPrice.toFixed(2)}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Botão de Ação - CTA Principal */}
+        <button
+          onClick={handlePurchase}
+          onTouchStart={() => setIsPressed(true)}
+          onTouchEnd={() => setIsPressed(false)}
+          className={`w-full py-4 px-6 bg-violet-500 hover:bg-violet-400 active:bg-violet-600 text-white rounded-2xl text-lg font-bold transition-all duration-200 shadow-lg shadow-violet-500/25 transform hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-violet-500/50 ${
+            isPressed ? 'scale-95 bg-violet-600' : ''
+          }`}
+          style={{
+            touchAction: 'manipulation',
+            userSelect: 'none',
+            WebkitTouchCallout: 'none'
+          }}
+        >
+          <div className="flex items-center justify-center gap-2">
+            <Clock className="h-5 w-5" />
+            Adicionar {formatTime(totalMinutes)}
+          </div>
+        </button>
+      </div>
+    </div>
+  );
+};
+
+export default CheckoutSelectorTime;

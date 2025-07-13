@@ -1,0 +1,1 @@
+//Precisamos construir a tela de checkout importando os componentes de cada etapa: client/src/components/Checkout/CheckoutComponents/CheckoutSelectorTime.tsx; client/src/components/Checkout/CheckoutComponents/PaymentConfirmation.tsx; client/src/components/Checkout/CheckoutComponents/PaymentForm.tsx.
