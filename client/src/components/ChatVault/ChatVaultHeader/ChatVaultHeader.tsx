@@ -1,7 +1,7 @@
 import React from 'react';
-import { VaultHeaderComponent } from '../components/VaultHeaderComponent/VaultHeaderComponent';
-import { ConvictionBar } from '../components/ConvictionBar/ConvictionBar';
-import { OffensiveBar } from '../components/OffensiveBar/OffensiveBar';
+import VaultHeaderComponent from '../../VaultHeaderComponent/VaultHeaderComponent';
+import ConvictionBar from '../../ConvictionBar/ConvictionBar';
+import OffensiveBar from '../../OffensiveBar/OffensiveBar';
 
 interface ChatVaultHeaderProps {
   vaultName: string;

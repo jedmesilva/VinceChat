@@ -45,14 +45,5 @@ const VaultHeaderComponent: React.FC<VaultHeaderComponentProps> = ({
   );
 };
 
-// Exemplo de uso
-const VaultHeaderComponent: React.FC = () => {
-  return (
-    <VaultHeader 
-      vaultName="Cofre Misterioso" 
-      chatLabel="Chat Convince" 
-    />
-  );
-};
-
+export { VaultHeaderComponent };
 export default VaultHeaderComponent;

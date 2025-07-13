@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Crown } from 'lucide-react';
 import ChatVaultHeader from './ChatVaultHeader/ChatVaultHeader';
-import { ChatVaultMessageInput } from '../ChatVault/ChatVaultMessageInput/ChatVaultMessageInput';
-import { ChatVaultHistory } from '../ChatVault/ChatVaultHistory/ChatVaultHistory';
+import ChatVaultMessageInput from './ChatVaultMessageInput/ChatVaultMessageInput';
+import ChatVaultHistory from './ChatVaultHistory/ChatVaultHistory';
 
 interface Message {
   id: string;

@@ -17,7 +17,7 @@ interface ChatVaultMessageInputProps {
   onRoleClick?: () => void;
 }
 
-const ChatVaultMessageInput: React.FC<MessageInputProps> = ({ 
+const ChatVaultMessageInput: React.FC<ChatVaultMessageInputProps> = ({ 
   onSendMessage = () => {}, 
   placeholder = "Digite sua mensagem...",
   disabled = false,
