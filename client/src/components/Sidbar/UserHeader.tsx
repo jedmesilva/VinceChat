@@ -44,13 +44,13 @@ const UserHeader: React.FC<UserHeaderProps> = ({
   return (
     <div className="bg-gray-800 flex w-full relative z-10">
       {/* Left side - User info */}
-      <div className={`flex-1 px-4 py-6 flex items-center min-h-24 transition-all duration-150 ${userSectionPressed ? 'bg-gray-700' : 'bg-gray-800'}`}>
+      <div className={`flex-1 px-4 py-6 flex items-center min-h-24 transition-all duration-150 ${userSectionPressed ? 'bg-gray-700' : 'bg-gray-800'} min-w-0`}>
         <button 
           onClick={onUserClick}
           className="w-full flex items-center justify-between"
         >
-          <div className="flex items-center space-x-3">
-            <div className="relative">
+          <div className="flex items-start space-x-3 min-w-0">
+            <div className="relative flex-shrink-0">
               <img 
                 src={user.avatar} 
                 alt={user.name}
@@ -58,9 +58,9 @@ const UserHeader: React.FC<UserHeaderProps> = ({
               />
               <div className="absolute inset-0 rounded-full bg-gradient-to-br from-violet-500/20 to-purple-500/20" />
             </div>
-            <div className="text-left">
-              <h3 className="text-base font-semibold text-white">{user.name}</h3>
-              <div className="flex items-center space-x-2 mt-1">
+            <div className="text-left min-w-0 flex-1">
+              <h3 className="text-base font-semibold text-white truncate">{user.name}</h3>
+              <div className="flex flex-wrap items-center gap-1 mt-1">
                 {user.titles.map((title, index) => (
                   <div key={index} className={`flex items-center space-x-1 px-2 py-1 rounded-lg text-xs font-medium border ${getTitleColor(title)}`}>
                     {getTitleIcon(title)}
