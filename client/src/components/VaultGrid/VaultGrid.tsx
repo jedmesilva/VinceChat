@@ -399,7 +399,7 @@ const VaultGrid: React.FC<VaultGridProps> = ({
 
       {/* Content */}
       <div className={`relative z-10 ${title ? 'px-4 pb-4' : 'p-4'}`}>
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-7xl mx-auto">
           {vaults.length === 0 ? (
             <div className="text-center py-16">
               <div className="w-24 h-24 bg-slate-700/30 rounded-full flex items-center justify-center mx-auto mb-6">
@@ -413,9 +413,9 @@ const VaultGrid: React.FC<VaultGridProps> = ({
               </p>
             </div>
           ) : (
-            <div className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 auto-rows-fr`}>
+            <div className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 auto-rows-fr`}>
               {vaults.map((vault, index) => (
-                <div className="max-w-sm mx-auto w-full" key={vault.id}>
+                <div className="w-full" key={vault.id}>
                   <VaultCard 
                     vault={vault} 
                     onVaultClick={onVaultClick}
