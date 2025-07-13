@@ -173,12 +173,12 @@ const VaultCard: React.FC<VaultCardProps> = React.memo(({ vault, onVaultClick, i
 
   return (
     <div 
-      className={`transform transition-all duration-500 ${
+      className={`h-full transform transition-all duration-500 ${
         isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
       }`}
     >
       <div 
-        className={`relative bg-slate-800/90 backdrop-blur-sm rounded-3xl p-6 border-2 ${difficulty.border} hover:scale-105 transition-all duration-300 cursor-pointer group ${difficulty.glow}`}
+        className={`relative h-full bg-slate-800/90 backdrop-blur-sm rounded-3xl p-6 border-2 ${difficulty.border} hover:scale-105 transition-all duration-300 cursor-pointer group ${difficulty.glow} flex flex-col`}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         onClick={handleClick}
@@ -237,8 +237,8 @@ const VaultCard: React.FC<VaultCardProps> = React.memo(({ vault, onVaultClick, i
           )}
         </div>
 
-        {/* Items Section */}
-        <div className="bg-slate-700/30 rounded-2xl p-4 mb-4">
+        {/* Items Section - Flexible */}
+        <div className="flex-1 bg-slate-700/30 rounded-2xl p-4 mb-4 flex flex-col">
           <h4 className="text-sm font-bold text-white mb-3 flex items-center gap-2">
             {vault.itemsVisible === false ? (
               <EyeOff className="h-4 w-4 text-slate-400" />
@@ -248,91 +248,93 @@ const VaultCard: React.FC<VaultCardProps> = React.memo(({ vault, onVaultClick, i
             {vault.itemsVisible === false ? 'Conteúdo Misterioso' : `Itens (${vault.items.length})`}
           </h4>
           
-          {vault.itemsVisible === false ? (
-            // Versão misteriosa
-            <div className="space-y-3">
-              <div className="flex items-center justify-center p-6 bg-slate-600/20 rounded-xl border-2 border-dashed border-slate-500/40">
+          <div className="flex-1 flex flex-col">
+            {vault.itemsVisible === false ? (
+              // Versão misteriosa
+              <div className="flex flex-col h-full justify-between space-y-3">
+                <div className="flex items-center justify-center p-6 bg-slate-600/20 rounded-xl border-2 border-dashed border-slate-500/40">
+                  <div className="text-center">
+                    <HelpCircle className="h-8 w-8 text-slate-400 mx-auto mb-2" />
+                    <p className="text-sm text-slate-400 mb-1">Conteúdo Desconhecido</p>
+                    <p className="text-xs text-slate-500">Os itens serão revelados ao abrir o cofre</p>
+                  </div>
+                </div>
+                
+                <div className="grid grid-cols-3 gap-2">
+                  {[1, 2, 3].map((index) => (
+                    <div 
+                      key={index}
+                      className="flex items-center justify-center p-3 bg-slate-600/20 rounded-lg border border-slate-500/30"
+                    >
+                      <div className="w-6 h-6 bg-slate-500/30 rounded-full flex items-center justify-center">
+                        <div className="w-2 h-2 bg-slate-400 rounded-full animate-pulse" />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                
                 <div className="text-center">
-                  <HelpCircle className="h-8 w-8 text-slate-400 mx-auto mb-2" />
-                  <p className="text-sm text-slate-400 mb-1">Conteúdo Desconhecido</p>
-                  <p className="text-xs text-slate-500">Os itens serão revelados ao abrir o cofre</p>
+                  <span className="text-xs text-slate-500 px-2 py-1 bg-slate-600/20 rounded-full">
+                    ??? itens misteriosos
+                  </span>
                 </div>
               </div>
-              
-              <div className="grid grid-cols-3 gap-2">
-                {[1, 2, 3].map((index) => (
-                  <div 
-                    key={index}
-                    className="flex items-center justify-center p-3 bg-slate-600/20 rounded-lg border border-slate-500/30"
-                  >
-                    <div className="w-6 h-6 bg-slate-500/30 rounded-full flex items-center justify-center">
-                      <div className="w-2 h-2 bg-slate-400 rounded-full animate-pulse" />
-                    </div>
-                  </div>
-                ))}
-              </div>
-              
-              <div className="text-center">
-                <span className="text-xs text-slate-500 px-2 py-1 bg-slate-600/20 rounded-full">
-                  ??? itens misteriosos
-                </span>
-              </div>
-            </div>
-          ) : (
-            // Versão normal com itens visíveis
-            <>
-              <div className="space-y-2">
-                {visibleItems.map((item) => {
-                  const ItemIcon = getItemIcon(item.type);
-                  return (
-                    <div 
-                      key={item.id} 
-                      className="flex items-center gap-3 p-2 bg-slate-600/30 rounded-xl"
-                    >
-                      <div className="flex-shrink-0">
-                        <div className="w-8 h-8 bg-violet-500/10 rounded-lg flex items-center justify-center">
-                          <ItemIcon className="h-4 w-4 text-violet-400" />
-                        </div>
-                      </div>
-                      
-                      <div className="flex-1 min-w-0">
-                        <div className="text-sm font-medium text-white truncate">
-                          {getItemDisplay(item)}
-                        </div>
-                        {item.type === 'money' && (
-                          <div className="text-xs text-slate-400">
-                            Dinheiro
+            ) : (
+              // Versão normal com itens visíveis
+              <div className="flex flex-col h-full">
+                <div className="flex-1 min-h-[120px] space-y-2">
+                  {visibleItems.map((item) => {
+                    const ItemIcon = getItemIcon(item.type);
+                    return (
+                      <div 
+                        key={item.id} 
+                        className="flex items-center gap-3 p-2 bg-slate-600/30 rounded-xl"
+                      >
+                        <div className="flex-shrink-0">
+                          <div className="w-8 h-8 bg-violet-500/10 rounded-lg flex items-center justify-center">
+                            <ItemIcon className="h-4 w-4 text-violet-400" />
                           </div>
-                        )}
+                        </div>
+                        
+                        <div className="flex-1 min-w-0">
+                          <div className="text-sm font-medium text-white truncate">
+                            {getItemDisplay(item)}
+                          </div>
+                          {item.type === 'money' && (
+                            <div className="text-xs text-slate-400">
+                              Dinheiro
+                            </div>
+                          )}
+                        </div>
                       </div>
-                    </div>
-                  );
-                })}
+                    );
+                  })}
+                </div>
+                
+                {hasMoreItems && (
+                  <button
+                    onClick={handleToggleItems}
+                    onMouseDown={(e) => e.stopPropagation()}
+                    onMouseUp={(e) => e.stopPropagation()}
+                    className="w-full mt-3 py-2 bg-slate-600/50 hover:bg-slate-600/70 text-slate-300 hover:text-white rounded-xl transition-all duration-200 flex items-center justify-center gap-2 text-sm relative z-20"
+                    type="button"
+                  >
+                    {showAllItems ? (
+                      <>
+                        Ver menos
+                        <ChevronUp className="h-4 w-4" />
+                      </>
+                    ) : (
+                      <>
+                        Ver mais (+{vault.items.length - 3})
+                        <ChevronDown className="h-4 w-4" />
+                      </>
+                    )}
+                  </button>
+                )}
               </div>
-              
-              {hasMoreItems && (
-                <button
-                  onClick={handleToggleItems}
-                  onMouseDown={(e) => e.stopPropagation()}
-                  onMouseUp={(e) => e.stopPropagation()}
-                  className="w-full mt-3 py-2 bg-slate-600/50 hover:bg-slate-600/70 text-slate-300 hover:text-white rounded-xl transition-all duration-200 flex items-center justify-center gap-2 text-sm relative z-20"
-                  type="button"
-                >
-                  {showAllItems ? (
-                    <>
-                      Ver menos
-                      <ChevronUp className="h-4 w-4" />
-                    </>
-                  ) : (
-                    <>
-                      Ver mais (+{vault.items.length - 3})
-                      <ChevronDown className="h-4 w-4" />
-                    </>
-                  )}
-                </button>
-              )}
-            </>
-          )}
+            )}
+          </div>
         </div>
 
         {/* Expires In */}
