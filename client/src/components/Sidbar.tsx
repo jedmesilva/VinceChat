@@ -64,7 +64,7 @@ const Sidebar = () => {
 
       {/* Divider line between user section and vault section */}
       <div className="flex-shrink-0 px-4">
-        <div className="h-px bg-slate-600/50"></div>
+        <div className="h-px bg-slate-700"></div>
       </div>
 
       {/* Vault Sidebar Component - Scrollable middle section */}
