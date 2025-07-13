@@ -44,10 +44,10 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="h-full bg-gray-900 relative overflow-hidden w-full max-w-none flex flex-col">
+    <div className="h-full bg-slate-800 relative overflow-hidden w-full max-w-none flex flex-col">
       {/* Background Effect */}
       <div className="absolute inset-0 w-full">
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-gray-900 to-black" />
+        <div className="absolute inset-0 bg-slate-800" />
       </div>
 
       {/* User Header Component - Fixed at top */}
