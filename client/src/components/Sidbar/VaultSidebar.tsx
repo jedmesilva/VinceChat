@@ -61,14 +61,14 @@ const VaultSidebar: React.FC<VaultSidebarProps> = ({
             {prizes.map((prize) => (
               <div 
                 key={prize.id}
-                className="relative bg-slate-800 rounded-2xl p-4 border border-violet-500/30 hover:scale-[1.02] transition-all duration-300 group shadow-lg hover:shadow-violet-500/20"
+                className="relative bg-slate-800 rounded-2xl p-4 border border-violet-500/30 hover:scale-[1.02] transition-all duration-300 group"
               >
                 {/* Shine effect */}
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl" />
 
                 {/* Content */}
                 <div className={`flex items-center space-x-3 relative z-10 ${!showItems ? 'blur-md' : ''}`}>
-                  <div className="w-12 h-12 bg-violet-500 rounded-xl flex items-center justify-center shadow-lg shadow-violet-500/30">
+                  <div className="w-12 h-12 bg-violet-500 rounded-xl flex items-center justify-center">
                     <DollarSign className="w-6 h-6 text-white" />
                   </div>
                   <div className="flex-1">
