@@ -178,7 +178,7 @@ const VaultCard: React.FC<VaultCardProps> = React.memo(({ vault, onVaultClick, i
       }`}
     >
       <div 
-        className={`relative min-h-[480px] bg-slate-800/90 backdrop-blur-sm rounded-3xl p-6 border-2 ${difficulty.border} hover:scale-105 transition-all duration-300 cursor-pointer group ${difficulty.glow} flex flex-col`}
+        className={`relative min-h-[480px] bg-slate-800/90 backdrop-blur-sm rounded-3xl p-6 border-2 ${difficulty.border} transition-all duration-300 cursor-pointer group ${difficulty.glow} flex flex-col`}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         onClick={handleClick}
@@ -211,7 +211,7 @@ const VaultCard: React.FC<VaultCardProps> = React.memo(({ vault, onVaultClick, i
 
         {/* Lock Icon */}
         <div className="flex justify-center mb-4 mt-8">
-          <div className={`relative w-16 h-16 rounded-xl flex items-center justify-center transition-all duration-300 group-hover:scale-110 ${
+          <div className={`relative w-16 h-16 rounded-xl flex items-center justify-center transition-all duration-300 ${
             vault.isLocked 
               ? 'bg-slate-700/50 border-2 border-slate-500/50' 
               : 'bg-green-500/20 border-2 border-green-400/50'
