@@ -84,7 +84,7 @@ const VaultSidebar: React.FC<VaultSidebarProps> = ({
 
                 {/* Hidden item message */}
                 {!showItems && (
-                  <div className="absolute inset-0 flex items-center justify-center bg-slate-900/50 backdrop-blur-sm rounded-2xl">
+                  <div className="absolute inset-0 flex items-center justify-center bg-slate-900/80 rounded-2xl">
                     <div className="flex items-center space-x-2">
                       <EyeOff className="w-5 h-5 text-white" />
                       <span className="text-white font-medium">Item escondido</span>
