@@ -413,7 +413,7 @@ const VaultGrid: React.FC<VaultGridProps> = ({
               </p>
             </div>
           ) : (
-            <div className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 ${gridGap} auto-rows-fr`}>
+            <div className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 auto-rows-fr`}>
               {vaults.map((vault, index) => (
                 <div className="max-w-sm mx-auto w-full" key={vault.id}>
                   <VaultCard 
