@@ -44,9 +44,9 @@ const UserHeader: React.FC<UserHeaderProps> = ({
   };
 
   return (
-    <div className="bg-gray-800 flex w-full relative z-10">
+    <div className="bg-slate-800 flex w-full relative z-10">
       {/* Left side - User info */}
-      <div className={`flex-1 px-4 py-6 flex items-center min-h-24 transition-all duration-150 ${userSectionPressed ? 'bg-gray-700' : 'bg-gray-800'} min-w-0`}>
+      <div className={`flex-1 px-4 py-6 flex items-center min-h-24 transition-all duration-150 ${userSectionPressed ? 'bg-slate-700' : 'bg-slate-800'} min-w-0`}>
         <button 
           onClick={onUserClick}
           className="w-full flex items-center justify-between"
@@ -79,7 +79,7 @@ const UserHeader: React.FC<UserHeaderProps> = ({
       <div className="w-px bg-slate-600/50"></div>
 
       {/* Right side - User arrow button area */}
-      <div className={`w-16 flex items-center justify-center transition-all duration-150 ${userSectionPressed ? 'bg-gray-700' : 'bg-gray-800'}`}>
+      <div className={`w-16 flex items-center justify-center transition-all duration-150 ${userSectionPressed ? 'bg-slate-700' : 'bg-slate-800'}`}>
         <button 
           onClick={onUserClick}
           className="w-9 h-9 flex items-center justify-center hover:bg-slate-700 rounded-xl transition-all duration-200"
