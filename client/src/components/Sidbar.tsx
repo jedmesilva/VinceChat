@@ -61,10 +61,7 @@ const Sidebar = () => {
         />
       </div>
 
-      {/* Divider line between user section and vault section */}
-      <div className="flex-shrink-0 px-4 py-3 bg-red-500/20">
-        <div className="h-0.5 bg-white border border-white/50 rounded-full"></div>
-      </div>
+
 
       {/* Vault Sidebar Component - Scrollable middle section */}
       <div className="flex-1 overflow-hidden">

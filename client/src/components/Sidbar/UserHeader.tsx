@@ -44,7 +44,7 @@ const UserHeader: React.FC<UserHeaderProps> = ({
   };
 
   return (
-    <div className="bg-slate-800 flex w-full relative z-10">
+    <div className="bg-slate-800 flex w-full relative z-10 border-b border-slate-600">
       {/* Left side - User info */}
       <div className={`flex-1 px-4 py-6 flex items-center min-h-24 transition-all duration-150 ${userSectionPressed ? 'bg-slate-700' : 'bg-slate-800'} min-w-0`}>
         <button 
