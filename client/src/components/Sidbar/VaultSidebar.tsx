@@ -61,7 +61,7 @@ const VaultSidebar: React.FC<VaultSidebarProps> = ({
             {prizes.map((prize) => (
               <div 
                 key={prize.id}
-                className="relative bg-slate-800 rounded-2xl p-4 border border-violet-500/30 hover:scale-[1.02] transition-all duration-300 group"
+                className="relative bg-slate-900 rounded-2xl p-4 border border-violet-500/30 hover:scale-[1.02] transition-all duration-300 group"
               >
                 {/* Shine effect */}
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl" />
