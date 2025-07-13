@@ -10,13 +10,15 @@ interface UserHeaderProps {
   userSectionPressed: boolean;
   onUserClick: () => void;
   onCloseSidebar: () => void;
+  showSidebarButton?: boolean;
 }
 
 const UserHeader: React.FC<UserHeaderProps> = ({ 
   user, 
   userSectionPressed, 
   onUserClick, 
-  onCloseSidebar 
+  onCloseSidebar,
+  showSidebarButton = false
 }) => {
 
   const getTitleIcon = (title) => {
@@ -73,21 +75,25 @@ const UserHeader: React.FC<UserHeaderProps> = ({
         </button>
       </div>
 
-      {/* Divider */}
-      <div className="w-px bg-slate-600/50"></div>
+      {showSidebarButton && (
+        <>
+          {/* Divider */}
+          <div className="w-px bg-slate-600/50"></div>
 
-      {/* Right side - User arrow button area */}
-      <div className={`w-16 flex items-center justify-center transition-all duration-150 ${userSectionPressed ? 'bg-gray-700' : 'bg-gray-800'}`}>
-        <button 
-          onClick={onUserClick}
-          className="w-9 h-9 flex items-center justify-center hover:bg-slate-700 rounded-xl transition-all duration-200"
-        >
-          <ChevronRight className="w-5 h-5 text-slate-300" />
-        </button>
-      </div>
+          {/* Right side - User arrow button area */}
+          <div className={`w-16 flex items-center justify-center transition-all duration-150 ${userSectionPressed ? 'bg-gray-700' : 'bg-gray-800'}`}>
+            <button 
+              onClick={onUserClick}
+              className="w-9 h-9 flex items-center justify-center hover:bg-slate-700 rounded-xl transition-all duration-200"
+            >
+              <ChevronRight className="w-5 h-5 text-slate-300" />
+            </button>
+          </div>
 
-      {/* Divider */}
-      <div className="w-px bg-slate-600/50"></div>
+          {/* Divider */}
+          <div className="w-px bg-slate-600/50"></div>
+        </>
+      )}
 
       {/* Right side - Close button area */}
       <div className="w-16 bg-slate-800 flex items-center justify-center">

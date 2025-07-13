@@ -8,6 +8,7 @@ const Sidebar = () => {
   // Estados que podem ser compartilhados entre componentes
   const [showItems, setShowItems] = useState(true);
   const [userSectionPressed, setUserSectionPressed] = useState(false);
+  const [showSidebarButton, setShowSidebarButton] = useState(false);
 
   const [user] = useState({
     name: "João Lukas",
@@ -57,6 +58,7 @@ const Sidebar = () => {
           userSectionPressed={userSectionPressed}
           onUserClick={handleUserClick}
           onCloseSidebar={handleCloseSidebar}
+          showSidebarButton={showSidebarButton}
         />
       </div>
 
