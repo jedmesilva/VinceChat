@@ -48,8 +48,6 @@ const Sidebar = () => {
       {/* Background Effect */}
       <div className="absolute inset-0 w-full">
         <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-gray-900 to-black" />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-slate-800/20 to-slate-900/40" />
-        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent transform skew-x-12" />
       </div>
 
       {/* User Header Component - Fixed at top */}
