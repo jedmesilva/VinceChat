@@ -75,35 +75,35 @@ const UserHeader: React.FC<UserHeaderProps> = ({
         </button>
       </div>
 
+      {/* Divider */}
+      <div className="w-px bg-slate-600/50"></div>
+
+      {/* Right side - User arrow button area */}
+      <div className={`w-16 flex items-center justify-center transition-all duration-150 ${userSectionPressed ? 'bg-gray-700' : 'bg-gray-800'}`}>
+        <button 
+          onClick={onUserClick}
+          className="w-9 h-9 flex items-center justify-center hover:bg-slate-700 rounded-xl transition-all duration-200"
+        >
+          <ChevronRight className="w-5 h-5 text-slate-300" />
+        </button>
+      </div>
+
       {showSidebarButton && (
         <>
           {/* Divider */}
           <div className="w-px bg-slate-600/50"></div>
 
-          {/* Right side - User arrow button area */}
-          <div className={`w-16 flex items-center justify-center transition-all duration-150 ${userSectionPressed ? 'bg-gray-700' : 'bg-gray-800'}`}>
+          {/* Right side - Close button area */}
+          <div className="w-16 bg-slate-800 flex items-center justify-center">
             <button 
-              onClick={onUserClick}
-              className="w-9 h-9 flex items-center justify-center hover:bg-slate-700 rounded-xl transition-all duration-200"
+              onClick={onCloseSidebar}
+              className="w-9 h-9 bg-slate-700 rounded-xl flex items-center justify-center hover:bg-slate-600 transition-all duration-200 border border-slate-600"
             >
-              <ChevronRight className="w-5 h-5 text-slate-300" />
+              <PanelLeft className="w-5 h-5 text-slate-300" />
             </button>
           </div>
-
-          {/* Divider */}
-          <div className="w-px bg-slate-600/50"></div>
         </>
       )}
-
-      {/* Right side - Close button area */}
-      <div className="w-16 bg-slate-800 flex items-center justify-center">
-        <button 
-          onClick={onCloseSidebar}
-          className="w-9 h-9 bg-slate-700 rounded-xl flex items-center justify-center hover:bg-slate-600 transition-all duration-200 border border-slate-600"
-        >
-          <PanelLeft className="w-5 h-5 text-slate-300" />
-        </button>
-      </div>
     </div>
   );
 };
