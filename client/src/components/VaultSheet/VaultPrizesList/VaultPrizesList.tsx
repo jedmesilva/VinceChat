@@ -1,21 +1,21 @@
 import React, { useState } from 'react';
 import { Gift, DollarSign, Trophy, Award, ChevronDown, ChevronUp } from 'lucide-react';
 
-interface Prize {
+interface Item {
   id: string;
   name: string;
   type: 'money' | 'item' | 'trophy' | 'gift';
   value?: number;
 }
 
-interface VaultPrizesListProps {
-  prizes: Prize[];
+interface VaultItemsListProps {
+  prizes: Item[];
 }
 
-const VaultPrizesList: React.FC<VaultPrizesListProps> = ({ prizes }) => {
-  const [showAllPrizes, setShowAllPrizes] = useState(false);
+const VaultPrizesList: React.FC<VaultItemsListProps> = ({ prizes }) => {
+  const [showAllItems, setShowAllItems] = useState(false);
 
-  const getPrizeIcon = (type: string) => {
+  const getItemIcon = (type: string) => {
     switch (type) {
       case 'money':
         return DollarSign;
@@ -28,43 +28,43 @@ const VaultPrizesList: React.FC<VaultPrizesListProps> = ({ prizes }) => {
     }
   };
 
-  const getPrizeDisplay = (prize: Prize) => {
-    if (prize.type === 'money' && prize.value) {
+  const getItemDisplay = (item: Item) => {
+    if (item.type === 'money' && item.value) {
       return new Intl.NumberFormat('pt-BR', {
         style: 'currency',
         currency: 'BRL',
         minimumFractionDigits: 0
-      }).format(prize.value);
+      }).format(item.value);
     }
-    return prize.name;
+    return item.name;
   };
 
-  const visiblePrizes = showAllPrizes ? prizes : prizes.slice(0, 3);
-  const hasMorePrizes = prizes.length > 3;
+  const visibleItems = showAllItems ? prizes : prizes.slice(0, 3);
+  const hasMoreItems = prizes.length > 3;
 
   return (
     <div className="bg-slate-800/50 backdrop-blur-md rounded-3xl p-6 border border-slate-700/50">
       <h3 className="text-2xl font-bold text-white mb-6 text-center flex items-center justify-center gap-2">
         <Gift className="h-6 w-6 text-violet-400" />
-        Prêmios Disponíveis
+        Itens Disponíveis
       </h3>
       
       <div className="space-y-4">
-        {visiblePrizes.map((prize) => {
-          const PrizeIcon = getPrizeIcon(prize.type);
+        {visibleItems.map((item) => {
+          const ItemIcon = getItemIcon(item.type);
           return (
-            <div key={prize.id} className="flex items-center gap-4 p-4 bg-slate-700/30 rounded-2xl border border-slate-600/30">
+            <div key={item.id} className="flex items-center gap-4 p-4 bg-slate-700/30 rounded-2xl border border-slate-600/30">
               <div className="flex-shrink-0">
                 <div className="w-12 h-12 bg-violet-500/10 rounded-xl flex items-center justify-center">
-                  <PrizeIcon className="h-6 w-6 text-violet-400" />
+                  <ItemIcon className="h-6 w-6 text-violet-400" />
                 </div>
               </div>
               
               <div className="flex-1">
                 <div className="text-lg font-semibold text-white">
-                  {getPrizeDisplay(prize)}
+                  {getItemDisplay(item)}
                 </div>
-                {prize.type === 'money' && (
+                {item.type === 'money' && (
                   <div className="text-sm text-slate-400">
                     Valor em dinheiro
                   </div>
@@ -74,19 +74,19 @@ const VaultPrizesList: React.FC<VaultPrizesListProps> = ({ prizes }) => {
           );
         })}
         
-        {hasMorePrizes && (
+        {hasMoreItems && (
           <button
-            onClick={() => setShowAllPrizes(!showAllPrizes)}
+            onClick={() => setShowAllItems(!showAllItems)}
             className="w-full mt-4 py-3 bg-slate-700/50 hover:bg-slate-700/70 active:bg-slate-700/90 text-slate-300 hover:text-white rounded-xl transition-all duration-200 flex items-center justify-center gap-2 transform hover:scale-105 active:scale-95"
           >
-            {showAllPrizes ? (
+            {showAllItems ? (
               <>
                 Ver menos
                 <ChevronUp className="h-4 w-4" />
               </>
             ) : (
               <>
-                Ver mais ({prizes.length - 3} prêmios)
+                Ver mais ({prizes.length - 3} itens)
                 <ChevronDown className="h-4 w-4" />
               </>
             )}

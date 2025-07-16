@@ -13,7 +13,7 @@ interface VaultSidebarProps {
     name: string;
     vaultItems?: number;
   };
-  prizes: Prize[];
+  prizes: Item[];
   showItems: boolean;
   onToggleShowItems: () => void;
 }

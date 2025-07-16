@@ -18,7 +18,7 @@ interface VaultData {
   }>;
 }
 
-interface InteriorPrize {
+interface InteriorItem {
   id: string;
   type: 'money' | 'product' | 'voucher' | 'special';
   name: string;
@@ -45,10 +45,10 @@ const VaultSheet: React.FC<VaultSheetProps> = ({
 }) => {
   const [isUnlocked, setIsUnlocked] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [interiorPrizes, setInteriorPrizes] = useState<InteriorPrize[]>([]);
-  const [claimingPrize, setClaimingPrize] = useState<string | null>(null);
+  const [interiorItems, setInteriorItems] = useState<InteriorItem[]>([]);
+  const [claimingItem, setClaimingItem] = useState<string | null>(null);
   const [claimProgress, setClaimProgress] = useState(0);
-  const [claimedPrizes, setClaimedPrizes] = useState<Set<string>>(new Set());
+  const [claimedItems, setClaimedItems] = useState<Set<string>>(new Set());
   const [finalProgress, setFinalProgress] = useState<Map<string, number>>(new Map());
   const [openTime, setOpenTime] = useState(0);
   
@@ -65,13 +65,13 @@ const VaultSheet: React.FC<VaultSheetProps> = ({
     }
   }, [isUnlocked]);
 
-  // Carregar prêmios do interior quando desbloqueado
+  // Carregar itens do interior quando desbloqueado
   useEffect(() => {
-    if (isUnlocked && interiorPrizes.length === 0) {
-      const loadInteriorPrizes = async () => {
+    if (isUnlocked && interiorItems.length === 0) {
+      const loadInteriorItems = async () => {
         await new Promise(resolve => setTimeout(resolve, 1000));
         
-        const samplePrizes: InteriorPrize[] = [
+        const sampleItems: InteriorItem[] = [
           {
             id: '1',
             type: 'money',
@@ -130,21 +130,21 @@ const VaultSheet: React.FC<VaultSheetProps> = ({
           }
         ];
         
-        setInteriorPrizes(samplePrizes);
+        setInteriorItems(sampleItems);
       };
       
-      loadInteriorPrizes();
+      loadInteriorItems();
     }
-  }, [isUnlocked, interiorPrizes.length]);
+  }, [isUnlocked, interiorItems.length]);
 
   const handleUnlockSuccess = () => {
     setIsUnlocked(true);
   };
 
-  const handleClaimPrize = (prizeId: string) => {
-    if (claimedPrizes.has(prizeId) || claimingPrize) return;
+  const handleClaimItem = (itemId: string) => {
+    if (claimedItems.has(itemId) || claimingItem) return;
     
-    setClaimingPrize(prizeId);
+    setClaimingItem(itemId);
     setClaimProgress(0);
     
     // Simular progresso de claim
@@ -158,13 +158,13 @@ const VaultSheet: React.FC<VaultSheetProps> = ({
           // Atualizar estado final
           setFinalProgress(prevMap => {
             const newMap = new Map(prevMap);
-            newMap.set(prizeId, 100);
+            newMap.set(itemId, 100);
             return newMap;
           });
           
           setTimeout(() => {
-            setClaimedPrizes(prevSet => new Set(prevSet).add(prizeId));
-            setClaimingPrize(null);
+            setClaimedItems(prevSet => new Set(prevSet).add(itemId));
+            setClaimingItem(null);
             setClaimProgress(0);
           }, 500);
           
@@ -189,10 +189,10 @@ const VaultSheet: React.FC<VaultSheetProps> = ({
     if (!isOpen) {
       setIsUnlocked(false);
       setIsSubmitting(false);
-      setInteriorPrizes([]);
-      setClaimingPrize(null);
+      setInteriorItems([]);
+      setClaimingItem(null);
       setClaimProgress(0);
-      setClaimedPrizes(new Set());
+      setClaimedItems(new Set());
       setFinalProgress(new Map());
       setOpenTime(0);
     }
@@ -240,11 +240,11 @@ const VaultSheet: React.FC<VaultSheetProps> = ({
               </div>
               
               <VaultInteriorGrid
-                prizes={interiorPrizes}
-                onClaimPrize={handleClaimPrize}
-                claimingPrize={claimingPrize}
+                prizes={interiorItems}
+                onClaimPrize={handleClaimItem}
+                claimingPrize={claimingItem}
                 claimProgress={claimProgress}
-                claimedPrizes={claimedPrizes}
+                claimedPrizes={claimedItems}
                 finalProgress={finalProgress}
               />
             </div>
