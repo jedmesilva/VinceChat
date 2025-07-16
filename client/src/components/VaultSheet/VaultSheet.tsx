@@ -2,15 +2,15 @@ import React, { useState, useEffect, useRef } from 'react';
 import VaultSheetHeader from './VaultSheetHeader/VaultSheetHeader';
 import VaultSheetBackground from './VaultSheetBackground/VaultSheetBackground';
 import VaultUnlockForm from './VaultUnlockForm/VaultUnlockForm';
-import VaultPrizesList from './VaultPrizesList/VaultPrizesList';
-import VaultInteriorGrid from './VaultInteriorGrid/VaultInteriorGrid';
+import VaultItemsList from './VaultItemsList/VaultItemsList';
+import VaultItemsGrid from './VaultItemsGrid/VaultItemsGrid';
 
 interface VaultData {
   id: string;
   name: string;
-  prizeAmount: number;
+  itemAmount: number;
   difficulty: 'easy' | 'medium' | 'hard' | 'legendary';
-  prizes: Array<{
+  items: Array<{
     id: string;
     name: string;
     type: 'money' | 'item' | 'trophy' | 'gift';
@@ -226,7 +226,7 @@ const VaultSheet: React.FC<VaultSheetProps> = ({
               </div>
               
               <div className="w-full">
-                <VaultPrizesList prizes={vault.prizes} />
+                <VaultItemsList items={vault.items} />
               </div>
             </div>
           ) : (
@@ -239,12 +239,12 @@ const VaultSheet: React.FC<VaultSheetProps> = ({
                 </div>
               </div>
               
-              <VaultInteriorGrid
-                prizes={interiorItems}
-                onClaimPrize={handleClaimItem}
-                claimingPrize={claimingItem}
+              <VaultItemsGrid
+                items={interiorItems}
+                onClaimItem={handleClaimItem}
+                claimingItem={claimingItem}
                 claimProgress={claimProgress}
-                claimedPrizes={claimedItems}
+                claimedItems={claimedItems}
                 finalProgress={finalProgress}
               />
             </div>

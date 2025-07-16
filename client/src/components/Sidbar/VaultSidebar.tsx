@@ -1,7 +1,7 @@
 import React from 'react';
 import { Lock, DollarSign, Eye, EyeOff } from 'lucide-react';
 
-interface Prize {
+interface Item {
   id: number;
   amount: string;
   type: string;
@@ -13,14 +13,14 @@ interface VaultSidebarProps {
     name: string;
     vaultItems?: number;
   };
-  prizes: Item[];
+  items: Item[];
   showItems: boolean;
   onToggleShowItems: () => void;
 }
 
 const VaultSidebar: React.FC<VaultSidebarProps> = ({ 
   user, 
-  prizes, 
+  items, 
   showItems, 
   onToggleShowItems 
 }) => {
@@ -37,7 +37,7 @@ const VaultSidebar: React.FC<VaultSidebarProps> = ({
             </div>
             <div>
               <h1 className="text-lg font-semibold text-white">Meu Cofre</h1>
-              <p className="text-sm text-slate-400">{prizes.length} itens</p>
+              <p className="text-sm text-slate-400">{items.length} itens</p>
             </div>
           </div>
 
@@ -58,9 +58,9 @@ const VaultSidebar: React.FC<VaultSidebarProps> = ({
       <div className="flex-1 overflow-y-auto relative z-10">
         <div className="p-4">
           <div className="space-y-3">
-            {prizes.map((prize) => (
+            {items.map((item) => (
               <div 
-                key={prize.id}
+                key={item.id}
                 className="relative bg-slate-700 rounded-2xl p-4 border border-violet-500/30 hover:scale-[1.02] transition-all duration-300 group"
               >
                 {/* Shine effect */}
@@ -72,13 +72,13 @@ const VaultSidebar: React.FC<VaultSidebarProps> = ({
                     <DollarSign className="w-6 h-6 text-white" />
                   </div>
                   <div className="flex-1">
-                    <h3 className="text-lg font-semibold text-white">{prize.amount}</h3>
-                    <p className="text-sm text-slate-400">{prize.type}</p>
+                    <h3 className="text-lg font-semibold text-white">{item.amount}</h3>
+                    <p className="text-sm text-slate-400">{item.type}</p>
                   </div>
 
                   {/* Rarity badge */}
                   <div className="px-3 py-1 rounded-full text-xs font-bold bg-violet-500/20 text-violet-300 border border-violet-400/30">
-                    {prize.rarity}
+                    {item.rarity}
                   </div>
                 </div>
 

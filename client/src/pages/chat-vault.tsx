@@ -157,7 +157,7 @@ const ChatVaultPage: React.FC = () => {
       vaultIcon={getVaultIcon(vault.difficulty)}
       conviction={getConvictionLevel(vault.difficulty)}
       offensiveCount={getOffensiveCount(vault.difficulty)}
-      
+
       isVaultLocked={vault.isLocked}
       vaultActionLabel={vault.isLocked ? "Saquear" : "Conquistado"}
       inputPlaceholder={vault.isLocked ? "Digite sua mensagem para convencer..." : "Este cofre já foi conquistado!"}
@@ -171,6 +171,7 @@ const ChatVaultPage: React.FC = () => {
           authorColor: 'bg-violet-600/80'
         }
       ]}
+      items={[{id: 'item1', name: 'Gold', type: 'money', value: 100}]}
     />
   );
 };
