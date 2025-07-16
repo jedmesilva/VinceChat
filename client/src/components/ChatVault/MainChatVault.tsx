@@ -153,8 +153,8 @@ const MainChatVault: React.FC<MainChatVaultProps> = ({
 
   return (
     <div className="min-h-screen bg-gray-900 flex flex-col">
-      {/* Header fixo no topo */}
-      <div className="fixed top-0 left-0 right-0 z-50">
+      {/* Header fixo - agora sem fixed positioning para ficar abaixo do timer */}
+      <div className="sticky top-0 z-50">
         <ChatVaultHeader 
           vaultName={vaultName}
           vaultIcon={vaultIcon}
@@ -165,7 +165,7 @@ const MainChatVault: React.FC<MainChatVaultProps> = ({
       </div>
       
       {/* Histórico do Chat com scroll */}
-      <div className="flex-1 pt-48 pb-44 overflow-hidden">
+      <div className="flex-1 pb-44 overflow-hidden">
         <ChatVaultHistory messages={messages} />
       </div>
 
