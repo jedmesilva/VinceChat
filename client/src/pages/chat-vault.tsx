@@ -130,14 +130,7 @@ const ChatVaultPage: React.FC = () => {
     }
   };
 
-  const handleVaultAction = () => {
-    if (vault?.isLocked) {
-      console.log(`Tentando saquear o cofre: ${vault.name}`);
-      // Implementar lógica de saque
-    } else {
-      console.log(`Cofre ${vault?.name} já foi conquistado!`);
-    }
-  };
+  // Removido handleVaultAction - deixar MainChatVault usar comportamento padrão
 
   const handleBackToVaults = () => {
     setLocation('/');
@@ -164,7 +157,7 @@ const ChatVaultPage: React.FC = () => {
       vaultIcon={getVaultIcon(vault.difficulty)}
       conviction={getConvictionLevel(vault.difficulty)}
       offensiveCount={getOffensiveCount(vault.difficulty)}
-      onVaultAction={handleVaultAction}
+      
       isVaultLocked={vault.isLocked}
       vaultActionLabel={vault.isLocked ? "Saquear" : "Conquistado"}
       inputPlaceholder={vault.isLocked ? "Digite sua mensagem para convencer..." : "Este cofre já foi conquistado!"}
