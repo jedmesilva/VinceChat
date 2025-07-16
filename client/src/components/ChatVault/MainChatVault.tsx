@@ -28,6 +28,7 @@ interface MainChatVaultProps {
   isVaultLocked?: boolean;
   vaultActionLabel?: string;
   inputPlaceholder?: string;
+  onAbandon?: () => void;
 }
 
 const MainChatVault: React.FC<MainChatVaultProps> = ({
@@ -40,7 +41,8 @@ const MainChatVault: React.FC<MainChatVaultProps> = ({
   onVaultAction,
   isVaultLocked = true,
   vaultActionLabel = "Saquear",
-  inputPlaceholder = "Digite sua mensagem para convencer..."
+  inputPlaceholder = "Digite sua mensagem para convencer...",
+  onAbandon
 }) => {
   const [messages, setMessages] = useState<Message[]>(initialMessages);
   const [currentConviction, setCurrentConviction] = useState(conviction);
@@ -138,6 +140,17 @@ const MainChatVault: React.FC<MainChatVaultProps> = ({
     }
   };
 
+  const handleAbandon = () => {
+    if (onAbandon) {
+      onAbandon();
+    } else {
+      // Comportamento padrão: resetar estado do chat
+      setMessages([]);
+      setCurrentConviction(conviction);
+      console.log('Chat abandonado - reiniciando...');
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gray-900 flex flex-col">
       {/* Header fixo no topo */}
@@ -147,6 +160,7 @@ const MainChatVault: React.FC<MainChatVaultProps> = ({
           vaultIcon={vaultIcon}
           conviction={currentConviction}
           offensiveCount={offensiveCount}
+          onAbandon={handleAbandon}
         />
       </div>
       

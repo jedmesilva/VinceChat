@@ -8,13 +8,17 @@ interface ChatVaultHeaderProps {
   vaultIcon?: React.ComponentType<{ className?: string }>;
   conviction?: number;
   offensiveCount?: number;
+  onAbandon?: () => void;
+  showAbandonButton?: boolean;
 }
 
 const ChatVaultHeader: React.FC<ChatVaultHeaderProps> = ({
   vaultName,
   vaultIcon,
   conviction = 75,
-  offensiveCount = 5
+  offensiveCount = 5,
+  onAbandon,
+  showAbandonButton = true
 }) => {
   return (
     <div className="bg-slate-800 border-b border-slate-700/50">
@@ -22,6 +26,8 @@ const ChatVaultHeader: React.FC<ChatVaultHeaderProps> = ({
       <VaultHeaderComponent 
         vaultName={vaultName}
         vaultIcon={vaultIcon}
+        onAbandon={onAbandon}
+        showAbandonButton={showAbandonButton}
       />
 
       {/* Barra de convencimento */}

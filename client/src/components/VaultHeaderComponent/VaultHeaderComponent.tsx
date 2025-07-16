@@ -1,5 +1,5 @@
 import React from 'react';
-import { Crown, MessageCircle } from 'lucide-react';
+import { Crown, MessageCircle, Square } from 'lucide-react';
 
 interface VaultHeaderComponentProps {
   vaultName: string;
@@ -7,6 +7,8 @@ interface VaultHeaderComponentProps {
   chatLabel?: string;
   backgroundColor?: string;
   borderColor?: string;
+  onAbandon?: () => void;
+  showAbandonButton?: boolean;
 }
 
 const VaultHeaderComponent: React.FC<VaultHeaderComponentProps> = ({
@@ -14,7 +16,9 @@ const VaultHeaderComponent: React.FC<VaultHeaderComponentProps> = ({
   vaultIcon: VaultIcon = Crown,
   chatLabel = "Chat Convince",
   backgroundColor = "bg-slate-800",
-  borderColor = "border-slate-700/50"
+  borderColor = "border-slate-700/50",
+  onAbandon = () => {},
+  showAbandonButton = true
 }) => {
   return (
     <div className={`${backgroundColor} border-b ${borderColor}`}>
@@ -39,6 +43,17 @@ const VaultHeaderComponent: React.FC<VaultHeaderComponentProps> = ({
               </div>
             </div>
           </div>
+          
+          {/* Botão Abandonar */}
+          {showAbandonButton && (
+            <button
+              onClick={onAbandon}
+              className="bg-red-500 hover:bg-red-400 active:bg-red-600 text-white px-3 py-1.5 rounded-lg text-sm font-medium transition-all duration-200 flex items-center gap-1.5"
+            >
+              <Square size={12} fill="currentColor" />
+              Abandonar
+            </button>
+          )}
         </div>
       </div>
     </div>
