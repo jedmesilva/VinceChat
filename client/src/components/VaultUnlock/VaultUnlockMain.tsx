@@ -128,7 +128,7 @@ const VaultUnlockMain: React.FC<VaultUnlockProps> = ({ vault, onBack, onSuccess 
         </div>
 
         {/* Main Content Area */}
-        <div className="flex-1 flex flex-col lg:flex-row gap-12 items-center justify-center">
+        <div className="flex-1 flex flex-col lg:flex-row gap-6 items-center justify-center">
           
           {/* Left Side - Formulário de Desbloqueio (principal) */}
           <div className="flex-1 max-w-md w-full">
