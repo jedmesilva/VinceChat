@@ -62,10 +62,10 @@ const VaultUnlockMain: React.FC<VaultUnlockProps> = ({ vault, onBack, onSuccess 
       <div className="absolute inset-0 bg-gray-900" />
 
       {/* Main Content */}
-      <div className="relative z-10 flex flex-col min-h-screen p-4 md:p-6 max-w-6xl mx-auto">
+      <div className="relative z-10 flex flex-col min-h-screen p-4 md:p-6 max-w-6xl mx-auto justify-center">
         
         {/* Header Section */}
-        <div className="mb-8 md:mb-12 pt-4 md:pt-8">
+        <div className="mb-6 md:mb-8 pt-4 md:pt-6">
           {/* Mobile: Layout em coluna */}
           <div className="block md:hidden">
             {/* Ícone centralizado no mobile */}
@@ -128,7 +128,7 @@ const VaultUnlockMain: React.FC<VaultUnlockProps> = ({ vault, onBack, onSuccess 
         </div>
 
         {/* Main Content Area */}
-        <div className="flex-1 flex flex-col lg:flex-row gap-4 lg:gap-6 items-start lg:items-center justify-center max-w-5xl mx-auto">
+        <div className="flex flex-col lg:flex-row gap-4 lg:gap-6 items-start lg:items-center justify-center max-w-5xl mx-auto">
           
           {/* Left Side - Formulário de Desbloqueio (principal) */}
           <div className="w-full lg:flex-1 max-w-md lg:max-w-lg">
