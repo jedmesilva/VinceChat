@@ -8,19 +8,12 @@ interface Item {
   value?: number;
 }
 
-interface Vault {
-  id: string;
-  name: string;
-  itemAmount: number;
-  difficulty: 'easy' | 'medium' | 'hard' | 'legendary';
-  items: Item[];
-}
-
 interface VaultItemsListUnlockProps {
-  vault: Vault;
+  prizes: Item[];
+  difficulty: 'easy' | 'medium' | 'hard' | 'legendary';
 }
 
-const VaultItemsListUnlock: React.FC<VaultItemsListUnlockProps> = ({ vault }) => {
+const VaultItemsListUnlock: React.FC<VaultItemsListUnlockProps> = ({ prizes, difficulty }) => {
   const [showAllItems, setShowAllItems] = useState(false);
 
   // Função para obter o ícone do item
@@ -50,8 +43,8 @@ const VaultItemsListUnlock: React.FC<VaultItemsListUnlockProps> = ({ vault }) =>
   };
 
   // Determinar quantos itens mostrar
-  const visibleItems = showAllItems ? vault.items : vault.items.slice(0, 3);
-  const hasMoreItems = vault.items.length > 3;
+  const visibleItems = showAllItems ? prizes : prizes.slice(0, 3);
+  const hasMoreItems = prizes.length > 3;
 
   return (
     <div className="flex-1 max-w-md w-full">
