@@ -42,22 +42,24 @@ const VaultSheet: React.FC<VaultSheetProps> = ({ vault, isOpen, onClose, onChatC
 
   return (
     <div className="fixed inset-0 z-[9999] bg-black/80 backdrop-blur-sm">
-      <div className="absolute inset-0 overflow-hidden">
-        {!isUnlocked ? (
-          // Tela de acesso ao cofre (exterior)
-          <VaultUnlockMain
-            vault={vault}
-            onBack={handleBack}
-            onSuccess={handleUnlockSuccess}
-          />
-        ) : (
-          // Tela do interior do cofre
-          <VaultMain
-            vault={vault}
-            onBack={handleBack}
-            onClose={onClose}
-          />
-        )}
+      <div className="absolute inset-0 overflow-y-auto overflow-x-hidden">
+        <div className="min-h-full">
+          {!isUnlocked ? (
+            // Tela de acesso ao cofre (exterior)
+            <VaultUnlockMain
+              vault={vault}
+              onBack={handleBack}
+              onSuccess={handleUnlockSuccess}
+            />
+          ) : (
+            // Tela do interior do cofre
+            <VaultMain
+              vault={vault}
+              onBack={handleBack}
+              onClose={onClose}
+            />
+          )}
+        </div>
       </div>
     </div>
   );
