@@ -213,12 +213,8 @@ const VaultSheet: React.FC<VaultSheetProps> = ({
         
         <div className="flex-1 overflow-y-auto">
           {!isUnlocked ? (
-            <div className="flex flex-col lg:flex-row gap-8 p-6 items-center justify-center min-h-full">
-              <div className="flex-1 max-w-md">
-                <VaultPrizesList prizes={vault.prizes} />
-              </div>
-              
-              <div className="flex-1 max-w-md">
+            <div className="flex flex-col items-center justify-center min-h-full p-6 gap-8 max-w-md mx-auto w-full">
+              <div className="w-full">
                 <div className="bg-slate-800/95 backdrop-blur-md rounded-3xl border border-slate-700/50 shadow-2xl shadow-black/50">
                   <VaultUnlockForm
                     onSuccess={handleUnlockSuccess}
@@ -227,6 +223,10 @@ const VaultSheet: React.FC<VaultSheetProps> = ({
                     setIsSubmitting={setIsSubmitting}
                   />
                 </div>
+              </div>
+              
+              <div className="w-full">
+                <VaultPrizesList prizes={vault.prizes} />
               </div>
             </div>
           ) : (
