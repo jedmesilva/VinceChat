@@ -45,7 +45,8 @@ const VaultSectionChat: React.FC<VaultSectionChatProps> = ({
         </div>
         <button 
           onClick={onVaultClick}
-          className="bg-violet-500 hover:bg-violet-400 active:bg-violet-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200"
+          className="bg-violet-500 hover:bg-violet-400 active:bg-violet-600 text-white px-4 rounded-lg text-sm font-medium transition-all duration-200 flex items-center leading-none flex-shrink-0"
+          style={{ height: '36px', minHeight: '36px', maxHeight: '36px' }}
         >
           {actionLabel}
         </button>

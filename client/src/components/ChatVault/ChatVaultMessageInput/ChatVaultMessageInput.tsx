@@ -87,9 +87,10 @@ const ChatVaultMessageInput: React.FC<ChatVaultMessageInputProps> = ({
               onRoleClick();
             }}
             disabled={disabled}
-            className={`flex items-center gap-2 px-4 py-2 bg-slate-800/60 hover:bg-slate-800/80 active:bg-violet-500/30 rounded-lg transition-all duration-200 group disabled:opacity-50 disabled:cursor-not-allowed flex-shrink-0 ${
+            className={`flex items-center gap-2 px-4 bg-slate-800/60 hover:bg-slate-800/80 active:bg-violet-500/30 rounded-lg transition-all duration-200 group disabled:opacity-50 disabled:cursor-not-allowed flex-shrink-0 leading-none ${
               roleClicked ? 'scale-95 bg-violet-500/20' : ''
             }`}
+            style={{ height: '36px', minHeight: '36px', maxHeight: '36px' }}
             title={userRole.description}
           >
             <div className={`w-4 h-4 transition-colors flex-shrink-0 ${
@@ -107,7 +108,8 @@ const ChatVaultMessageInput: React.FC<ChatVaultMessageInputProps> = ({
           <button
             onClick={handleSendMessage}
             disabled={!inputText.trim() || disabled}
-            className="bg-violet-500 hover:bg-violet-400 active:bg-violet-600 p-2.5 rounded-full transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex-shrink-0"
+            className="bg-violet-500 hover:bg-violet-400 active:bg-violet-600 rounded-full transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex-shrink-0 flex items-center justify-center"
+            style={{ height: '40px', minHeight: '40px', maxHeight: '40px', width: '40px', minWidth: '40px', maxWidth: '40px' }}
           >
             <ArrowUp className="w-5 h-5 text-white" />
           </button>
