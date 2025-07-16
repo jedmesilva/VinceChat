@@ -1,16 +1,18 @@
 import React, { useState } from 'react';
-import { Lock } from 'lucide-react';
+import { Lock, Crown } from 'lucide-react';
 
 interface VaultSectionChatProps {
   isLocked?: boolean;
-  onVaultAction?: () => void;
+  onVaultClick?: () => void;
   actionLabel?: string;
+  vaultName?: string;
 }
 
 const VaultSectionChat: React.FC<VaultSectionChatProps> = ({ 
   isLocked = true, 
-  onVaultAction = () => {},
-  actionLabel = "Saquear"
+  onVaultClick = () => {},
+  actionLabel = "Saquear",
+  vaultName = "Cofre Atual"
 }) => {
   const [isLockHovered, setIsLockHovered] = useState(false);
 
@@ -19,6 +21,7 @@ const VaultSectionChat: React.FC<VaultSectionChatProps> = ({
       <div className="flex items-center justify-between px-4">
         <div className="flex items-center">
           <button
+            onClick={onVaultClick}
             onMouseEnter={() => setIsLockHovered(true)}
             onMouseLeave={() => setIsLockHovered(false)}
             className={`
@@ -27,14 +30,21 @@ const VaultSectionChat: React.FC<VaultSectionChatProps> = ({
               ${isLockHovered ? 'scale-105' : 'scale-100'}
             `}
           >
-            <Lock className="w-4 h-4 text-slate-300" />
+            {isLocked ? (
+              <Lock className="w-4 h-4 text-slate-300" />
+            ) : (
+              <Crown className="w-4 h-4 text-yellow-400" />
+            )}
           </button>
-          <span className="ml-3 text-slate-400 text-sm">
-            {isLocked ? 'Cofre fechado' : 'Cofre aberto'}
-          </span>
+          <div className="ml-3">
+            <div className="text-slate-300 text-sm font-medium">{vaultName}</div>
+            <div className="text-slate-400 text-xs">
+              {isLocked ? 'Cofre fechado' : 'Cofre aberto'}
+            </div>
+          </div>
         </div>
         <button 
-          onClick={onVaultAction}
+          onClick={onVaultClick}
           className="bg-violet-500 hover:bg-violet-400 active:bg-violet-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200"
         >
           {actionLabel}

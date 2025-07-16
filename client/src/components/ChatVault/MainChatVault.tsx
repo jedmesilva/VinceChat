@@ -4,6 +4,7 @@ import ChatVaultHeader from './ChatVaultHeader/ChatVaultHeader';
 import ChatVaultMessageInput from './ChatVaultMessageInput/ChatVaultMessageInput';
 import ChatVaultHistory from './ChatVaultHistory/ChatVaultHistory';
 import VaultSectionChat from '../VaultSectionChat/VaultSectionChat';
+import VaultSheet from '../VaultSheet/VaultSheet';
 
 interface Message {
   id: string;
@@ -43,6 +44,33 @@ const MainChatVault: React.FC<MainChatVaultProps> = ({
 }) => {
   const [messages, setMessages] = useState<Message[]>(initialMessages);
   const [currentConviction, setCurrentConviction] = useState(conviction);
+  const [isVaultSheetOpen, setIsVaultSheetOpen] = useState(false);
+
+  // Dados de exemplo do cofre
+  const vaultData = {
+    id: '1',
+    name: vaultName,
+    prizeAmount: 5000,
+    difficulty: 'medium' as const,
+    prizes: [
+      {
+        id: '1',
+        name: 'Prêmio em Dinheiro',
+        type: 'money' as const,
+        value: 2500
+      },
+      {
+        id: '2',
+        name: 'Troféu de Ouro',
+        type: 'trophy' as const
+      },
+      {
+        id: '3',
+        name: 'Caixa Misteriosa',
+        type: 'gift' as const
+      }
+    ]
+  };
 
   const handleSendMessage = (message: string) => {
     const newUserMessage: Message = {
@@ -93,7 +121,20 @@ const MainChatVault: React.FC<MainChatVaultProps> = ({
     if (onVaultAction) {
       onVaultAction();
     } else {
-      console.log('Ação do cofre executada');
+      setIsVaultSheetOpen(true);
+    }
+  };
+
+  const handleCloseVaultSheet = () => {
+    setIsVaultSheetOpen(false);
+  };
+
+  const handleChatClick = () => {
+    setIsVaultSheetOpen(false);
+    // Focar no input de mensagem
+    const messageInput = document.querySelector('input[placeholder*="Digite sua mensagem"]') as HTMLInputElement;
+    if (messageInput) {
+      messageInput.focus();
     }
   };
 
@@ -118,8 +159,9 @@ const MainChatVault: React.FC<MainChatVaultProps> = ({
       <div className="fixed bottom-0 left-0 right-0 z-50">
         <VaultSectionChat
           isLocked={isVaultLocked}
-          onVaultAction={handleVaultAction}
+          onVaultClick={handleVaultAction}
           actionLabel={vaultActionLabel}
+          vaultName={vaultName}
         />
         <ChatVaultMessageInput
           onSendMessage={handleSendMessage}
@@ -127,6 +169,14 @@ const MainChatVault: React.FC<MainChatVaultProps> = ({
           disabled={!isVaultLocked}
         />
       </div>
+
+      {/* VaultSheet Modal */}
+      <VaultSheet
+        vault={vaultData}
+        isOpen={isVaultSheetOpen}
+        onClose={handleCloseVaultSheet}
+        onChatClick={handleChatClick}
+      />
     </div>
   );
 };

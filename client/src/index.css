@@ -2,6 +2,28 @@
 @tailwind components;
 @tailwind utilities;
 
+/* VaultSheet Animations */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  10% { transform: translateX(-8px); }
+  20% { transform: translateX(8px); }
+  30% { transform: translateX(-8px); }
+  40% { transform: translateX(8px); }
+  50% { transform: translateX(-8px); }
+  60% { transform: translateX(8px); }
+  70% { transform: translateX(-8px); }
+  80% { transform: translateX(8px); }
+  90% { transform: translateX(-8px); }
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  button {
+    min-height: 48px;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  }
+}
+
 :root {
   --background: hsl(222, 84%, 5%);
   --foreground: hsl(210, 40%, 98%);
