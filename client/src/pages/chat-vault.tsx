@@ -170,7 +170,7 @@ const ChatVaultPage: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gray-900 flex flex-col">
-      {/* Timer no topo */}
+      {/* Timer no topo - sem posicionamento fixo */}
       <div className="w-full bg-gray-900">
         <Timer
           initialTime={300}
