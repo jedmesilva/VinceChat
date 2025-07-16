@@ -70,7 +70,7 @@ const ChatVaultMessageInput: React.FC<ChatVaultMessageInputProps> = ({
           onInput={handleTextareaInput}
           placeholder={placeholder}
           disabled={disabled}
-          className="w-full bg-transparent text-white placeholder-slate-400 focus:outline-none text-base mb-3 resize-none min-h-[24px] overflow-y-auto disabled:opacity-50 disabled:cursor-not-allowed"
+          className="w-full bg-transparent text-white placeholder-slate-400 focus:outline-none text-base mb-3 resize-none min-h-[24px] overflow-y-hidden disabled:opacity-50 disabled:cursor-not-allowed"
           rows={1}
           style={{ 
             height: 'auto',
