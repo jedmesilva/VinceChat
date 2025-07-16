@@ -89,7 +89,7 @@ const ConvictionBar: React.FC<ConvictionBarProps> = ({
           <span className={`${sizeClasses.text} font-medium text-slate-300 flex-shrink-0`}>
             {label}
           </span>
-          <div className={`flex-1 ${sizeClasses.barHeight} bg-slate-800 rounded-full overflow-hidden min-w-0`}>
+          <div className={`flex-1 ${sizeClasses.barHeight} bg-slate-700/50 border border-slate-600/30 rounded-full overflow-hidden min-w-0`}>
             <div 
               className={`h-full bg-gradient-to-r ${gradientClass} transition-all duration-1000 ease-out rounded-full relative`}
               style={{ width: `${displayConviction}%` }}
