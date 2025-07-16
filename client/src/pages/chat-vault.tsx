@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useLocation } from 'wouter';
 import MainChatVault from '../components/ChatVault/MainChatVault';
+import Timer from '../components/Timer/Timer';
 import { Crown, Gem, Shield, Trophy, Gift } from 'lucide-react';
 
 interface VaultData {
@@ -16,6 +17,7 @@ const ChatVaultPage: React.FC = () => {
   const [, setLocation] = useLocation();
   const [vault, setVault] = useState<VaultData | null>(null);
   const [loading, setLoading] = useState(true);
+  const [timerActive, setTimerActive] = useState(false);
 
   useEffect(() => {
     const loadVault = async () => {
@@ -136,6 +138,21 @@ const ChatVaultPage: React.FC = () => {
     setLocation('/');
   };
 
+  const handleTimerStart = () => {
+    setTimerActive(true);
+  };
+
+  const handleTimerAbandon = () => {
+    setTimerActive(false);
+    setLocation('/');
+  };
+
+  const handleTimerTimeUp = () => {
+    setTimerActive(false);
+    // Aqui você pode adicionar lógica para quando o tempo acabar
+    console.log('Tempo esgotado!');
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen bg-gray-900 flex items-center justify-center">
@@ -152,27 +169,41 @@ const ChatVaultPage: React.FC = () => {
   }
 
   return (
-    <MainChatVault
-      vaultName={vault.name}
-      vaultIcon={getVaultIcon(vault.difficulty)}
-      conviction={getConvictionLevel(vault.difficulty)}
-      offensiveCount={getOffensiveCount(vault.difficulty)}
+    <div className="min-h-screen bg-gray-900">
+      {/* Timer fixo no topo */}
+      <div className="fixed top-0 left-0 right-0 z-50">
+        <Timer
+          initialTime={300}
+          onStart={handleTimerStart}
+          onAbandon={handleTimerAbandon}
+          onTimeUp={handleTimerTimeUp}
+        />
+      </div>
 
-      isVaultLocked={vault.isLocked}
-      vaultActionLabel={vault.isLocked ? "Saquear" : "Conquistado"}
-      inputPlaceholder={vault.isLocked ? "Digite sua mensagem para convencer..." : "Este cofre já foi conquistado!"}
-      initialMessages={[
-        {
-          id: 'welcome',
-          text: `Bem-vindo ao ${vault.name}! ${vault.description}`,
-          isUser: false,
-          timestamp: new Date(),
-          authorName: 'IA Guardian',
-          authorColor: 'bg-violet-600/80'
-        }
-      ]}
-      items={[{id: 'item1', name: 'Gold', type: 'money', value: 100}]}
-    />
+      {/* Conteúdo principal com margem superior para não sobrepor o timer */}
+      <div style={{ marginTop: '60px' }}>
+        <MainChatVault
+          vaultName={vault.name}
+          vaultIcon={getVaultIcon(vault.difficulty)}
+          conviction={getConvictionLevel(vault.difficulty)}
+          offensiveCount={getOffensiveCount(vault.difficulty)}
+          isVaultLocked={vault.isLocked}
+          vaultActionLabel={vault.isLocked ? "Saquear" : "Conquistado"}
+          inputPlaceholder={vault.isLocked ? "Digite sua mensagem para convencer..." : "Este cofre já foi conquistado!"}
+          initialMessages={[
+            {
+              id: 'welcome',
+              text: `Bem-vindo ao ${vault.name}! ${vault.description}`,
+              isUser: false,
+              timestamp: new Date(),
+              authorName: 'IA Guardian',
+              authorColor: 'bg-violet-600/80'
+            }
+          ]}
+          items={[{id: 'item1', name: 'Gold', type: 'money', value: 100}]}
+        />
+      </div>
+    </div>
   );
 };
 
