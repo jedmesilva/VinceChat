@@ -48,7 +48,8 @@ const VaultHeaderComponent: React.FC<VaultHeaderComponentProps> = ({
           {showAbandonButton && (
             <button
               onClick={onAbandon}
-              className="bg-red-500 hover:bg-red-400 active:bg-red-600 text-white px-1.5 rounded text-xs font-medium transition-all duration-200 flex items-center gap-1 h-6"
+              className="bg-red-500 hover:bg-red-400 active:bg-red-600 text-white px-1.5 rounded text-xs font-medium transition-all duration-200 flex items-center gap-1 h-6 min-h-6 max-h-6 flex-shrink-0 leading-none"
+              style={{ height: '24px', minHeight: '24px', maxHeight: '24px' }}
             >
               <Square size={8} fill="currentColor" />
               Abandonar
