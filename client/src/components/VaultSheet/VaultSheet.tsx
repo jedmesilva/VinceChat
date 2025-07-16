@@ -15,10 +15,12 @@ interface VaultSheetProps {
       value?: number;
     }>;
   };
+  isOpen: boolean;
   onClose: () => void;
+  onChatClick?: () => void;
 }
 
-const VaultSheet: React.FC<VaultSheetProps> = ({ vault, onClose }) => {
+const VaultSheet: React.FC<VaultSheetProps> = ({ vault, isOpen, onClose, onChatClick }) => {
   const [isUnlocked, setIsUnlocked] = useState(false);
 
   const handleUnlockSuccess = () => {
@@ -35,24 +37,29 @@ const VaultSheet: React.FC<VaultSheetProps> = ({ vault, onClose }) => {
     }
   };
 
+  // Se não estiver aberto, não renderiza nada
+  if (!isOpen) return null;
+
   return (
-    <>
-      {!isUnlocked ? (
-        // Tela de acesso ao cofre (exterior)
-        <VaultUnlockMain
-          vault={vault}
-          onBack={handleBack}
-          onSuccess={handleUnlockSuccess}
-        />
-      ) : (
-        // Tela do interior do cofre
-        <VaultMain
-          vault={vault}
-          onBack={handleBack}
-          onClose={onClose}
-        />
-      )}
-    </>
+    <div className="fixed inset-0 z-[9999] bg-black/80 backdrop-blur-sm">
+      <div className="absolute inset-0 overflow-hidden">
+        {!isUnlocked ? (
+          // Tela de acesso ao cofre (exterior)
+          <VaultUnlockMain
+            vault={vault}
+            onBack={handleBack}
+            onSuccess={handleUnlockSuccess}
+          />
+        ) : (
+          // Tela do interior do cofre
+          <VaultMain
+            vault={vault}
+            onBack={handleBack}
+            onClose={onClose}
+          />
+        )}
+      </div>
+    </div>
   );
 };
 
