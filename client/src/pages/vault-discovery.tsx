@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useLocation } from 'wouter';
-import { VaultGrid, type Vault } from '@/components/VaultGrid/VaultGrid';
+import { VaultGrid, type Vault } from '@/components/VaultsGridDiscovery/VaultsGridDiscovery';
 import VaultHunting from '@/components/VaultHunting/VaultHunting';
 import Navbar from '@/components/Navbar';
 import Sidbar from '@/components/Sidbar';
