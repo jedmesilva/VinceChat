@@ -3,6 +3,7 @@ import { Crown } from 'lucide-react';
 import ChatVaultHeader from './ChatVaultHeader/ChatVaultHeader';
 import ChatVaultMessageInput from './ChatVaultMessageInput/ChatVaultMessageInput';
 import ChatVaultHistory from './ChatVaultHistory/ChatVaultHistory';
+import VaultSectionChat from '../VaultSectionChat/VaultSectionChat';
 
 interface Message {
   id: string;
@@ -113,14 +114,17 @@ const MainChatVault: React.FC<MainChatVaultProps> = ({
         <ChatVaultHistory messages={messages} />
       </div>
 
-      {/* Input de mensagem fixo na parte inferior */}
+      {/* Seção fixa inferior com VaultSectionChat e Input */}
       <div className="fixed bottom-0 left-0 right-0 z-50">
-        <ChatVaultMessageInput
-          isVaultLocked={isVaultLocked}
+        <VaultSectionChat
+          isLocked={isVaultLocked}
           onVaultAction={handleVaultAction}
+          actionLabel={vaultActionLabel}
+        />
+        <ChatVaultMessageInput
           onSendMessage={handleSendMessage}
-          inputPlaceholder={inputPlaceholder}
-          vaultActionLabel={vaultActionLabel}
+          placeholder={inputPlaceholder}
+          disabled={!isVaultLocked}
         />
       </div>
     </div>
