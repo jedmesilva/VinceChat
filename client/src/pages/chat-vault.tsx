@@ -171,7 +171,7 @@ const ChatVaultPage: React.FC = () => {
   return (
     <div className="min-h-screen bg-gray-900">
       {/* Timer fixo no topo */}
-      <div className="fixed top-0 left-0 right-0 z-50">
+      <div className="sticky top-0 left-0 right-0 z-[100] bg-gray-900">
         <Timer
           initialTime={300}
           onStart={handleTimerStart}
@@ -180,8 +180,8 @@ const ChatVaultPage: React.FC = () => {
         />
       </div>
 
-      {/* Conteúdo principal com margem superior para não sobrepor o timer */}
-      <div style={{ marginTop: '60px' }}>
+      {/* Conteúdo principal */}
+      <div>
         <MainChatVault
           vaultName={vault.name}
           vaultIcon={getVaultIcon(vault.difficulty)}
