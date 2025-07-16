@@ -78,7 +78,7 @@ const ChatVaultMessageInput: React.FC<ChatVaultMessageInputProps> = ({
             maxHeight: `${maxHeight}px`
           }}
         />
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center gap-3">
           <button
             onClick={(e) => {
               e.stopPropagation();
@@ -87,17 +87,17 @@ const ChatVaultMessageInput: React.FC<ChatVaultMessageInputProps> = ({
               onRoleClick();
             }}
             disabled={disabled}
-            className={`flex items-center gap-2 px-3 py-1.5 bg-slate-800/60 hover:bg-slate-800/80 active:bg-violet-500/30 rounded-lg transition-all duration-200 group disabled:opacity-50 disabled:cursor-not-allowed ${
+            className={`flex items-center gap-2 px-4 py-2 bg-slate-800/60 hover:bg-slate-800/80 active:bg-violet-500/30 rounded-lg transition-all duration-200 group disabled:opacity-50 disabled:cursor-not-allowed flex-shrink-0 ${
               roleClicked ? 'scale-95 bg-violet-500/20' : ''
             }`}
             title={userRole.description}
           >
-            <div className={`w-4 h-4 transition-colors ${
+            <div className={`w-4 h-4 transition-colors flex-shrink-0 ${
               roleClicked ? 'text-violet-400' : 'text-slate-400 group-hover:text-slate-300'
             }`}>
               <RoleIcon className="w-4 h-4" />
             </div>
-            <span className={`text-xs font-medium transition-colors ${
+            <span className={`text-sm font-medium transition-colors whitespace-nowrap ${
               roleClicked ? 'text-violet-400' : 'text-slate-400 group-hover:text-slate-300'
             }`}>
               {userRole.name}
@@ -107,9 +107,9 @@ const ChatVaultMessageInput: React.FC<ChatVaultMessageInputProps> = ({
           <button
             onClick={handleSendMessage}
             disabled={!inputText.trim() || disabled}
-            className="bg-violet-500 hover:bg-violet-400 active:bg-violet-600 p-2 rounded-full transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="bg-violet-500 hover:bg-violet-400 active:bg-violet-600 p-2.5 rounded-full transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex-shrink-0"
           >
-            <ArrowUp className="w-4 h-4 text-white" />
+            <ArrowUp className="w-5 h-5 text-white" />
           </button>
         </div>
       </div>
