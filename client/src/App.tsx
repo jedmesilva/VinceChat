@@ -5,12 +5,14 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import VaultDiscovery from "@/pages/vault-discovery";
 import ChatVaultPage from "@/pages/chat-vault";
+import AccountPage from "@/pages/account";
 import NotFound from "@/pages/not-found";
 
 function Router() {
   return (
     <Switch>
       <Route path="/" component={VaultDiscovery} />
+      <Route path="/account" component={AccountPage} />
       <Route path="/:vaultId" component={ChatVaultPage} />
       <Route component={NotFound} />
     </Switch>
