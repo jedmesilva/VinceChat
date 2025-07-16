@@ -128,10 +128,10 @@ const VaultUnlockMain: React.FC<VaultUnlockProps> = ({ vault, onBack, onSuccess 
         </div>
 
         {/* Main Content Area */}
-        <div className="flex-1 flex flex-col lg:flex-row gap-6 items-center justify-center">
+        <div className="flex-1 flex flex-col lg:flex-row gap-4 lg:gap-6 items-start lg:items-center justify-center max-w-5xl mx-auto">
           
           {/* Left Side - Formulário de Desbloqueio (principal) */}
-          <div className="flex-1 max-w-md w-full">
+          <div className="w-full lg:flex-1 max-w-md lg:max-w-lg">
             <VaultUnlockForm
               vault={vault}
               onSuccess={onSuccess}
@@ -140,7 +140,7 @@ const VaultUnlockMain: React.FC<VaultUnlockProps> = ({ vault, onBack, onSuccess 
           </div>
 
           {/* Right Side - Lista de Prêmios */}
-          <div className="flex-1 max-w-md w-full">
+          <div className="w-full lg:flex-1 max-w-md lg:max-w-lg">
             <VaultItemsListUnlock 
               prizes={vault.prizes}
               difficulty={vault.difficulty}
