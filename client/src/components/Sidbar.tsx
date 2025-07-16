@@ -67,7 +67,7 @@ const Sidebar = () => {
       <div className="flex-1 overflow-hidden">
         <VaultSidebar 
           user={user}
-          prizes={prizes}
+          items={prizes}
           showItems={showItems}
           onToggleShowItems={toggleShowItems}
         />
