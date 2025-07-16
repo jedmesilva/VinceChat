@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { useLocation } from 'wouter';
 import { VaultGrid, type Vault } from '@/components/VaultGrid/VaultGrid';
 import VaultHunting from '@/components/VaultHunting/VaultHunting';
 import Navbar from '@/components/Navbar';
 import Sidbar from '@/components/Sidbar';
 
 const VaultDiscovery: React.FC = () => {
+  const [, setLocation] = useLocation();
   const [vaults, setVaults] = useState<Vault[]>([]);
   const [loading, setLoading] = useState(true);
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -134,9 +136,10 @@ const VaultDiscovery: React.FC = () => {
 
   // Handler para quando um cofre é clicado
   const handleVaultClick = useCallback((vault: Vault) => {
-    console.log('Cofre clicado:', vault.name);
-    // Implementar lógica de abertura do cofre
-  }, []);
+    console.log('Navegando para o cofre:', vault.name);
+    // Navega para a página do chat do cofre específico
+    setLocation(`/${vault.id}`);
+  }, [setLocation]);
 
   // Handlers para o componente de caça de cofres
   const handleVaultFound = useCallback((vault: any) => {

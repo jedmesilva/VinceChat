@@ -15,7 +15,7 @@ interface Message {
   authorColor?: string;
 }
 
-interface ChatVaultProps {
+interface MainChatVaultProps {
   vaultName?: string;
   vaultIcon?: React.ComponentType<{ className?: string }>;
   conviction?: number;
@@ -28,7 +28,7 @@ interface ChatVaultProps {
   inputPlaceholder?: string;
 }
 
-const ChatVault: React.FC<ChatVaultProps> = ({
+const MainChatVault: React.FC<MainChatVaultProps> = ({
   vaultName = "Cofre Misterioso",
   vaultIcon = Crown,
   conviction = 75,
@@ -127,4 +127,4 @@ const ChatVault: React.FC<ChatVaultProps> = ({
   );
 };
 
-export default ChatVault;
+export default MainChatVault;

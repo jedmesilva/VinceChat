@@ -11,7 +11,7 @@ function Router() {
   return (
     <Switch>
       <Route path="/" component={VaultDiscovery} />
-      <Route path="/chatvault" component={ChatVaultPage} />
+      <Route path="/:vaultId" component={ChatVaultPage} />
       <Route component={NotFound} />
     </Switch>
   );
