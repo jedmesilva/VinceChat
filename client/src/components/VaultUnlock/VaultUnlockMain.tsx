@@ -96,54 +96,54 @@ const VaultUnlockMain: React.FC<VaultUnlockProps> = ({ vault, onBack, onSuccess 
             </p>
           </div>
 
-          {/* Desktop: Layout horizontal */}
-          <div className="hidden md:flex items-start gap-6">
+          {/* Desktop: Layout centralizado */}
+          <div className="hidden md:flex flex-col items-center text-center">
             {/* Ícone do cofre */}
-            <div className="flex-shrink-0">
+            <div className="flex-shrink-0 mb-6">
               <div className="w-20 h-20 bg-violet-500 rounded-2xl flex items-center justify-center shadow-lg">
                 <Crown className="h-10 w-10 text-white" />
               </div>
             </div>
             
-            {/* Título e descrição */}
-            <div className="flex-1 min-w-0">
-              {/* Difficulty Badge acima do título */}
-              <div className={`mb-4 px-4 py-2 rounded-full border ${currentConfig.border} ${currentConfig.bgAccent} backdrop-blur-sm w-fit`}>
-                <div className="flex items-center gap-2">
-                  <Gift className="h-4 w-4 text-slate-300" />
-                  <span className="text-sm font-medium text-slate-300">{currentConfig.label}</span>
-                </div>
+            {/* Difficulty Badge centralizado */}
+            <div className={`mb-4 px-4 py-2 rounded-full border ${currentConfig.border} ${currentConfig.bgAccent} backdrop-blur-sm w-fit`}>
+              <div className="flex items-center gap-2">
+                <Gift className="h-4 w-4 text-slate-300" />
+                <span className="text-sm font-medium text-slate-300">{currentConfig.label}</span>
               </div>
-              
-              <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 leading-tight">
-                {vault.name}
-              </h1>
-              <p className="text-lg md:text-xl text-slate-400 leading-relaxed max-w-4xl">
-                Um cofre misterioso repleto de tesouros antigos e prêmios valiosos. Cada item 
-                foi cuidadosamente selecionado para proporcionar uma experiência única de 
-                descoberta.
-              </p>
             </div>
+            
+            {/* Título centralizado */}
+            <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 leading-tight">
+              {vault.name}
+            </h1>
+            
+            {/* Descrição centralizada */}
+            <p className="text-lg md:text-xl text-slate-400 leading-relaxed max-w-4xl">
+              Um cofre misterioso repleto de tesouros antigos e prêmios valiosos. Cada item 
+              foi cuidadosamente selecionado para proporcionar uma experiência única de 
+              descoberta.
+            </p>
           </div>
         </div>
 
         {/* Main Content Area */}
         <div className="flex-1 flex flex-col lg:flex-row gap-12 items-center justify-center">
           
-          {/* Left Side - Lista de Prêmios */}
-          <div className="flex-1 max-w-md w-full">
-            <VaultItemsListUnlock 
-              prizes={vault.prizes}
-              difficulty={vault.difficulty}
-            />
-          </div>
-
-          {/* Right Side - Formulário de Desbloqueio */}
+          {/* Left Side - Formulário de Desbloqueio (principal) */}
           <div className="flex-1 max-w-md w-full">
             <VaultUnlockForm
               vault={vault}
               onSuccess={onSuccess}
               onBack={onBack}
+            />
+          </div>
+
+          {/* Right Side - Lista de Prêmios */}
+          <div className="flex-1 max-w-md w-full">
+            <VaultItemsListUnlock 
+              prizes={vault.prizes}
+              difficulty={vault.difficulty}
             />
           </div>
         </div>

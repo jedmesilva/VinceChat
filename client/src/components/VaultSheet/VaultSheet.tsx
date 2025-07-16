@@ -42,7 +42,7 @@ const VaultSheet: React.FC<VaultSheetProps> = ({ vault, isOpen, onClose, onChatC
 
   return (
     <div className="fixed inset-0 z-[9999] bg-black/80 backdrop-blur-sm">
-      <div className="absolute inset-0 overflow-y-auto overflow-x-hidden">
+      <div className="absolute inset-0 overflow-y-auto overflow-x-hidden scrollbar-hide">
         <div className="min-h-full">
           {!isUnlocked ? (
             // Tela de acesso ao cofre (exterior)
@@ -61,6 +61,19 @@ const VaultSheet: React.FC<VaultSheetProps> = ({ vault, isOpen, onClose, onChatC
           )}
         </div>
       </div>
+      
+      {/* CSS para ocultar scrollbar */}
+      <style dangerouslySetInnerHTML={{
+        __html: `
+          .scrollbar-hide {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+          }
+          .scrollbar-hide::-webkit-scrollbar {
+            display: none;  /* Chrome, Safari and Opera */
+          }
+        `
+      }} />
     </div>
   );
 };
