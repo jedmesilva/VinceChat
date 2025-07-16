@@ -46,13 +46,7 @@ const VaultSheet: React.FC<VaultSheetProps> = ({
   const [isUnlocked, setIsUnlocked] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [interiorItems, setInteriorItems] = useState<InteriorItem[]>([]);
-  const [claimingItem, setClaimingItem] = useState<string | null>(null);
-  const [claimProgress, setClaimProgress] = useState(0);
-  const [claimedItems, setClaimedItems] = useState<Set<string>>(new Set());
-  const [finalProgress, setFinalProgress] = useState<Map<string, number>>(new Map());
   const [openTime, setOpenTime] = useState(0);
-  
-  const progressTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   // Timer para cofre aberto
   useEffect(() => {
@@ -142,47 +136,11 @@ const VaultSheet: React.FC<VaultSheetProps> = ({
   };
 
   const handleClaimItem = (itemId: string) => {
-    if (claimedItems.has(itemId) || claimingItem) return;
-    
-    setClaimingItem(itemId);
-    setClaimProgress(0);
-    
-    // Simular progresso de claim
-    progressTimerRef.current = setInterval(() => {
-      setClaimProgress(prev => {
-        if (prev >= 100) {
-          if (progressTimerRef.current) {
-            clearInterval(progressTimerRef.current);
-          }
-          
-          // Atualizar estado final
-          setFinalProgress(prevMap => {
-            const newMap = new Map(prevMap);
-            newMap.set(itemId, 100);
-            return newMap;
-          });
-          
-          setTimeout(() => {
-            setClaimedItems(prevSet => new Set(prevSet).add(itemId));
-            setClaimingItem(null);
-            setClaimProgress(0);
-          }, 500);
-          
-          return 100;
-        }
-        return prev + 2;
-      });
-    }, 50);
+    // Remove o item da lista após 2 segundos
+    setTimeout(() => {
+      setInteriorItems(prev => prev.filter(item => item.id !== itemId));
+    }, 2000);
   };
-
-  // Cleanup timers
-  useEffect(() => {
-    return () => {
-      if (progressTimerRef.current) {
-        clearInterval(progressTimerRef.current);
-      }
-    };
-  }, []);
 
   // Reset state when closing
   useEffect(() => {
@@ -190,10 +148,6 @@ const VaultSheet: React.FC<VaultSheetProps> = ({
       setIsUnlocked(false);
       setIsSubmitting(false);
       setInteriorItems([]);
-      setClaimingItem(null);
-      setClaimProgress(0);
-      setClaimedItems(new Set());
-      setFinalProgress(new Map());
       setOpenTime(0);
     }
   }, [isOpen]);
@@ -242,10 +196,10 @@ const VaultSheet: React.FC<VaultSheetProps> = ({
               <VaultItemsGrid
                 items={interiorItems}
                 onClaimItem={handleClaimItem}
-                claimingItem={claimingItem}
-                claimProgress={claimProgress}
-                claimedItems={claimedItems}
-                finalProgress={finalProgress}
+                claimingItem={null}
+                claimProgress={0}
+                claimedItems={new Set()}
+                finalProgress={new Map()}
               />
             </div>
           )}
