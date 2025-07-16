@@ -58,6 +58,17 @@ const ChatVaultMessageInput: React.FC<ChatVaultMessageInputProps> = ({
 
   return (
     <div className={`p-4 bg-slate-800 border-t border-slate-700/30 ${className}`}>
+      <style dangerouslySetInnerHTML={{
+        __html: `
+          .scrollbar-none {
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+          }
+          .scrollbar-none::-webkit-scrollbar {
+            display: none;
+          }
+        `
+      }} />
       <div 
         className="bg-slate-700 rounded-3xl p-4 cursor-text"
         onClick={() => textareaRef.current?.focus()}
@@ -70,7 +81,7 @@ const ChatVaultMessageInput: React.FC<ChatVaultMessageInputProps> = ({
           onInput={handleTextareaInput}
           placeholder={placeholder}
           disabled={disabled}
-          className="w-full bg-transparent text-white placeholder-slate-400 focus:outline-none text-base mb-3 resize-none min-h-[24px] overflow-y-hidden disabled:opacity-50 disabled:cursor-not-allowed"
+          className="w-full bg-transparent text-white placeholder-slate-400 focus:outline-none text-base mb-3 resize-none min-h-[24px] overflow-y-auto disabled:opacity-50 disabled:cursor-not-allowed scrollbar-none"
           rows={1}
           style={{ 
             height: 'auto',
