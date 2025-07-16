@@ -226,7 +226,7 @@ const VaultSheet: React.FC<VaultSheetProps> = ({
               </div>
               
               <div className="w-full">
-                <VaultItemsList items={vault.items} />
+                <VaultItemsList items={vault.items || []} />
               </div>
             </div>
           ) : (

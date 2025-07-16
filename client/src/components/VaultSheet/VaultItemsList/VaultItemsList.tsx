@@ -13,7 +13,7 @@ interface VaultItemsListProps {
   items: Item[];
 }
 
-const VaultItemsList: React.FC<VaultItemsListProps> = ({ items }) => {
+const VaultItemsList: React.FC<VaultItemsListProps> = ({ items = [] }) => {
   const [showAllItems, setShowAllItems] = useState(false);
 
   const getItemIcon = (type: string) => {
@@ -40,8 +40,8 @@ const VaultItemsList: React.FC<VaultItemsListProps> = ({ items }) => {
     return item.name;
   };
 
-  const visibleItems = showAllItems ? items : items.slice(0, 3);
-  const hasMoreItems = items.length > 3;
+  const visibleItems = showAllItems ? items : items?.slice(0, 3) || [];
+  const hasMoreItems = (items?.length || 0) > 3;
 
   return (
     <div className="bg-slate-800/50 backdrop-blur-md rounded-3xl p-6 border border-slate-700/50">
@@ -51,7 +51,7 @@ const VaultItemsList: React.FC<VaultItemsListProps> = ({ items }) => {
       </h3>
       
       <div className="space-y-4">
-        {visibleItems.map((item) => {
+        {visibleItems?.map((item) => {
           const ItemIcon = getItemIcon(item.type);
           return (
             <div key={item.id} className="flex items-center gap-4 p-4 bg-slate-700/30 rounded-2xl border border-slate-600/30">
@@ -87,7 +87,7 @@ const VaultItemsList: React.FC<VaultItemsListProps> = ({ items }) => {
               </>
             ) : (
               <>
-                Ver mais ({items.length - 3} itens)
+                Ver mais ({(items?.length || 0) - 3} itens)
                 <ChevronDown className="h-4 w-4" />
               </>
             )}
