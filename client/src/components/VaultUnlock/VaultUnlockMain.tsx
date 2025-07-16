@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Crown, Gift } from 'lucide-react';
-import VaultUnlockForm from './VaultUnlockForm';
+import VaultUnlockForm from './VaultUnlockForm/VaultUnlockForm';
 import VaultItemsListUnlock from './VaultItemsListUnlock/VaultItemsListUnlock';
 
 interface VaultUnlockProps {

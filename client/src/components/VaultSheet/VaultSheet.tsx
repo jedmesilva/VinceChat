@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import VaultUnlockMain from './VaultUnlock/VaultUnlockMain';
-import VaultMain from './Vault/VaultMain';
+import VaultUnlockMain from '../VaultUnlock/VaultUnlockMain';
+import VaultMain from '../Vault/VaultMain';
 
 interface VaultSheetProps {
   vault: {

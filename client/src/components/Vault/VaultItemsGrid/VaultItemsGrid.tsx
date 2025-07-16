@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useRef } from 'react';
 import { CheckCircle } from 'lucide-react';
-import VaultItemCard from 'client/src/components/Vault/VaultItemCard/VaultItemCard.tsx';
+import VaultItemCard from '../VaultItemCard/VaultItemCard';
 
 interface VaultItem {
   id: string;

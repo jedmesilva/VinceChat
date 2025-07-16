@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { CheckCircle } from 'lucide-react';
-import VaultHeader from '../../../components/Vault/VaultHeader/VaultHeader';
-import VaultItemsGrid from '../../../components/Vault/VaultItemsGrid/VaultItemsGrid';
+import VaultHeader from './VaultHeader/VaultHeader';
+import VaultItemsGrid from './VaultItemsGrid/VaultItemsGrid';
 
 interface Item {
   id: string;
