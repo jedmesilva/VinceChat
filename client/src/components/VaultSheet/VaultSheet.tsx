@@ -201,56 +201,54 @@ const VaultSheet: React.FC<VaultSheetProps> = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
-      <div className="relative w-full h-full max-w-6xl max-h-screen mx-4 bg-slate-800/95 backdrop-blur-md rounded-2xl border border-slate-700/50 shadow-2xl overflow-hidden">
-        <VaultSheetBackground difficulty={vault.difficulty} />
+    <div className="fixed inset-0 z-50 bg-gray-900">
+      <VaultSheetBackground difficulty={vault.difficulty} />
+      
+      <div className="relative z-10 flex flex-col h-full">
+        <VaultSheetHeader 
+          vaultName={vault.name}
+          difficulty={vault.difficulty}
+          onClose={onClose}
+        />
         
-        <div className="relative z-10 flex flex-col h-full">
-          <VaultSheetHeader 
-            vaultName={vault.name}
-            difficulty={vault.difficulty}
-            onClose={onClose}
-          />
-          
-          <div className="flex-1 overflow-y-auto">
-            {!isUnlocked ? (
-              <div className="flex flex-col lg:flex-row gap-8 p-6 items-center justify-center min-h-full">
-                <div className="flex-1 max-w-md">
-                  <VaultPrizesList prizes={vault.prizes} />
-                </div>
-                
-                <div className="flex-1 max-w-md">
-                  <div className="bg-slate-800/95 backdrop-blur-md rounded-3xl border border-slate-700/50 shadow-2xl shadow-black/50">
-                    <VaultUnlockForm
-                      onSuccess={handleUnlockSuccess}
-                      onChatClick={onChatClick}
-                      isSubmitting={isSubmitting}
-                      setIsSubmitting={setIsSubmitting}
-                    />
-                  </div>
+        <div className="flex-1 overflow-y-auto">
+          {!isUnlocked ? (
+            <div className="flex flex-col lg:flex-row gap-8 p-6 items-center justify-center min-h-full">
+              <div className="flex-1 max-w-md">
+                <VaultPrizesList prizes={vault.prizes} />
+              </div>
+              
+              <div className="flex-1 max-w-md">
+                <div className="bg-slate-800/95 backdrop-blur-md rounded-3xl border border-slate-700/50 shadow-2xl shadow-black/50">
+                  <VaultUnlockForm
+                    onSuccess={handleUnlockSuccess}
+                    onChatClick={onChatClick}
+                    isSubmitting={isSubmitting}
+                    setIsSubmitting={setIsSubmitting}
+                  />
                 </div>
               </div>
-            ) : (
-              <div className="p-4">
-                <div className="text-center mb-6">
-                  <h3 className="text-3xl font-bold text-white mb-2">Interior do Cofre</h3>
-                  <p className="text-slate-400">Mantenha pressionado em um item para resgatá-lo</p>
-                  <div className="text-sm text-slate-500 mt-2">
-                    Cofre aberto há {Math.floor(openTime / 60)}:{(openTime % 60).toString().padStart(2, '0')}
-                  </div>
+            </div>
+          ) : (
+            <div className="p-4">
+              <div className="text-center mb-6">
+                <h3 className="text-3xl font-bold text-white mb-2">Interior do Cofre</h3>
+                <p className="text-slate-400">Mantenha pressionado em um item para resgatá-lo</p>
+                <div className="text-sm text-slate-500 mt-2">
+                  Cofre aberto há {Math.floor(openTime / 60)}:{(openTime % 60).toString().padStart(2, '0')}
                 </div>
-                
-                <VaultInteriorGrid
-                  prizes={interiorPrizes}
-                  onClaimPrize={handleClaimPrize}
-                  claimingPrize={claimingPrize}
-                  claimProgress={claimProgress}
-                  claimedPrizes={claimedPrizes}
-                  finalProgress={finalProgress}
-                />
               </div>
-            )}
-          </div>
+              
+              <VaultInteriorGrid
+                prizes={interiorPrizes}
+                onClaimPrize={handleClaimPrize}
+                claimingPrize={claimingPrize}
+                claimProgress={claimProgress}
+                claimedPrizes={claimedPrizes}
+                finalProgress={finalProgress}
+              />
+            </div>
+          )}
         </div>
       </div>
     </div>
