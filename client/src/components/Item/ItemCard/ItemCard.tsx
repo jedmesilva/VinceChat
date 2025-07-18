@@ -158,7 +158,7 @@ const VaultItemCard: React.FC<VaultItemCardProps> = ({
   return (
     <div
       onClick={handleItemClick}
-      className={`bg-slate-800/95 backdrop-blur-md rounded-3xl p-6 border ${rarity.border} ${isClickable ? 'cursor-pointer hover:scale-105' : isExpired || isClaimed ? 'cursor-not-allowed' : 'cursor-default'} transition-all duration-300 group relative ${className}`}
+      className={`bg-slate-800/95 backdrop-blur-md rounded-3xl p-6 border ${rarity.border} ${isClickable ? 'cursor-pointer hover:border-violet-300' : isExpired || isClaimed ? 'cursor-not-allowed' : 'cursor-default'} transition-all duration-300 group relative ${className}`}
     >
       {/* Claimed/Expired Overlay */}
       {(isClaimed || isExpired) && (
