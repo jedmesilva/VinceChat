@@ -162,13 +162,13 @@ const MainChatVault: React.FC<MainChatVaultProps> = ({
         onAbandon={handleAbandon}
       />
       
-      {/* Histórico do Chat com scroll */}
-      <div className="flex-1 overflow-hidden">
+      {/* Histórico do Chat expandido ao máximo */}
+      <div className="flex-1 overflow-hidden min-h-0">
         <ChatVaultHistory messages={messages} />
       </div>
 
-      {/* Seção inferior com VaultSectionChat e Input */}
-      <div className="flex-shrink-0">
+      {/* Seção inferior fixa com VaultSectionChat e Input */}
+      <div className="flex-shrink-0 flex-grow-0">
         <VaultSectionChat
           isLocked={isVaultLocked}
           onVaultClick={handleVaultAction}

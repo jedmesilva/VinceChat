@@ -208,9 +208,9 @@ const ChatVaultHistory: React.FC<ChatVaultHistoryProps> = ({
   }, [messages]);
 
   return (
-    <div className={`h-full overflow-y-auto px-4 py-6 space-y-6 chat-history ${className}`}>
+    <div className={`h-full overflow-y-auto px-4 py-6 chat-history ${className}`}>
       {messages.length === 0 ? (
-        <div className="flex items-center justify-center h-full">
+        <div className="flex items-center justify-center h-full min-h-[400px]">
           <div className="text-center">
             <div className="w-16 h-16 bg-slate-700 rounded-full flex items-center justify-center mx-auto mb-4">
               <MessageCircle className="w-8 h-8 text-slate-400" />
@@ -221,12 +221,12 @@ const ChatVaultHistory: React.FC<ChatVaultHistoryProps> = ({
           </div>
         </div>
       ) : (
-        <>
+        <div className="space-y-6 min-h-full">
           {messages.map((message) => (
             <ChatMessage key={message.id} message={message} />
           ))}
           <div ref={messagesEndRef} />
-        </>
+        </div>
       )}
     </div>
   );
