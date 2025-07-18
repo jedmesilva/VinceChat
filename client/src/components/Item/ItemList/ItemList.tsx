@@ -1,5 +1,5 @@
 import React from 'react';
-import ItemCard from '../../Item/ItemCard/ItemCard';
+import VaultItemCard from '../../Item/ItemCard/ItemCard';
 
 interface ItemListProps {
   items: any[];
@@ -50,7 +50,7 @@ const ItemList: React.FC<ItemListProps> = ({
   return (
     <div className={`grid ${gridClasses} ${gapClasses} w-full ${className}`}>
       {items.map((item) => (
-        <ItemCard
+        <VaultItemCard
           key={item.id}
           item={item}
           onItemClick={onItemClick}
