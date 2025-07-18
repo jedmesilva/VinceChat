@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { useLocation } from 'wouter';
 import { VaultGrid, type Vault } from '@/components/VaultsGridDiscovery/VaultsGridDiscovery';
 import VaultHunting from '@/components/VaultHunting/VaultHunting';
+import MyVaultMain from '@/components/MyVault/MyVaultMain';
 import Navbar from '@/components/Navbar';
 
 const VaultDiscovery: React.FC = () => {
@@ -188,38 +189,49 @@ const VaultDiscovery: React.FC = () => {
         <div className="fixed inset-0 z-30 lg:hidden">
           <div className="fixed inset-0 bg-black/50" onClick={handleCloseSidebar} />
           <div className="fixed left-0 top-0 h-full w-80 bg-slate-800">
-            <Sidbar />
+            {/* Conteúdo do sidebar pode ser adicionado aqui */}
+            <div className="p-4">
+              <h2 className="text-white text-lg font-semibold">Menu</h2>
+            </div>
           </div>
         </div>
       )}
 
       {/* Conteúdo principal */}
-      <div className="pt-16"> {/* Espaço para navbar fixa */}
-        {/* Componente de caça de cofres no topo */}
-        <div className="p-4">
-          <VaultHunting
-            onVaultFound={handleVaultFound}
-            onHuntComplete={handleHuntComplete}
-            onHuntStart={handleHuntStart}
-            onHuntStop={handleHuntStop}
-          />
+      <div className="pt-16 h-screen flex overflow-hidden"> {/* Espaço para navbar fixa */}
+        {/* MyVault - lado esquerdo */}
+        <div className="w-1/3 min-w-0 flex-shrink-0 border-r border-slate-700/50">
+          <MyVaultMain />
         </div>
 
-        {/* Grid de cofres abaixo */}
-        <VaultGrid
-          vaults={vaults}
-          onVaultClick={handleVaultClick}
-          title="Cofres Disponíveis"
-          emptyStateConfig={{
-            title: "Nenhum cofre encontrado",
-            description: "Inicie uma caçada para encontrar cofres disponíveis, ou aguarde que eles apareçam para você esporadicamente"
-          }}
-          gridConfig={{
-            cols: { sm: 2, md: 2, lg: 3, xl: 4 },
-            gap: 6
-          }}
-          showBackground={false} // Removemos o background do grid já que a página tem seu próprio background
-        />
+        {/* Discovery Content - lado direito */}
+        <div className="flex-1 min-w-0 overflow-y-auto">
+          {/* Componente de caça de cofres no topo */}
+          <div className="p-4">
+            <VaultHunting
+              onVaultFound={handleVaultFound}
+              onHuntComplete={handleHuntComplete}
+              onHuntStart={handleHuntStart}
+              onHuntStop={handleHuntStop}
+            />
+          </div>
+
+          {/* Grid de cofres abaixo */}
+          <VaultGrid
+            vaults={vaults}
+            onVaultClick={handleVaultClick}
+            title="Cofres Disponíveis"
+            emptyStateConfig={{
+              title: "Nenhum cofre encontrado",
+              description: "Inicie uma caçada para encontrar cofres disponíveis, ou aguarde que eles apareçam para você esporadicamente"
+            }}
+            gridConfig={{
+              cols: { sm: 2, md: 2, lg: 3, xl: 4 },
+              gap: 6
+            }}
+            showBackground={false} // Removemos o background do grid já que a página tem seu próprio background
+          />
+        </div>
       </div>
     </div>
   );
