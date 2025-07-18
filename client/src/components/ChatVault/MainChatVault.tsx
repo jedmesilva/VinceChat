@@ -165,7 +165,7 @@ const MainChatVault: React.FC<MainChatVaultProps> = ({
       </div>
       
       {/* Histórico do Chat com scroll - margem superior para compensar Timer e Header fixos */}
-      <div className="flex-1 pt-32 pb-44 overflow-hidden">
+      <div className="flex-1 pt-24 pb-44 overflow-hidden"></div>
         <ChatVaultHistory messages={messages} />
       </div>
 
