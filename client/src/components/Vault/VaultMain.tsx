@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { CheckCircle } from 'lucide-react';
 import VaultHeader from './VaultHeader/VaultHeader';
-import VaultItemsList from './VaultItemsList/VaultItemsList';
+import ItemList from '../Item/ItemList/ItemList';
 
 interface Item {
   id: string;
@@ -105,11 +105,10 @@ const VaultMain: React.FC<VaultMainProps> = ({
     setItems(sampleItems);
   }, []);
 
-  const handleItemClaimed = (itemId: string) => {
-    // Aguardar 2 segundos e depois remover o item da lista
-    setTimeout(() => {
-      setItems(prev => prev.filter(item => item.id !== itemId));
-    }, 2000);
+  const handleItemClick = (item: any) => {
+    console.log('Item clicado:', item);
+    // Aqui você pode implementar a lógica de click do item
+    // Por exemplo, abrir um modal, marcar como reclamado, etc.
   };
 
   return (
@@ -126,12 +125,15 @@ const VaultMain: React.FC<VaultMainProps> = ({
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 overflow-y-auto px-4 pb-4">
+      <div className="flex-1 overflow-y-auto px-4 pb-4 scrollbar-hide">
         <div className="w-full">
           {/* Items List */}
-          <VaultItemsList
+          <ItemList
             items={items}
-            onItemClaimed={handleItemClaimed}
+            onItemClick={handleItemClick}
+            gridCols="2"
+            gap="medium"
+            className="w-full"
           />
 
           {/* Empty State */}
