@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useLocation } from 'wouter';
 import MainChatVault from '../components/ChatVault/MainChatVault';
+import MyVaultMain from '../components/MyVault/MyVaultMain';
 import Timer from '../components/Timer/Timer';
 import { Crown, Gem, Shield, Trophy, Gift } from 'lucide-react';
 
@@ -183,29 +184,37 @@ const ChatVaultPage: React.FC = () => {
         />
       </div>
 
-      {/* MainChatVault ocupando toda a altura restante */}
-      <div className="flex-1 min-h-0 w-full">
-        <MainChatVault
-          vaultName={vault.name}
-          vaultIcon={getVaultIcon(vault.difficulty)}
-          conviction={getConvictionLevel(vault.difficulty)}
-          offensiveCount={getOffensiveCount(vault.difficulty)}
-          isVaultLocked={vault.isLocked}
-          vaultActionLabel={vault.isLocked ? "Saquear" : "Conquistado"}
-          inputPlaceholder={vault.isLocked ? "Digite sua mensagem para convencer..." : "Este cofre já foi conquistado!"}
-          initialMessages={[
-            {
-              id: 'welcome',
-              text: `Bem-vindo ao ${vault.name}! ${vault.description}`,
-              isUser: false,
-              timestamp: new Date(),
-              authorName: 'IA Guardian',
-              authorColor: 'bg-violet-600/80',
-              userType: 'guardian'
-            }
-          ]}
-          items={[{id: 'item1', name: 'Gold', type: 'money', value: 100}]}
-        />
+      {/* Container principal com MyVault e Chat lado a lado */}
+      <div className="flex-1 min-h-0 w-full flex overflow-hidden">
+        {/* MyVault - lado esquerdo */}
+        <div className="w-1/3 min-w-0 flex-shrink-0 border-r border-slate-700/50">
+          <MyVaultMain />
+        </div>
+
+        {/* MainChatVault - lado direito */}
+        <div className="flex-1 min-w-0">
+          <MainChatVault
+            vaultName={vault.name}
+            vaultIcon={getVaultIcon(vault.difficulty)}
+            conviction={getConvictionLevel(vault.difficulty)}
+            offensiveCount={getOffensiveCount(vault.difficulty)}
+            isVaultLocked={vault.isLocked}
+            vaultActionLabel={vault.isLocked ? "Saquear" : "Conquistado"}
+            inputPlaceholder={vault.isLocked ? "Digite sua mensagem para convencer..." : "Este cofre já foi conquistado!"}
+            initialMessages={[
+              {
+                id: 'welcome',
+                text: `Bem-vindo ao ${vault.name}! ${vault.description}`,
+                isUser: false,
+                timestamp: new Date(),
+                authorName: 'IA Guardian',
+                authorColor: 'bg-violet-600/80',
+                userType: 'guardian'
+              }
+            ]}
+            items={[{id: 'item1', name: 'Gold', type: 'money', value: 100}]}
+          />
+        </div>
       </div>
     </div>
   );
