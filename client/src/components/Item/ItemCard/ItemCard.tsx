@@ -2,12 +2,16 @@ import React, { useState } from 'react';
 import { 
   Banknote, 
   Gift, 
-  Crown, 
-  Star, 
   CreditCard,
+  Crown,
+  CheckCircle,
+  Clock,
+  X,
+  Calendar,
   Package,
   Shield,
-  Zap
+  Zap,
+  Star
 } from 'lucide-react';
 
 interface VaultItem {
@@ -26,31 +30,21 @@ interface VaultItem {
   expiresAt?: string;
 }
 
-interface ItemCardProps {
+interface VaultItemCardProps {
   item: VaultItem;
+  onItemClick?: (item: VaultItem) => void;
   className?: string;
-  showFullDescription?: boolean;
-  onToggleDescription?: (show: boolean) => void;
 }
 
-const ItemCard: React.FC<ItemCardProps> = ({ 
-  item, 
-  className = "",
-  showFullDescription = false,
-  onToggleDescription
+const VaultItemCard: React.FC<VaultItemCardProps> = ({
+  item,
+  onItemClick,
+  className = ''
 }) => {
-  const [internalShowDescription, setInternalShowDescription] = useState(false);
+  const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
 
-  // Usar estado interno se não for controlado externamente
-  const isDescriptionExpanded = onToggleDescription ? showFullDescription : internalShowDescription;
-  
-  const handleToggleDescription = () => {
-    const newState = !isDescriptionExpanded;
-    if (onToggleDescription) {
-      onToggleDescription(newState);
-    } else {
-      setInternalShowDescription(newState);
-    }
+  const toggleDescription = () => {
+    setIsDescriptionExpanded(prev => !prev);
   };
 
   // Configurações de raridade
@@ -139,104 +133,224 @@ const ItemCard: React.FC<ItemCardProps> = ({
     }
   };
 
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('pt-BR', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric'
+    });
+  };
+
+  const handleItemClick = () => {
+    if (onItemClick && item.status === 'available') {
+      onItemClick(item);
+    }
+  };
+
   const ItemIcon = typeConfig[item.type].icon;
   const rarity = rarityConfig[item.rarity];
   const status = statusConfig[item.status];
-
-  const formatValue = (value: number) => {
-    return new Intl.NumberFormat('pt-BR', {
-      style: 'currency',
-      currency: 'BRL',
-      minimumFractionDigits: 0
-    }).format(value);
-  };
+  const isExpired = item.status === 'expired';
+  const isClaimed = item.status === 'claimed';
+  const isClickable = onItemClick && item.status === 'available';
 
   return (
-    <div className={`bg-slate-800/95 backdrop-blur-md rounded-3xl p-6 md:p-8 border ${rarity.border} ${className}`}>
-      {/* Badges */}
-      <div className="flex justify-between items-center mb-6">
-        <div className={`px-4 py-2 rounded-full border ${status.border} ${status.bg} backdrop-blur-sm`}>
-          <span className={`text-sm font-medium ${status.color}`}>{status.label}</span>
-        </div>
-        <div className={`px-4 py-2 rounded-full border ${rarity.border} ${rarity.bg} backdrop-blur-sm`}>
-          <div className="flex items-center gap-2">
-            <rarity.icon className={`h-4 w-4 ${rarity.text}`} />
-            <span className={`text-sm font-medium ${rarity.text}`}>{rarity.label}</span>
-          </div>
-        </div>
-      </div>
-      
-      <div className="flex flex-col lg:flex-row gap-8">
-        {/* Item Visual */}
-        <div className="flex-shrink-0">
-          <div className="relative">
-            {item.image ? (
-              <img 
-                src={item.image} 
-                alt={item.name}
-                className={`w-40 h-40 rounded-2xl object-cover border-2 ${rarity.border}`}
-              />
+    <div
+      onClick={handleItemClick}
+      className={`bg-slate-800/95 backdrop-blur-md rounded-3xl p-6 border ${rarity.border} ${isClickable ? 'cursor-pointer hover:scale-105' : isExpired || isClaimed ? 'cursor-not-allowed' : 'cursor-default'} transition-all duration-300 group relative ${className}`}
+    >
+      {/* Claimed/Expired Overlay */}
+      {(isClaimed || isExpired) && (
+        <div className="absolute inset-0 rounded-3xl flex items-center justify-center z-20">
+          <div 
+            className={`${isClaimed ? 'bg-purple-600' : 'bg-red-600'} rounded-xl px-3 py-2 flex items-center gap-2`}
+          >
+            {isClaimed ? (
+              <CheckCircle className="h-5 w-5 text-white" />
             ) : (
-              <div className={`w-40 h-40 rounded-2xl ${typeConfig[item.type].bg} flex items-center justify-center border-2 ${rarity.border}`}>
-                <ItemIcon className={`h-20 w-20 ${typeConfig[item.type].color}`} />
-              </div>
+              <X className="h-5 w-5 text-white" />
             )}
+            <div className="text-white font-bold text-sm">
+              {isClaimed ? 'RESGATADO' : 'EXPIRADO'}
+            </div>
           </div>
+        </div>
+      )}
+
+      {/* Item Visual */}
+      <div className={`flex justify-center mb-6 ${isExpired || isClaimed ? 'opacity-30' : ''}`}>
+        {item.image ? (
+          <img 
+            src={item.image} 
+            alt={item.name}
+            className={`w-24 h-24 rounded-2xl object-cover border-2 ${rarity.border}`}
+          />
+        ) : (
+          <div className={`w-24 h-24 rounded-2xl ${typeConfig[item.type].bg} flex items-center justify-center`}>
+            <ItemIcon className={`h-12 w-12 ${typeConfig[item.type].color}`} />
+          </div>
+        )}
+      </div>
+
+      {/* Item Info */}
+      <div className={`text-center ${isExpired || isClaimed ? 'opacity-30' : ''}`}>
+        <h3 className="text-xl font-bold text-white mb-2">{item.name}</h3>
+        
+        <div className="flex items-center justify-center gap-3 text-sm text-slate-400 mb-3">
+          <span className={`px-3 py-1 rounded-lg ${typeConfig[item.type].bg} ${typeConfig[item.type].color} font-medium`}>
+            {typeConfig[item.type].label}
+          </span>
+
+          {item.vaultSource && (
+            <span className="text-slate-500">
+              • {item.vaultSource}
+            </span>
+          )}
         </div>
 
-        {/* Item Info */}
-        <div className="flex-1">
-          <div className="mb-4">
-            <h2 className="text-3xl font-bold text-white mb-2">{item.name}</h2>
-            <div className="flex items-center gap-3 text-sm text-slate-400 mb-3">
-              <span className={`px-3 py-1 rounded-lg ${typeConfig[item.type].bg} ${typeConfig[item.type].color} font-medium`}>
-                {typeConfig[item.type].label}
-              </span>
+        {/* Descrição */}
+        <div className="space-y-3 mb-4">
+          <p className="text-slate-300 leading-relaxed text-sm">
+            {isDescriptionExpanded ? item.description : `${item.description.substring(0, 100)}...`}
+          </p>
+          {item.description.length > 100 && (
+            <button 
+              onClick={(e) => {
+                e.stopPropagation();
+                toggleDescription();
+              }}
+              className="text-violet-400 hover:text-violet-300 text-sm font-medium transition-all duration-200"
+            >
+              {isDescriptionExpanded ? 'Ver menos' : 'Ver mais'}
+            </button>
+          )}
+        </div>
+
+        {/* Informações adicionais */}
+        {(item.expiresAt || item.quantity || item.claimedAt) && (
+          <div className="pt-4 border-t border-slate-700/50">
+            <div className="flex flex-wrap justify-center gap-4 text-sm text-slate-400">
+              {item.status === 'available' && item.expiresAt && (
+                <span className="flex items-center gap-1 text-orange-400">
+                  <Clock className="h-3 w-3" />
+                  Válido até {formatDate(item.expiresAt)}
+                </span>
+              )}
+              
+              {item.status === 'claimed' && item.claimedAt && (
+                <span className="flex items-center gap-1 text-green-400">
+                  <Calendar className="h-3 w-3" />
+                  Resgatado em {formatDate(item.claimedAt)}
+                </span>
+              )}
+              
               {item.quantity && (
                 <span className="flex items-center gap-1">
                   <Package className="h-3 w-3" />
                   Qtd: {item.quantity}
                 </span>
               )}
-              {item.vaultSource && (
-                <span className="text-slate-500">
-                  • {item.vaultSource}
-                </span>
-              )}
             </div>
           </div>
+        )}
+      </div>
+    </div>
+  );
+};
 
-          {/* Descrição */}
-          <div className="space-y-3">
-            <p className="text-slate-300 leading-relaxed">
-              {isDescriptionExpanded ? item.description : `${item.description.substring(0, 200)}...`}
-            </p>
-            {item.description.length > 200 && (
-              <button 
-                onClick={handleToggleDescription}
-                className="text-violet-400 hover:text-violet-300 text-sm font-medium transition-all duration-200"
-              >
-                {isDescriptionExpanded ? 'Ver menos' : 'Ver mais'}
-              </button>
-            )}
+// Demo component to showcase the VaultItemCard
+const Demo = () => {
+  const sampleItems: VaultItem[] = [
+    {
+      id: '1',
+      type: 'money',
+      name: 'Baú de Moedas',
+      value: 1000,
+      description: 'Uma quantia generosa em moedas douradas coletadas dos cofres mais raros do reino. Perfeito para expandir seu inventário.',
+      rarity: 'common',
+      status: 'available',
+      vaultSource: 'Cofre Básico',
+      expiresAt: '2025-08-15'
+    },
+    {
+      id: '2',
+      type: 'product',
+      name: 'Smartphone Premium',
+      value: 2500,
+      description: 'O mais recente modelo com todas as funcionalidades avançadas, incluindo câmera profissional e processamento de última geração.',
+      rarity: 'epic',
+      status: 'claimed',
+      vaultSource: 'Cofre Épico',
+      claimedAt: '2025-07-10'
+    },
+    {
+      id: '3',
+      type: 'voucher',
+      name: 'Vale Compras',
+      value: 500,
+      description: 'Válido em diversas lojas parceiras para você escolher exatamente o que precisa.',
+      rarity: 'rare',
+      status: 'available',
+      vaultSource: 'Cofre Raro',
+      expiresAt: '2025-12-31'
+    },
+    {
+      id: '4',
+      type: 'special',
+      name: 'Coroa Dourada',
+      value: 5000,
+      description: 'Item especial de prestígio único que demonstra sua habilidade e sorte excepcionais.',
+      rarity: 'legendary',
+      status: 'expired',
+      vaultSource: 'Cofre Lendário'
+    }
+  ];
+
+  const handleItemClick = (item: VaultItem) => {
+    alert(`Você clicou em: ${item.name}`);
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 to-slate-800 p-6">
+      <div className="max-w-7xl mx-auto">
+        <h1 className="text-4xl font-bold text-white mb-8 text-center">
+          VaultItemCard - Componente Individual
+        </h1>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {sampleItems.map((item) => (
+            <VaultItemCard
+              key={item.id}
+              item={item}
+              onItemClick={handleItemClick}
+            />
+          ))}
+        </div>
+        
+        <div className="mt-12 bg-slate-800/50 rounded-2xl p-6">
+          <h2 className="text-2xl font-bold text-white mb-4">Como usar:</h2>
+          <div className="bg-slate-900 rounded-lg p-4 text-sm">
+            <pre className="text-green-400 whitespace-pre-wrap">
+{`import VaultItemCard from './VaultItemCard';
+
+// Uso básico
+<VaultItemCard 
+  item={vaultItem} 
+  onItemClick={(item) => console.log('Clicou em:', item.name)}
+/>
+
+// Com className customizada
+<VaultItemCard 
+  item={vaultItem} 
+  className="shadow-lg"
+/>`}
+            </pre>
           </div>
-
-          {/* Informações adicionais */}
-          {item.expiresAt && (
-            <div className="mt-4 pt-4 border-t border-slate-700/50">
-              <div className="flex flex-wrap gap-4 text-sm text-slate-400">
-                <span className="flex items-center gap-1">
-                  <Package className="h-3 w-3" />
-                  Expira: {new Date(item.expiresAt).toLocaleDateString('pt-BR')}
-                </span>
-              </div>
-            </div>
-          )}
         </div>
       </div>
     </div>
   );
 };
 
-export default ItemCard;
-export type { VaultItem, ItemCardProps };
+export default Demo;
