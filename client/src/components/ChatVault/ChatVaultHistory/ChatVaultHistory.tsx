@@ -208,7 +208,7 @@ const ChatVaultHistory: React.FC<ChatVaultHistoryProps> = ({
   }, [messages]);
 
   return (
-    <div className={`h-full overflow-y-auto px-4 py-6 space-y-6 chat-history ${className}`}>
+    <div className={`flex-1 overflow-y-auto px-4 py-6 space-y-6 ${className}`}>
       {messages.length === 0 ? (
         <div className="flex items-center justify-center h-full">
           <div className="text-center">
@@ -232,6 +232,70 @@ const ChatVaultHistory: React.FC<ChatVaultHistoryProps> = ({
   );
 };
 
+// Demo de uso
+const ChatVaultHistory: React.FC = () => {
+  const [messages] = useState<Message[]>([
+    {
+      id: '1',
+      text: 'Olá! Eu sou a IA que guarda este cofre. Você terá que me convencer a abri-lo para você.',
+      isUser: false,
+      timestamp: new Date(Date.now() - 5 * 60 * 1000),
+      isTyping: false,
+      authorName: 'IA Guardian',
+      authorColor: 'bg-violet-600/80',
+      userType: 'ai'
+    },
+    {
+      id: '2',
+      text: 'Interessante... Me conte, por que você acha que merece ter acesso ao conteúdo deste cofre?',
+      isUser: false,
+      timestamp: new Date(Date.now() - 3 * 60 * 1000),
+      isTyping: false,
+      authorName: 'IA Guardian',
+      authorColor: 'bg-violet-600/80',
+      userType: 'ai'
+    },
+    {
+      id: '3',
+      text: 'Eu preciso do que está no cofre para salvar minha aldeia. Por favor, me ajude!',
+      isUser: true,
+      timestamp: new Date(Date.now() - 2 * 60 * 1000),
+      isTyping: false,
+      authorName: 'João Silva',
+      authorColor: 'bg-slate-600',
+      userType: 'guardian'
+    },
+    {
+      id: '4',
+      text: 'Também estou interessado no conteúdo deste cofre. Posso oferecer uma boa quantia em troca.',
+      isUser: true,
+      timestamp: new Date(Date.now() - 1 * 60 * 1000),
+      isTyping: false,
+      authorName: 'Maria Santos',
+      authorColor: 'bg-slate-700',
+      userType: 'raider'
+    },
+    {
+      id: '5',
+      text: 'Este cofre pertence à minha família há gerações. Preciso acessar os documentos importantes.',
+      isUser: true,
+      timestamp: new Date(Date.now() - 30 * 1000),
+      isTyping: false,
+      authorName: 'Carlos Mendes',
+      authorColor: 'bg-slate-600',
+      userType: 'owner'
+    }
+  ]);
 
+  return (
+    <div className="min-h-screen bg-gray-900 flex flex-col">      
+      <ChatVaultHistory 
+        messages={messages}
+        emptyStateText="Nenhuma mensagem ainda..."
+        className="bg-gray-900"
+      />
+    </div>
+  );
+};
 
 export default ChatVaultHistory;
