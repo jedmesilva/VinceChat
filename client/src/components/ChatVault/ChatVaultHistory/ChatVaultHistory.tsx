@@ -153,11 +153,10 @@ const ChatMessage: React.FC<{ message: Message }> = ({ message }) => {
           {/* Nome do autor com ícone */}
           <div className={`
             mb-1 px-1 text-xs font-medium flex items-center gap-1
-            ${message.isUser ? 'flex-row-reverse' : 'flex-row'}
             ${getUserTypeColor(message.userType)}
           `}>
-            {getUserTypeIcon(message.userType)}
             <span>{message.authorName}</span>
+            {getUserTypeIcon(message.userType)}
           </div>
 
           {/* Balão da mensagem */}
