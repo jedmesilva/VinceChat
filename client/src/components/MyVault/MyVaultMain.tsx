@@ -2,25 +2,9 @@ import React from 'react';
 import MyVaultHeader from '../../components/MyVault/MyVaultHeader/MyVaultHeader';
 import ItemList from '../../components/Item/ItemList/ItemList';
 
-interface VaultItem {
-  id: string;
-  type: 'money' | 'product' | 'voucher' | 'special';
-  name: string;
-  value: number;
-  description: string;
-  quantity?: number;
-  image?: string;
-  rarity: 'common' | 'rare' | 'epic' | 'legendary';
-  status: 'available' | 'claimed' | 'expired';
-  claimDeadline?: string;
-  claimedAt?: string;
-  vaultSource?: string;
-  expiresAt?: string;
-}
-
 const MyVaultMain: React.FC = () => {
   // Dados de exemplo
-  const vaultItems: VaultItem[] = [
+  const vaultItems = [
     {
       id: '1',
       type: 'money',
@@ -110,7 +94,7 @@ const MyVaultMain: React.FC = () => {
     }
   ];
 
-  const handleItemClick = (item: VaultItem) => {
+  const handleItemClick = (item: any) => {
     if (item.status === 'available') {
       alert(`Resgatar: ${item.name}`);
       // Aqui você pode implementar a lógica de resgate do item
@@ -123,12 +107,13 @@ const MyVaultMain: React.FC = () => {
       <MyVaultHeader />
 
       {/* Content */}
-      <div className="max-w-7xl mx-auto px-6 py-8">
+      <div className="w-full max-w-7xl mx-auto px-6 py-8">
         <ItemList
           items={vaultItems}
           onItemClick={handleItemClick}
           gridCols="auto"
           gap="medium"
+          className="w-full"
         />
       </div>
     </div>
