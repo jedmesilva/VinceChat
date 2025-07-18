@@ -74,7 +74,7 @@ const Timer: React.FC<TimerProps> = ({
 
         <div className="flex items-center gap-2">
           <div className="text-slate-400 font-sans font-normal text-sm">
-            Seu tempo disponível
+            Seu tempo
           </div>
           <button
             onClick={addTime}
