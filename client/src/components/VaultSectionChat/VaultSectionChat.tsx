@@ -25,10 +25,11 @@ const VaultSectionChat: React.FC<VaultSectionChatProps> = ({
             onMouseEnter={() => setIsLockHovered(true)}
             onMouseLeave={() => setIsLockHovered(false)}
             className={`
-              bg-slate-700 hover:bg-slate-600 w-10 h-10 rounded-xl 
-              flex items-center justify-center transition-all duration-200
+              bg-slate-700 hover:bg-slate-600 w-10 h-10 aspect-square rounded-xl 
+              flex items-center justify-center transition-all duration-200 flex-shrink-0
               ${isLockHovered ? 'scale-105' : 'scale-100'}
             `}
+            style={{ minWidth: '40px', minHeight: '40px' }}
           >
             {isLocked ? (
               <Lock className="w-4 h-4 text-slate-300" />
