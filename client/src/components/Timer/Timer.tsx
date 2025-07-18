@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Clock, Plus } from 'lucide-react';
 
 interface TimerProps {
@@ -18,20 +18,28 @@ const Timer: React.FC<TimerProps> = ({
   const [isActive, setIsActive] = useState(true);
   const totalTime = initialTime;
 
+  const handleTimeUp = useCallback(() => {
+    onTimeUp();
+  }, [onTimeUp]);
+
   useEffect(() => {
-    let interval = null;
+    let interval: NodeJS.Timeout | null = null;
     
     if (isActive && timeLeft > 0) {
       interval = setInterval(() => {
         setTimeLeft(timeLeft => timeLeft - 1);
       }, 1000);
-    } else if (timeLeft === 0) {
+    } else if (timeLeft === 0 && isActive) {
       setIsActive(false);
-      onTimeUp();
+      handleTimeUp();
     }
     
-    return () => clearInterval(interval);
-  }, [isActive, timeLeft, onTimeUp]);
+    return () => {
+      if (interval) {
+        clearInterval(interval);
+      }
+    };
+  }, [isActive, timeLeft]);
 
   const addTime = () => {
     setTimeLeft(prevTime => prevTime + 60); // Adiciona 1 minuto
