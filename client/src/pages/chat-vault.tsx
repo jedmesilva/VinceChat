@@ -179,7 +179,7 @@ const ChatVaultPage: React.FC = () => {
       />
 
       {/* MainChatVault ocupando o resto do espaço */}
-      <div className="flex-1 overflow-hidden min-h-0 chat-messages-container">
+      <div className="flex-1 overflow-hidden">
         <MainChatVault
           vaultName={vault.name}
           vaultIcon={getVaultIcon(vault.difficulty)}
