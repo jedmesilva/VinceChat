@@ -169,19 +169,17 @@ const ChatVaultPage: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-900 flex flex-col">
-      {/* Timer fixo no topo */}
-      <div className="fixed top-0 left-0 right-0 z-50 bg-gray-900">
-        <Timer
-          initialTime={300}
-          onStart={handleTimerStart}
-          onAbandon={handleTimerAbandon}
-          onTimeUp={handleTimerTimeUp}
-        />
-      </div>
+    <div className="h-screen bg-gray-900 flex flex-col overflow-hidden">
+      {/* Timer no topo */}
+      <Timer
+        initialTime={300}
+        onStart={handleTimerStart}
+        onAbandon={handleTimerAbandon}
+        onTimeUp={handleTimerTimeUp}
+      />
 
-      {/* Conteúdo principal com margem superior para compensar o Timer fixo */}
-      <div className="flex-1 pt-16">
+      {/* MainChatVault ocupando o resto do espaço */}
+      <div className="flex-1 overflow-hidden">
         <MainChatVault
           vaultName={vault.name}
           vaultIcon={getVaultIcon(vault.difficulty)}

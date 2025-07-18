@@ -152,25 +152,23 @@ const MainChatVault: React.FC<MainChatVaultProps> = ({
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 flex flex-col">
-      {/* Header fixo logo abaixo do Timer */}
-      <div className="fixed top-16 left-0 right-0 z-40">
-        <ChatVaultHeader 
-          vaultName={vaultName}
-          vaultIcon={vaultIcon}
-          conviction={currentConviction}
-          offensiveCount={offensiveCount}
-          onAbandon={handleAbandon}
-        />
-      </div>
+    <div className="h-full bg-gray-900 flex flex-col">
+      {/* Header do Chat */}
+      <ChatVaultHeader 
+        vaultName={vaultName}
+        vaultIcon={vaultIcon}
+        conviction={currentConviction}
+        offensiveCount={offensiveCount}
+        onAbandon={handleAbandon}
+      />
       
-      {/* Histórico do Chat com scroll - margem superior para compensar Timer e Header fixos */}
-      <div className="flex-1 pt-32 pb-44 overflow-hidden">
+      {/* Histórico do Chat com scroll */}
+      <div className="flex-1 overflow-hidden">
         <ChatVaultHistory messages={messages} />
       </div>
 
-      {/* Seção fixa inferior com VaultSectionChat e Input */}
-      <div className="fixed bottom-0 left-0 right-0 z-50">
+      {/* Seção inferior com VaultSectionChat e Input */}
+      <div className="flex-shrink-0">
         <VaultSectionChat
           isLocked={isVaultLocked}
           onVaultClick={handleVaultAction}
