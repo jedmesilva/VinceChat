@@ -72,7 +72,7 @@ const Timer: React.FC<TimerProps> = ({
           </div>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center justify-between gap-2 flex-1">
           <div className="text-slate-400 font-sans font-normal text-sm">
             Seu tempo
           </div>
