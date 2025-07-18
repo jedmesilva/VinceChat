@@ -50,6 +50,16 @@ body {
   display: none;
 }
 
+/* Scrollbar hide utility class */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
 /* Mobile optimizations */
 @media (max-width: 768px) {
   button {
