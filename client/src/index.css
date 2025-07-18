@@ -67,6 +67,12 @@ body {
     font-size: 16px !important;
   }
   
+  /* Fix textarea height on mobile */
+  textarea {
+    min-height: 24px !important;
+    line-height: 1.5;
+  }
+  
   /* Fix keyboard overlay issues */
   .chat-container {
     height: 100vh;

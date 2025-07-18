@@ -57,7 +57,7 @@ const ChatVaultMessageInput: React.FC<ChatVaultMessageInputProps> = ({
   const RoleIcon = userRole.icon;
 
   return (
-    <div className={`p-4 bg-slate-800 border-t border-slate-700/30 mobile-safe-bottom ${className}`}>
+    <div className={`p-4 bg-slate-800 border-t border-slate-700/30 ${className}`}>
       <style dangerouslySetInnerHTML={{
         __html: `
           .scrollbar-none {
@@ -81,9 +81,11 @@ const ChatVaultMessageInput: React.FC<ChatVaultMessageInputProps> = ({
           onInput={handleTextareaInput}
           placeholder={placeholder}
           disabled={disabled}
-          className="w-full bg-transparent text-white placeholder-slate-400 focus:outline-none text-base mb-3 resize-none min-h-[24px] overflow-y-auto disabled:opacity-50 disabled:cursor-not-allowed scrollbar-none"
+          className="w-full bg-transparent text-white placeholder-slate-400 focus:outline-none mb-3 resize-none min-h-[24px] overflow-y-auto disabled:opacity-50 disabled:cursor-not-allowed scrollbar-none"
           rows={1}
           style={{ 
+            fontSize: '16px',
+            lineHeight: '1.5',
             height: 'auto',
             minHeight: '24px',
             maxHeight: `${maxHeight}px`
