@@ -169,17 +169,19 @@ const ChatVaultPage: React.FC = () => {
   }
 
   return (
-    <div className="mobile-full-height bg-gray-900 flex flex-col overflow-hidden mobile-safe-top mobile-safe-bottom">
-      {/* Timer no topo */}
-      <Timer
-        initialTime={300}
-        onStart={handleTimerStart}
-        onAbandon={handleTimerAbandon}
-        onTimeUp={handleTimerTimeUp}
-      />
+    <div className="h-screen w-full bg-gray-900 flex flex-col overflow-hidden">
+      {/* Timer no topo - altura automática */}
+      <div className="flex-shrink-0">
+        <Timer
+          initialTime={300}
+          onStart={handleTimerStart}
+          onAbandon={handleTimerAbandon}
+          onTimeUp={handleTimerTimeUp}
+        />
+      </div>
 
-      {/* MainChatVault ocupando o resto do espaço */}
-      <div className="flex-1 overflow-hidden">
+      {/* MainChatVault ocupando toda a altura restante */}
+      <div className="flex-1 min-h-0 w-full">
         <MainChatVault
           vaultName={vault.name}
           vaultIcon={getVaultIcon(vault.difficulty)}

@@ -10,16 +10,13 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes
 
-### Mobile Viewport Fixes (July 18, 2025)
-- Fixed mobile viewport issues in chat-vault page preventing proper display on mobile devices
-- Added proper viewport meta tag with viewport-fit=cover for notch support
-- Implemented mobile-safe CSS classes for safe areas (mobile-safe-top, mobile-safe-bottom)
-- Added dynamic viewport height (dvh) support for better mobile compatibility
-- Fixed header being cut off by browser navigation bar on mobile
-- Added mobile-specific CSS fixes for keyboard overlay and scrolling
-- Prevented zoom on input focus by setting font-size to 16px
-- Added overscroll-behavior controls for better mobile scrolling experience
-- Applied chat-container and chat-history classes for improved mobile layout
+### Mobile Layout Fix (July 18, 2025)
+- Fixed chat-vault page mobile viewport issues with simplified layout approach
+- Timer at top with auto height (flex-shrink-0), MainChat expands to fill remaining height (flex-1)
+- Removed complex mobile CSS classes and used straightforward flexbox layout
+- Timer now properly adjusts to content, chat area uses all available space
+- Fixed mobile browser navigation bar overlap issues with proper height calculations
+- Simplified structure: h-screen container with flex-col, timer and chat sections properly sized
 
 ### VaultSheet Implementation (July 16, 2025)
 - Created comprehensive VaultSheet system with 6 modular components
