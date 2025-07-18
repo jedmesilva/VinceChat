@@ -337,9 +337,9 @@ const MyVault: React.FC = () => {
   };
 
   return (
-    <div className="h-full bg-slate-900 flex flex-col">
-      {/* Header compacto */}
-      <div className="bg-slate-800/50 backdrop-blur-md border-b border-slate-700/50 flex-shrink-0">
+    <div className="h-full bg-gray-900 flex flex-col">
+      {/* Header compacto - mesma cor do chat */}
+      <div className="bg-slate-800 border-b border-slate-700/50 flex-shrink-0">
         <div className="px-4 py-4">
           <div className="flex items-center gap-3">
             <div className="w-8 h-8 bg-violet-500/20 rounded-xl flex items-center justify-center">
@@ -353,8 +353,8 @@ const MyVault: React.FC = () => {
         </div>
       </div>
 
-      {/* Content com scroll */}
-      <div className="flex-1 min-h-0 overflow-y-auto px-4 py-4">
+      {/* Content com scroll oculto */}
+      <div className="flex-1 min-h-0 overflow-y-auto px-4 py-4 hide-scrollbar">
         <div className="grid grid-cols-1 gap-4">
           {vaultItems.map((item) => (
             <VaultItemCard

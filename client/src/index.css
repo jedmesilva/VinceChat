@@ -40,6 +40,16 @@ body {
   min-height: 100dvh;
 }
 
+/* Hide scrollbar for MyVault */
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
 /* Mobile optimizations */
 @media (max-width: 768px) {
   button {
