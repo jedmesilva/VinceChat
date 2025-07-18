@@ -78,11 +78,12 @@ const Timer: React.FC<TimerProps> = ({
           </div>
           <button
             onClick={addTime}
-            className="bg-violet-500 hover:bg-violet-600 rounded-lg flex items-center justify-center gap-1 px-2 py-0 transition-colors group transform scale-75"
+            className="bg-violet-500 hover:bg-violet-600 active:bg-violet-700 text-white px-2 rounded-lg text-xs font-medium transition-all duration-200 flex items-center gap-1 flex-shrink-0 leading-none"
+            style={{ height: '28px', minHeight: '28px', maxHeight: '28px' }}
             title="Adicionar 1 minuto"
           >
-            <Plus size={12} className="text-white group-hover:text-gray-100" />
-            <span className="text-white text-xs font-medium">Adicionar tempo</span>
+            <Plus size={9} className="text-white" />
+            Adicionar tempo
           </button>
         </div>
       </div>
