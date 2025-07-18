@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useRef } from 'react';
 import { CheckCircle } from 'lucide-react';
-import VaultItemCard from '../VaultItemCard/VaultItemCard';
+import ItemCard from '../../Item/ItemCard/ItemCard';
 
 interface VaultItem {
   id: string;
@@ -15,13 +15,13 @@ interface VaultItem {
   claimDeadline?: string;
 }
 
-interface VaultItemsGridProps {
+interface VaultItemsListProps {
   items: VaultItem[];
   onItemClaimed: (itemId: string) => void;
-  onItemsUpdated: (items: VaultItem[]) => void;
+  onItemsUpdated?: (items: VaultItem[]) => void;
 }
 
-const VaultItemsGrid: React.FC<VaultItemsGridProps> = ({
+const VaultItemsList: React.FC<VaultItemsListProps> = ({
   items,
   onItemClaimed,
   onItemsUpdated
@@ -144,7 +144,7 @@ const VaultItemsGrid: React.FC<VaultItemsGridProps> = ({
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {items.map((item) => (
-        <VaultItemCard
+        <ItemCard
           key={item.id}
           item={item}
           isBeingClaimed={claimingItem === item.id}
@@ -160,4 +160,4 @@ const VaultItemsGrid: React.FC<VaultItemsGridProps> = ({
   );
 };
 
-export default VaultItemsGrid;
+export default VaultItemsList;

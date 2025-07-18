@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useLocation } from 'wouter';
 import MainChatVault from '../components/ChatVault/MainChatVault';
 import MyVaultMain from '../components/MyVault/MyVaultMain';
+import VaultMain from '../components/Vault/VaultMain';
 import Timer from '../components/Timer/Timer';
 import { Crown, Gem, Shield, Trophy, Gift } from 'lucide-react';
 
@@ -19,6 +20,7 @@ const ChatVaultPage: React.FC = () => {
   const [vault, setVault] = useState<VaultData | null>(null);
   const [loading, setLoading] = useState(true);
   const [timerActive, setTimerActive] = useState(false);
+  const [showVaultMain, setShowVaultMain] = useState(false); // Estado para controlar qual tela mostrar
 
   useEffect(() => {
     const loadVault = async () => {
@@ -133,7 +135,15 @@ const ChatVaultPage: React.FC = () => {
     }
   };
 
-  // Removido handleVaultAction - deixar MainChatVault usar comportamento padrão
+  // Função para alternar para a tela do cofre
+  const handleVaultAction = () => {
+    setShowVaultMain(true);
+  };
+
+  // Função para voltar para a tela do chat
+  const handleBackToChat = () => {
+    setShowVaultMain(false);
+  };
 
   const handleBackToVaults = () => {
     setLocation('/');
@@ -184,36 +194,54 @@ const ChatVaultPage: React.FC = () => {
         />
       </div>
 
-      {/* Container principal com MyVault e Chat lado a lado */}
+      {/* Container principal com MyVault e Chat/Cofre lado a lado */}
       <div className="flex-1 min-h-0 w-full flex overflow-hidden">
         {/* MyVault - lado esquerdo */}
         <div className="w-1/3 min-w-0 flex-shrink-0 border-r border-slate-700/50">
           <MyVaultMain />
         </div>
 
-        {/* MainChatVault - lado direito */}
+        {/* Container do Chat/Cofre - lado direito */}
         <div className="flex-1 min-w-0">
-          <MainChatVault
-            vaultName={vault.name}
-            vaultIcon={getVaultIcon(vault.difficulty)}
-            conviction={getConvictionLevel(vault.difficulty)}
-            offensiveCount={getOffensiveCount(vault.difficulty)}
-            isVaultLocked={vault.isLocked}
-            vaultActionLabel={vault.isLocked ? "Saquear" : "Conquistado"}
-            inputPlaceholder={vault.isLocked ? "Digite sua mensagem para convencer..." : "Este cofre já foi conquistado!"}
-            initialMessages={[
-              {
-                id: 'welcome',
-                text: `Bem-vindo ao ${vault.name}! ${vault.description}`,
-                isUser: false,
-                timestamp: new Date(),
-                authorName: 'IA Guardian',
-                authorColor: 'bg-violet-600/80',
-                userType: 'guardian'
-              }
-            ]}
-            items={[{id: 'item1', name: 'Gold', type: 'money', value: 100}]}
-          />
+          {!showVaultMain ? (
+            /* Tela do Chat */
+            <MainChatVault
+              vaultName={vault.name}
+              vaultIcon={getVaultIcon(vault.difficulty)}
+              conviction={getConvictionLevel(vault.difficulty)}
+              offensiveCount={getOffensiveCount(vault.difficulty)}
+              isVaultLocked={vault.isLocked}
+              vaultActionLabel={vault.isLocked ? "Saquear" : "Conquistado"}
+              inputPlaceholder={vault.isLocked ? "Digite sua mensagem para convencer..." : "Este cofre já foi conquistado!"}
+              onVaultAction={handleVaultAction}
+              initialMessages={[
+                {
+                  id: 'welcome',
+                  text: `Bem-vindo ao ${vault.name}! ${vault.description}`,
+                  isUser: false,
+                  timestamp: new Date(),
+                  authorName: 'IA Guardian',
+                  authorColor: 'bg-violet-600/80',
+                  userType: 'guardian'
+                }
+              ]}
+            />
+          ) : (
+            /* Tela do Cofre */
+            <VaultMain
+              vault={{
+                id: vault.id,
+                name: vault.name,
+                prizeAmount: 5000,
+                difficulty: vault.difficulty,
+                description: vault.description
+              }}
+              onBack={handleBackToChat}
+              timerLabel="Cofre aberto"
+              closeButtonText="Voltar ao Chat"
+              instructionText="Mantenha pressionado por 3 segundos para saquear o item"
+            />
+          )}
         </div>
       </div>
     </div>

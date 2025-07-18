@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { CheckCircle } from 'lucide-react';
 import VaultHeader from './VaultHeader/VaultHeader';
-import VaultItemsGrid from './VaultItemsGrid/VaultItemsGrid';
+import VaultItemsList from './VaultItemsList/VaultItemsList';
 
 interface Item {
   id: string;
@@ -126,8 +126,8 @@ const VaultMain: React.FC<VaultMainProps> = ({
       {/* Main Content */}
       <div className="px-6 pb-6">
         <div className="max-w-6xl mx-auto">
-          {/* Items Grid */}
-          <VaultItemsGrid
+          {/* Items List */}
+          <VaultItemsList
             items={items}
             onItemClaimed={handleItemClaimed}
           />
