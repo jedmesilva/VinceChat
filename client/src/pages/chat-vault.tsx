@@ -169,7 +169,7 @@ const ChatVaultPage: React.FC = () => {
   }
 
   return (
-    <div className="h-screen bg-gray-900 flex flex-col overflow-hidden">
+    <div className="mobile-full-height bg-gray-900 flex flex-col overflow-hidden mobile-safe-top mobile-safe-bottom">
       {/* Timer no topo */}
       <Timer
         initialTime={300}

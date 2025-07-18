@@ -16,11 +16,68 @@
   90% { transform: translateX(-8px); }
 }
 
+/* Mobile viewport fix */
+html {
+  height: 100%;
+  /* Prevent iOS Safari from bouncing */
+  overscroll-behavior: none;
+}
+
+body {
+  height: 100%;
+  min-height: 100vh;
+  /* Use dvh (dynamic viewport height) for better mobile support */
+  min-height: 100dvh;
+  /* Prevent iOS Safari from bouncing */
+  overscroll-behavior: none;
+  /* Prevent horizontal scrolling on mobile */
+  overflow-x: hidden;
+}
+
+#root {
+  height: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
 /* Mobile optimizations */
 @media (max-width: 768px) {
   button {
     min-height: 48px;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  }
+  
+  /* Fix for mobile viewport height issues */
+  .mobile-full-height {
+    height: 100vh;
+    height: 100dvh;
+  }
+  
+  /* Safe area for devices with notch */
+  .mobile-safe-top {
+    padding-top: env(safe-area-inset-top);
+  }
+  
+  .mobile-safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  
+  /* Prevent zoom on input focus */
+  input, textarea, select {
+    font-size: 16px !important;
+  }
+  
+  /* Fix keyboard overlay issues */
+  .chat-container {
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden;
+  }
+  
+  /* Better scrolling on mobile */
+  .chat-history {
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
   }
 }
 

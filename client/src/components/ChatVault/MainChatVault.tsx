@@ -152,7 +152,7 @@ const MainChatVault: React.FC<MainChatVaultProps> = ({
   };
 
   return (
-    <div className="h-full bg-gray-900 flex flex-col">
+    <div className="h-full bg-gray-900 flex flex-col chat-container">
       {/* Header do Chat */}
       <ChatVaultHeader 
         vaultName={vaultName}
