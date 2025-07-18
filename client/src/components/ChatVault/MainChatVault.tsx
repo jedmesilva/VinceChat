@@ -15,6 +15,7 @@ interface Message {
   authorName: string;
   authorAvatar?: string;
   authorColor?: string;
+  userType?: 'guardian' | 'raider' | 'owner' | 'ai';
 }
 
 interface MainChatVaultProps {
@@ -82,7 +83,8 @@ const MainChatVault: React.FC<MainChatVaultProps> = ({
       timestamp: new Date(),
       isTyping: false,
       authorName: 'Você',
-      authorColor: 'bg-slate-600'
+      authorColor: 'bg-slate-600',
+      userType: 'raider'
     };
 
     setMessages(prev => [...prev, newUserMessage]);
@@ -108,7 +110,8 @@ const MainChatVault: React.FC<MainChatVaultProps> = ({
           timestamp: new Date(),
           isTyping: true,
           authorName: 'IA Guardian',
-          authorColor: 'bg-violet-600/80'
+          authorColor: 'bg-violet-600/80',
+          userType: 'guardian'
         };
 
         setMessages(prev => [...prev, aiResponse]);

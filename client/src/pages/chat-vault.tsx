@@ -200,7 +200,8 @@ const ChatVaultPage: React.FC = () => {
               isUser: false,
               timestamp: new Date(),
               authorName: 'IA Guardian',
-              authorColor: 'bg-violet-600/80'
+              authorColor: 'bg-violet-600/80',
+              userType: 'guardian'
             }
           ]}
           items={[{id: 'item1', name: 'Gold', type: 'money', value: 100}]}
