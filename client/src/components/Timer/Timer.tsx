@@ -78,7 +78,7 @@ const Timer: React.FC<TimerProps> = ({
           </div>
           <button
             onClick={addTime}
-            className="bg-violet-500 hover:bg-violet-600 rounded-lg flex items-center justify-center gap-1 px-2 py-0 transition-colors group"
+            className="bg-violet-500 hover:bg-violet-600 rounded-lg flex items-center justify-center gap-1 px-2 py-0 transition-colors group transform scale-75"
             title="Adicionar 1 minuto"
           >
             <Plus size={12} className="text-white group-hover:text-gray-100" />
