@@ -102,17 +102,19 @@ const MyVaultMain: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 to-slate-800">
+    <div className="h-full bg-gradient-to-br from-slate-900 to-slate-800 flex flex-col">
       {/* Header */}
-      <MyVaultHeader />
+      <div className="flex-shrink-0">
+        <MyVaultHeader />
+      </div>
 
       {/* Content */}
-      <div className="w-full max-w-7xl mx-auto px-6 py-8">
+      <div className="flex-1 overflow-y-auto px-4 py-4">
         <ItemList
           items={vaultItems}
           onItemClick={handleItemClick}
-          gridCols="auto"
-          gap="medium"
+          gridCols="1"
+          gap="small"
           className="w-full"
         />
       </div>

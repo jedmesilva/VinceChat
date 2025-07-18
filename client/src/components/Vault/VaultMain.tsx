@@ -113,19 +113,21 @@ const VaultMain: React.FC<VaultMainProps> = ({
   };
 
   return (
-    <div className={`min-h-screen bg-gray-900 ${className}`}>
+    <div className={`h-full bg-gray-900 flex flex-col ${className}`}>
       {/* Header */}
-      <VaultHeader
-        vault={vault}
-        onBack={onBack}
-        timerLabel={timerLabel}
-        closeButtonText={closeButtonText}
-        instructionText={instructionText}
-      />
+      <div className="flex-shrink-0">
+        <VaultHeader
+          vault={vault}
+          onBack={onBack}
+          timerLabel={timerLabel}
+          closeButtonText={closeButtonText}
+          instructionText={instructionText}
+        />
+      </div>
 
       {/* Main Content */}
-      <div className="px-6 pb-6">
-        <div className="max-w-6xl mx-auto">
+      <div className="flex-1 overflow-y-auto px-4 pb-4">
+        <div className="w-full">
           {/* Items List */}
           <VaultItemsList
             items={items}
