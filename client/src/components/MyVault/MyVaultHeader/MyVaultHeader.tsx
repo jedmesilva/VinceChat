@@ -6,11 +6,13 @@ import { Lock, MessageCircle } from 'lucide-react';
 interface MyVaultHeaderProps {
   className?: string;
   onChatToggle?: () => void;
+  showChatToggle?: boolean;
 }
 
 const MyVaultHeader: React.FC<MyVaultHeaderProps> = ({
   className = '',
-  onChatToggle = () => {}
+  onChatToggle = () => {},
+  showChatToggle = false
 }) => {
   return (
     <div className={`bg-slate-800 border-b border-slate-700/50 ${className}`}>
@@ -20,7 +22,7 @@ const MyVaultHeader: React.FC<MyVaultHeaderProps> = ({
         vaultIcon={Lock}
         chatLabel="Gerencie seus itens"
         showAbandonButton={false}
-        showChatToggle={true}
+        showChatToggle={showChatToggle}
         onChatToggle={onChatToggle}
       />
     </div>

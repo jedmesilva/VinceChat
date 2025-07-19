@@ -212,7 +212,10 @@ const ChatVaultPage: React.FC = () => {
           md:w-1/3 md:block
           ${mobileView === 'myvault' ? 'w-full block' : 'w-0 hidden md:block'}
         `}>
-          <MyVaultMain onChatToggle={handleToggleToChat} />
+          <MyVaultMain 
+            onChatToggle={handleToggleToChat}
+            showChatToggle={true}
+          />
         </div>
 
         {/* Container do Chat/Cofre - Desktop: lado direito | Mobile: tela completa quando selecionado */}

@@ -4,9 +4,13 @@ import ItemList from '../../components/Item/ItemList/ItemList';
 
 interface MyVaultMainProps {
   onChatToggle?: () => void;
+  showChatToggle?: boolean;
 }
 
-const MyVaultMain: React.FC<MyVaultMainProps> = ({ onChatToggle = () => {} }) => {
+const MyVaultMain: React.FC<MyVaultMainProps> = ({ 
+  onChatToggle = () => {},
+  showChatToggle = false
+}) => {
   // Dados de exemplo
   const vaultItems = [
     {
@@ -109,7 +113,10 @@ const MyVaultMain: React.FC<MyVaultMainProps> = ({ onChatToggle = () => {} }) =>
     <div className="h-full bg-gray-900 flex flex-col">
       {/* Header */}
       <div className="flex-shrink-0">
-        <MyVaultHeader onChatToggle={onChatToggle} />
+        <MyVaultHeader 
+          onChatToggle={onChatToggle}
+          showChatToggle={showChatToggle}
+        />
       </div>
 
       {/* Content */}
