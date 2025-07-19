@@ -10,7 +10,7 @@ const MyVaultHeader: React.FC<MyVaultHeaderProps> = ({
 }) => {
 
   return (
-    <div className={`bg-slate-800/50 backdrop-blur-md border-b border-slate-700/50 ${className}`}>
+    <div className={`bg-slate-800 border-b border-slate-700/50 ${className}`}>
       <div className="w-full px-3 py-4">
         {/* Header content */}
         <div className="flex items-center gap-3">
