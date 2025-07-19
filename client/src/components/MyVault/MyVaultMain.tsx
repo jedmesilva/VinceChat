@@ -102,7 +102,7 @@ const MyVaultMain: React.FC = () => {
   };
 
   return (
-    <div className="h-full bg-gradient-to-br from-slate-900 to-slate-800 flex flex-col">
+    <div className="h-full bg-gray-900 flex flex-col">
       {/* Header */}
       <div className="flex-shrink-0">
         <MyVaultHeader />
