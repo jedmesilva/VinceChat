@@ -236,7 +236,10 @@ const VaultDiscovery: React.FC = () => {
           md:${myVaultVisible ? 'w-1/3' : 'w-0'}
           ${myVaultVisible ? 'w-full md:w-1/3' : 'w-0'}
         `}>
-          <MyVaultMain />
+          <MyVaultMain 
+            onChatToggle={() => {}}
+            showChatToggle={false}
+          />
         </div>
 
         {/* Discovery Content - Desktop: lado direito | Mobile: tela completa quando MyVault oculto */}

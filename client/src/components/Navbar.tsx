@@ -49,14 +49,28 @@ const Navbar: React.FC<NavbarProps> = ({
         </div>
         
         {/* User card on the right */}
-        <div className="flex items-center">
-          <UserCardNavbar 
-            user={user}
-            onProfileClick={onProfileClick}
-            onSettingsClick={onSettingsClick}
-            onLogoutClick={onLogoutClick}
-          />
-        </div>
+        {user && (
+          <div className="flex items-center">
+            <UserCardNavbar 
+              userData={{
+                name: user.name,
+                avatar: user.avatar || '/default-avatar.png',
+                titles: [
+                  {
+                    id: '1',
+                    name: 'Explorador',
+                    type: 'guardian',
+                    icon: 'shield',
+                    earnedAt: new Date().toISOString()
+                  }
+                ]
+              }}
+              onDropdownToggle={() => {
+                // Handle dropdown toggle
+              }}
+            />
+          </div>
+        )}
       </div>
     </div>
   );

@@ -59,7 +59,6 @@ const UserCardNavbar: React.FC<UserCardNavbarProps> = ({
   };
 
   return (
-    {/* Container principal - agrupa TUDO */}
     <div 
       className="flex items-center space-x-3 cursor-pointer hover:bg-slate-700/30 rounded-lg px-3 py-2 transition-all duration-200"
       onClick={onDropdownToggle}
