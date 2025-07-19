@@ -70,7 +70,7 @@ const ChatVaultMessageInput: React.FC<ChatVaultMessageInputProps> = ({
         `
       }} />
       <div 
-        className="bg-slate-700 rounded-3xl p-4 cursor-text"
+        className="bg-gray-900 rounded-3xl p-4 cursor-text"
         onClick={() => textareaRef.current?.focus()}
       >
         <textarea
