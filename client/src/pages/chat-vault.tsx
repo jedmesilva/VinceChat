@@ -21,6 +21,7 @@ const ChatVaultPage: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [timerActive, setTimerActive] = useState(false);
   const [showVaultMain, setShowVaultMain] = useState(false); // Estado para controlar qual tela mostrar
+  const [mobileView, setMobileView] = useState<'chat' | 'myvault'>('chat'); // Estado para controlar a vista no mobile
 
   useEffect(() => {
     const loadVault = async () => {
@@ -145,6 +146,15 @@ const ChatVaultPage: React.FC = () => {
     setShowVaultMain(false);
   };
 
+  // Funções para alternar entre Chat e MyVault no mobile
+  const handleToggleToMyVault = () => {
+    setMobileView('myvault');
+  };
+
+  const handleToggleToChat = () => {
+    setMobileView('chat');
+  };
+
   const handleBackToVaults = () => {
     setLocation('/');
   };
@@ -194,15 +204,23 @@ const ChatVaultPage: React.FC = () => {
         />
       </div>
 
-      {/* Container principal com MyVault e Chat/Cofre lado a lado */}
+      {/* Container principal - Desktop: lado a lado | Mobile: uma tela por vez */}
       <div className="flex-1 min-h-0 w-full flex overflow-hidden">
-        {/* MyVault - lado esquerdo */}
-        <div className="w-1/3 min-w-0 flex-shrink-0 border-r border-slate-700/50">
-          <MyVaultMain />
+        {/* MyVault - Desktop: lado esquerdo | Mobile: tela completa quando selecionado */}
+        <div className={`
+          min-w-0 flex-shrink-0 border-r border-slate-700/50
+          md:w-1/3 md:block
+          ${mobileView === 'myvault' ? 'w-full block' : 'w-0 hidden md:block'}
+        `}>
+          <MyVaultMain onChatToggle={handleToggleToChat} />
         </div>
 
-        {/* Container do Chat/Cofre - lado direito */}
-        <div className="flex-1 min-w-0">
+        {/* Container do Chat/Cofre - Desktop: lado direito | Mobile: tela completa quando selecionado */}
+        <div className={`
+          min-w-0
+          md:flex-1
+          ${mobileView === 'chat' ? 'flex-1 block' : 'w-0 hidden md:flex md:flex-col'}
+        `}>
           {!showVaultMain ? (
             /* Tela do Chat */
             <MainChatVault
@@ -214,6 +232,7 @@ const ChatVaultPage: React.FC = () => {
               vaultActionLabel={vault.isLocked ? "Saquear" : "Conquistado"}
               inputPlaceholder={vault.isLocked ? "Digite sua mensagem para convencer..." : "Este cofre já foi conquistado!"}
               onVaultAction={handleVaultAction}
+              onVaultToggle={handleToggleToMyVault}
               initialMessages={[
                 {
                   id: 'welcome',
