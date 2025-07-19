@@ -1,12 +1,28 @@
 import React from 'react';
 import { PanelLeftOpen, PanelLeftClose } from 'lucide-react';
+import UserCardNavbar from '@/components/UserCardNavbar/UserCardNavbar';
 
 interface NavbarProps {
   onOpenSidebar?: () => void;
   isMyVaultVisible?: boolean;
+  user?: {
+    name: string;
+    email: string;
+    avatar?: string;
+  };
+  onProfileClick?: () => void;
+  onSettingsClick?: () => void;
+  onLogoutClick?: () => void;
 }
 
-const Navbar: React.FC<NavbarProps> = ({ onOpenSidebar, isMyVaultVisible = true }) => {
+const Navbar: React.FC<NavbarProps> = ({ 
+  onOpenSidebar, 
+  isMyVaultVisible = true,
+  user,
+  onProfileClick,
+  onSettingsClick,
+  onLogoutClick
+}) => {
   const handleTogglePanel = () => {
     if (onOpenSidebar) {
       onOpenSidebar();
@@ -32,9 +48,14 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenSidebar, isMyVaultVisible = true 
           </button>
         </div>
         
-        {/* Empty space to maintain layout balance */}
+        {/* User card on the right */}
         <div className="flex items-center">
-          {/* Space for future right-side elements */}
+          <UserCardNavbar 
+            user={user}
+            onProfileClick={onProfileClick}
+            onSettingsClick={onSettingsClick}
+            onLogoutClick={onLogoutClick}
+          />
         </div>
       </div>
     </div>

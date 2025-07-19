@@ -12,6 +12,13 @@ const VaultDiscovery: React.FC = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [myVaultVisible, setMyVaultVisible] = useState(true);
 
+  // Mock user data - replace with real user data from authentication
+  const mockUser = {
+    name: "João Silva",
+    email: "joao@exemplo.com",
+    avatar: undefined
+  };
+
   // Carrega os dados dos cofres
   useEffect(() => {
     const loadVaults = async () => {
@@ -173,6 +180,18 @@ const VaultDiscovery: React.FC = () => {
     console.log('Caçada parada');
   }, []);
 
+  const handleProfileClick = useCallback(() => {
+    setLocation('/account');
+  }, [setLocation]);
+
+  const handleSettingsClick = useCallback(() => {
+    console.log('Configurações clicadas');
+  }, []);
+
+  const handleLogoutClick = useCallback(() => {
+    console.log('Logout clicado');
+  }, []);
+
   if (loading) {
     return (
       <div className="min-h-screen bg-gray-900 flex items-center justify-center">
@@ -190,6 +209,10 @@ const VaultDiscovery: React.FC = () => {
       <Navbar 
         onOpenSidebar={handleToggleMyVault} 
         isMyVaultVisible={myVaultVisible}
+        user={mockUser}
+        onProfileClick={handleProfileClick}
+        onSettingsClick={handleSettingsClick}
+        onLogoutClick={handleLogoutClick}
       />
       
       {/* Sidebar */}
