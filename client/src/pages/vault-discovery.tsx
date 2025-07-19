@@ -218,35 +218,37 @@ const VaultDiscovery: React.FC = () => {
 
         {/* Discovery Content - Desktop: lado direito | Mobile: tela completa quando MyVault oculto */}
         <div className={`
-          min-w-0 overflow-y-auto
+          min-w-0
           md:flex-1
           ${myVaultVisible ? 'hidden md:flex md:flex-col' : 'flex-1'}
         `}>
-          {/* Componente de caça de cofres no topo */}
-          <div className="p-4">
-            <VaultHunting
-              onVaultFound={handleVaultFound}
-              onHuntComplete={handleHuntComplete}
-              onHuntStart={handleHuntStart}
-              onHuntStop={handleHuntStop}
+          <div className="h-full overflow-y-auto">
+            {/* Componente de caça de cofres no topo */}
+            <div className="p-4">
+              <VaultHunting
+                onVaultFound={handleVaultFound}
+                onHuntComplete={handleHuntComplete}
+                onHuntStart={handleHuntStart}
+                onHuntStop={handleHuntStop}
+              />
+            </div>
+
+            {/* Grid de cofres abaixo */}
+            <VaultGrid
+              vaults={vaults}
+              onVaultClick={handleVaultClick}
+              title="Cofres Disponíveis"
+              emptyStateConfig={{
+                title: "Nenhum cofre encontrado",
+                description: "Inicie uma caçada para encontrar cofres disponíveis, ou aguarde que eles apareçam para você esporadicamente"
+              }}
+              gridConfig={{
+                cols: { sm: 2, md: 2, lg: 3, xl: 4 },
+                gap: 6
+              }}
+              showBackground={false} // Removemos o background do grid já que a página tem seu próprio background
             />
           </div>
-
-          {/* Grid de cofres abaixo */}
-          <VaultGrid
-            vaults={vaults}
-            onVaultClick={handleVaultClick}
-            title="Cofres Disponíveis"
-            emptyStateConfig={{
-              title: "Nenhum cofre encontrado",
-              description: "Inicie uma caçada para encontrar cofres disponíveis, ou aguarde que eles apareçam para você esporadicamente"
-            }}
-            gridConfig={{
-              cols: { sm: 2, md: 2, lg: 3, xl: 4 },
-              gap: 6
-            }}
-            showBackground={false} // Removemos o background do grid já que a página tem seu próprio background
-          />
         </div>
       </div>
     </div>
