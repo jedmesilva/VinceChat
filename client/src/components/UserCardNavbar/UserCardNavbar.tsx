@@ -1,86 +1,99 @@
 import React from 'react';
-import { User, Settings, LogOut } from 'lucide-react';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { 
+  Shield, 
+  Crown, 
+  Star,
+  Skull,
+  Trophy
+} from 'lucide-react';
 
 interface UserCardNavbarProps {
-  user?: {
+  userData: {
     name: string;
-    email: string;
-    avatar?: string;
+    avatar: string;
+    titles: Array<{
+      id: string;
+      name: string;
+      type: 'guardian' | 'raider' | 'owner' | 'special';
+      icon: string;
+      earnedAt: string;
+    }>;
   };
-  onProfileClick?: () => void;
-  onSettingsClick?: () => void;
-  onLogoutClick?: () => void;
+  showDropdown?: boolean;
+  onDropdownToggle?: () => void;
 }
 
-const UserCardNavbar: React.FC<UserCardNavbarProps> = ({
-  user = { name: "Usuário", email: "user@example.com" },
-  onProfileClick,
-  onSettingsClick,
-  onLogoutClick
+const UserCardNavbar: React.FC<UserCardNavbarProps> = ({ 
+  userData, 
+  showDropdown = false,
+  onDropdownToggle 
 }) => {
-  const userInitials = user.name
-    .split(' ')
-    .map(n => n[0])
-    .join('')
-    .toUpperCase()
-    .slice(0, 2);
+  const getTitleIcon = (type: string) => {
+    switch(type) {
+      case 'guardian':
+        return <Shield className="w-3 h-3" />;
+      case 'raider':
+        return <Skull className="w-3 h-3" />;
+      case 'owner':
+        return <Crown className="w-3 h-3" />;
+      case 'special':
+        return <Star className="w-3 h-3" />;
+      default:
+        return <Trophy className="w-3 h-3" />;
+    }
+  };
+
+  const getTitleColor = (type: string) => {
+    switch(type) {
+      case 'guardian':
+        return 'bg-blue-500/20 text-blue-300 border-blue-400/30';
+      case 'raider':
+        return 'bg-red-500/20 text-red-300 border-red-400/30';
+      case 'owner':
+        return 'bg-yellow-500/20 text-yellow-300 border-yellow-400/30';
+      case 'special':
+        return 'bg-purple-500/20 text-purple-300 border-purple-400/30';
+      default:
+        return 'bg-slate-500/20 text-slate-300 border-slate-400/30';
+    }
+  };
 
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <button className="flex items-center gap-3 px-3 py-2 rounded-xl bg-slate-700/50 hover:bg-slate-600/70 transition-all duration-200 border border-slate-600/20">
-          <Avatar className="w-8 h-8">
-            <AvatarImage src={user.avatar} alt={user.name} />
-            <AvatarFallback className="bg-slate-600 text-slate-200 text-sm">
-              {userInitials}
-            </AvatarFallback>
-          </Avatar>
-          <div className="flex flex-col items-start min-w-0">
-            <span className="text-slate-200 text-sm font-medium truncate max-w-[120px]">
-              {user.name}
-            </span>
-            <span className="text-slate-400 text-xs truncate max-w-[120px]">
-              {user.email}
-            </span>
-          </div>
-        </button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-56 bg-slate-800 border-slate-700">
-        <DropdownMenuLabel className="text-slate-200">Minha Conta</DropdownMenuLabel>
-        <DropdownMenuSeparator className="bg-slate-700" />
-        <DropdownMenuItem 
-          onClick={onProfileClick}
-          className="text-slate-200 hover:bg-slate-700 focus:bg-slate-700 cursor-pointer"
-        >
-          <User className="mr-2 h-4 w-4" />
-          <span>Perfil</span>
-        </DropdownMenuItem>
-        <DropdownMenuItem 
-          onClick={onSettingsClick}
-          className="text-slate-200 hover:bg-slate-700 focus:bg-slate-700 cursor-pointer"
-        >
-          <Settings className="mr-2 h-4 w-4" />
-          <span>Configurações</span>
-        </DropdownMenuItem>
-        <DropdownMenuSeparator className="bg-slate-700" />
-        <DropdownMenuItem 
-          onClick={onLogoutClick}
-          className="text-red-400 hover:bg-slate-700 focus:bg-slate-700 cursor-pointer"
-        >
-          <LogOut className="mr-2 h-4 w-4" />
-          <span>Sair</span>
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
+    {/* Container principal - agrupa TUDO */}
+    <div 
+      className="flex items-center space-x-3 cursor-pointer hover:bg-slate-700/30 rounded-lg px-3 py-2 transition-all duration-200"
+      onClick={onDropdownToggle}
+    >
+      {/* Seção de conteúdo textual */}
+      <div className="flex-1 min-w-0">
+        {/* Nome do usuário */}
+        <h3 className="text-sm font-semibold text-white truncate">
+          {userData.name}
+        </h3>
+        
+        {/* Container dos títulos/badges */}
+        <div className="flex items-center space-x-1 mt-1">
+          {userData.titles.slice(0, 2).map((title) => (
+            <div 
+              key={title.id} 
+              className={`flex items-center space-x-1 px-1.5 py-0.5 rounded text-xs font-medium border ${getTitleColor(title.type)}`}
+            >
+              {getTitleIcon(title.type)}
+              <span className="hidden sm:inline">{title.name}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+      
+      {/* Seção da imagem */}
+      <div className="flex-shrink-0">
+        <img 
+          src={userData.avatar} 
+          alt={userData.name}
+          className="w-10 h-10 rounded-full object-cover border-2 border-violet-500/50"
+        />
+      </div>
+    </div>
   );
 };
 
