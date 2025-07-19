@@ -1,5 +1,5 @@
 import React from 'react';
-import { Crown, MessageCircle, Square } from 'lucide-react';
+import { Crown, MessageCircle, Square, Lock } from 'lucide-react';
 
 interface VaultHeaderComponentProps {
   vaultName: string;
@@ -9,6 +9,10 @@ interface VaultHeaderComponentProps {
   borderColor?: string;
   onAbandon?: () => void;
   showAbandonButton?: boolean;
+  showChatToggle?: boolean;
+  onChatToggle?: () => void;
+  showVaultToggle?: boolean;
+  onVaultToggle?: () => void;
 }
 
 const VaultHeaderComponent: React.FC<VaultHeaderComponentProps> = ({
@@ -18,7 +22,11 @@ const VaultHeaderComponent: React.FC<VaultHeaderComponentProps> = ({
   backgroundColor = "bg-slate-800",
   borderColor = "border-slate-700/50",
   onAbandon = () => {},
-  showAbandonButton = true
+  showAbandonButton = true,
+  showChatToggle = false,
+  onChatToggle = () => {},
+  showVaultToggle = false,
+  onVaultToggle = () => {}
 }) => {
   return (
     <div className={`${backgroundColor} border-b ${borderColor}`}>
@@ -44,17 +52,44 @@ const VaultHeaderComponent: React.FC<VaultHeaderComponentProps> = ({
             </div>
           </div>
           
-          {/* Botão Abandonar */}
-          {showAbandonButton && (
-            <button
-              onClick={onAbandon}
-              className="bg-red-500/20 hover:bg-red-500/30 active:bg-red-500/40 text-red-400 hover:text-red-300 px-2 rounded-lg text-xs font-medium transition-all duration-200 flex items-center gap-1 flex-shrink-0 leading-none"
-              style={{ height: '28px', minHeight: '28px', maxHeight: '28px' }}
-            >
-              <Square size={9} fill="currentColor" />
-              Abandonar
-            </button>
-          )}
+          {/* Botões do lado direito */}
+          <div className="flex items-center gap-2">
+            {/* Botão para alternar para Chat (apenas no MyVault) */}
+            {showChatToggle && (
+              <button
+                onClick={onChatToggle}
+                className="bg-violet-500/20 hover:bg-violet-500/30 active:bg-violet-500/40 text-violet-400 hover:text-violet-300 p-2 rounded-lg transition-all duration-200 flex items-center justify-center flex-shrink-0"
+                style={{ width: '32px', height: '28px', minHeight: '28px', maxHeight: '28px' }}
+                title="Ir para Chat"
+              >
+                <MessageCircle size={14} />
+              </button>
+            )}
+
+            {/* Botão para alternar para MyVault (apenas no Chat) */}
+            {showVaultToggle && (
+              <button
+                onClick={onVaultToggle}
+                className="bg-violet-500/20 hover:bg-violet-500/30 active:bg-violet-500/40 text-violet-400 hover:text-violet-300 p-2 rounded-lg transition-all duration-200 flex items-center justify-center flex-shrink-0"
+                style={{ width: '32px', height: '28px', minHeight: '28px', maxHeight: '28px' }}
+                title="Ir para Cofre"
+              >
+                <Lock size={14} />
+              </button>
+            )}
+
+            {/* Botão Abandonar */}
+            {showAbandonButton && (
+              <button
+                onClick={onAbandon}
+                className="bg-red-500/20 hover:bg-red-500/30 active:bg-red-500/40 text-red-400 hover:text-red-300 px-2 rounded-lg text-xs font-medium transition-all duration-200 flex items-center gap-1 flex-shrink-0 leading-none"
+                style={{ height: '28px', minHeight: '28px', maxHeight: '28px' }}
+              >
+                <Square size={9} fill="currentColor" />
+                Abandonar
+              </button>
+            )}
+          </div>
         </div>
       </div>
     </div>
