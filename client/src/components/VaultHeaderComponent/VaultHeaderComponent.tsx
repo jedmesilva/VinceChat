@@ -54,11 +54,11 @@ const VaultHeaderComponent: React.FC<VaultHeaderComponentProps> = ({
           
           {/* Botões do lado direito */}
           <div className="flex items-center gap-2">
-            {/* Botão para alternar para Chat (apenas no MyVault) */}
+            {/* Botão para alternar para Chat (apenas no MyVault no mobile) */}
             {showChatToggle && (
               <button
                 onClick={onChatToggle}
-                className="bg-violet-500/20 hover:bg-violet-500/30 active:bg-violet-500/40 text-violet-400 hover:text-violet-300 p-2 rounded-lg transition-all duration-200 flex items-center justify-center flex-shrink-0"
+                className="bg-violet-500/20 hover:bg-violet-500/30 active:bg-violet-500/40 text-violet-400 hover:text-violet-300 p-2 rounded-lg transition-all duration-200 flex items-center justify-center flex-shrink-0 md:hidden"
                 style={{ width: '32px', height: '28px', minHeight: '28px', maxHeight: '28px' }}
                 title="Ir para Chat"
               >
@@ -66,11 +66,11 @@ const VaultHeaderComponent: React.FC<VaultHeaderComponentProps> = ({
               </button>
             )}
 
-            {/* Botão para alternar para MyVault (apenas no Chat) */}
+            {/* Botão para alternar para MyVault (apenas no Chat no mobile) */}
             {showVaultToggle && (
               <button
                 onClick={onVaultToggle}
-                className="bg-violet-500/20 hover:bg-violet-500/30 active:bg-violet-500/40 text-violet-400 hover:text-violet-300 p-2 rounded-lg transition-all duration-200 flex items-center justify-center flex-shrink-0"
+                className="bg-violet-500/20 hover:bg-violet-500/30 active:bg-violet-500/40 text-violet-400 hover:text-violet-300 p-2 rounded-lg transition-all duration-200 flex items-center justify-center flex-shrink-0 md:hidden"
                 style={{ width: '32px', height: '28px', minHeight: '28px', maxHeight: '28px' }}
                 title="Ir para Cofre"
               >
