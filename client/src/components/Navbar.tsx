@@ -30,7 +30,7 @@ const Navbar: React.FC<NavbarProps> = ({
   };
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-20 bg-slate-800 border-b border-slate-700/50">
+    <div className="w-full bg-slate-800 border-b border-slate-700/50">
       <div className="flex items-center justify-between px-4 py-3">
         {/* Toggle MyVault panel button */}
         <div className="flex items-center">
