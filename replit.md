@@ -10,7 +10,7 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes
 
-### Mobile Navigation System (July 19, 2025)
+### Navigation and Toggle System (July 19, 2025)
 - Implemented responsive navigation system for ChatVault page
 - Added toggle buttons in headers: chat icon in MyVaultHeader, vault icon in ChatVaultHeader  
 - Mobile breakpoint shows only one view at a time (Chat OR MyVault)
@@ -18,6 +18,10 @@ Preferred communication style: Simple, everyday language.
 - Toggle buttons only visible on mobile breakpoint (md:hidden class)
 - ChatVault page: users can switch between views using header buttons
 - Vault Discovery page: MyVault appears without chat toggle (different context)
+- Added MyVault visibility toggle in Vault Discovery navbar
+- Navbar button switches between PanelLeftOpen/PanelLeftClose icons
+- Content area expands to full width when MyVault is hidden
+- Smooth transition animations when toggling MyVault visibility
 
 ### Mobile Layout Fix (July 18, 2025)
 - Fixed chat-vault page mobile viewport issues with simplified layout approach

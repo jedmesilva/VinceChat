@@ -10,6 +10,7 @@ const VaultDiscovery: React.FC = () => {
   const [vaults, setVaults] = useState<Vault[]>([]);
   const [loading, setLoading] = useState(true);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [myVaultVisible, setMyVaultVisible] = useState(true);
 
   // Carrega os dados dos cofres
   useEffect(() => {
@@ -126,6 +127,10 @@ const VaultDiscovery: React.FC = () => {
   }, []);
 
   // Handlers para sidebar
+  const handleToggleMyVault = useCallback(() => {
+    setMyVaultVisible(prev => !prev);
+  }, []);
+
   const handleOpenSidebar = useCallback(() => {
     setSidebarOpen(true);
   }, []);
@@ -182,7 +187,10 @@ const VaultDiscovery: React.FC = () => {
   return (
     <div className="min-h-screen bg-gray-900">
       {/* Navbar */}
-      <Navbar onOpenSidebar={handleOpenSidebar} />
+      <Navbar 
+        onOpenSidebar={handleToggleMyVault} 
+        isMyVaultVisible={myVaultVisible}
+      />
       
       {/* Sidebar */}
       {sidebarOpen && (
@@ -199,13 +207,15 @@ const VaultDiscovery: React.FC = () => {
 
       {/* Conteúdo principal */}
       <div className="pt-16 h-screen flex overflow-hidden"> {/* Espaço para navbar fixa */}
-        {/* MyVault - lado esquerdo */}
-        <div className="w-1/3 min-w-0 flex-shrink-0 border-r border-slate-700/50">
-          <MyVaultMain />
-        </div>
+        {/* MyVault - lado esquerdo - controlado por visibilidade */}
+        {myVaultVisible && (
+          <div className="w-1/3 min-w-0 flex-shrink-0 border-r border-slate-700/50">
+            <MyVaultMain />
+          </div>
+        )}
 
-        {/* Discovery Content - lado direito */}
-        <div className="flex-1 min-w-0 overflow-y-auto">
+        {/* Discovery Content - lado direito - expande quando MyVault está oculto */}
+        <div className={`min-w-0 overflow-y-auto transition-all duration-300 ${myVaultVisible ? 'flex-1' : 'w-full'}`}>
           {/* Componente de caça de cofres no topo */}
           <div className="p-4">
             <VaultHunting
