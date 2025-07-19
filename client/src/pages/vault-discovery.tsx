@@ -207,15 +207,21 @@ const VaultDiscovery: React.FC = () => {
 
       {/* Conteúdo principal */}
       <div className="pt-16 h-screen flex overflow-hidden"> {/* Espaço para navbar fixa */}
-        {/* MyVault - lado esquerdo - controlado por visibilidade CSS */}
-        <div className={`min-w-0 flex-shrink-0 border-r border-slate-700/50 transition-all duration-300 overflow-hidden ${
-          myVaultVisible ? 'w-1/3' : 'w-0'
-        }`}>
+        {/* MyVault - Desktop: lado esquerdo | Mobile: tela completa quando visível */}
+        <div className={`
+          min-w-0 flex-shrink-0 border-r border-slate-700/50 transition-all duration-300 overflow-hidden
+          md:${myVaultVisible ? 'w-1/3' : 'w-0'}
+          ${myVaultVisible ? 'w-full md:w-1/3' : 'w-0'}
+        `}>
           <MyVaultMain />
         </div>
 
-        {/* Discovery Content - lado direito - expande quando MyVault está oculto */}
-        <div className="flex-1 min-w-0 overflow-y-auto">
+        {/* Discovery Content - Desktop: lado direito | Mobile: tela completa quando MyVault oculto */}
+        <div className={`
+          min-w-0 overflow-y-auto
+          md:flex-1
+          ${myVaultVisible ? 'hidden md:flex md:flex-col' : 'flex-1'}
+        `}>
           {/* Componente de caça de cofres no topo */}
           <div className="p-4">
             <VaultHunting
