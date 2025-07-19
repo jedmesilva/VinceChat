@@ -57,7 +57,7 @@ const ChatVaultMessageInput: React.FC<ChatVaultMessageInputProps> = ({
   const RoleIcon = userRole.icon;
 
   return (
-    <div className={`p-4 bg-slate-800 border-t border-slate-700/30 ${className}`}>
+    <div className={`p-4 bg-gray-900 border-t border-slate-700/30 ${className}`}>
       <style dangerouslySetInnerHTML={{
         __html: `
           .scrollbar-none {
