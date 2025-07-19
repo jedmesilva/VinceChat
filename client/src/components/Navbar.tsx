@@ -1,28 +1,12 @@
 import React from 'react';
 import { PanelLeftOpen, PanelLeftClose } from 'lucide-react';
-import UserCardNavbar from '@/components/UserCardNavbar/UserCardNavbar';
 
 interface NavbarProps {
   onOpenSidebar?: () => void;
   isMyVaultVisible?: boolean;
-  user?: {
-    name: string;
-    email: string;
-    avatar?: string;
-  };
-  onProfileClick?: () => void;
-  onSettingsClick?: () => void;
-  onLogoutClick?: () => void;
 }
 
-const Navbar: React.FC<NavbarProps> = ({ 
-  onOpenSidebar, 
-  isMyVaultVisible = true,
-  user,
-  onProfileClick,
-  onSettingsClick,
-  onLogoutClick
-}) => {
+const Navbar: React.FC<NavbarProps> = ({ onOpenSidebar, isMyVaultVisible = true }) => {
   const handleTogglePanel = () => {
     if (onOpenSidebar) {
       onOpenSidebar();
@@ -30,7 +14,7 @@ const Navbar: React.FC<NavbarProps> = ({
   };
 
   return (
-    <div className="w-full bg-slate-800 border-b border-slate-700/50">
+    <div className="fixed top-0 left-0 right-0 z-20 bg-slate-800 border-b border-slate-700/50">
       <div className="flex items-center justify-between px-4 py-3">
         {/* Toggle MyVault panel button */}
         <div className="flex items-center">
@@ -48,29 +32,10 @@ const Navbar: React.FC<NavbarProps> = ({
           </button>
         </div>
         
-        {/* User card on the right */}
-        {user && (
-          <div className="flex items-center">
-            <UserCardNavbar 
-              userData={{
-                name: user.name,
-                avatar: user.avatar || '/default-avatar.png',
-                titles: [
-                  {
-                    id: '1',
-                    name: 'Explorador',
-                    type: 'guardian',
-                    icon: 'shield',
-                    earnedAt: new Date().toISOString()
-                  }
-                ]
-              }}
-              onDropdownToggle={() => {
-                // Handle dropdown toggle
-              }}
-            />
-          </div>
-        )}
+        {/* Empty space to maintain layout balance */}
+        <div className="flex items-center">
+          {/* Space for future right-side elements */}
+        </div>
       </div>
     </div>
   );

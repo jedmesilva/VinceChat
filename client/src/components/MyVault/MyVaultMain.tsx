@@ -1,6 +1,6 @@
 import React from 'react';
-import MyVaultHeader from './MyVaultHeader/MyVaultHeader';
-import ItemList from '@/components/Item/ItemList/ItemList';
+import MyVaultHeader from '../../components/MyVault/MyVaultHeader/MyVaultHeader';
+import ItemList from '../../components/Item/ItemList/ItemList';
 
 interface MyVaultMainProps {
   onChatToggle?: () => void;

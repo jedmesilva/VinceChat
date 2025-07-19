@@ -12,13 +12,6 @@ const VaultDiscovery: React.FC = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [myVaultVisible, setMyVaultVisible] = useState(true);
 
-  // Mock user data - replace with real user data from authentication
-  const mockUser = {
-    name: "João Silva",
-    email: "joao@exemplo.com",
-    avatar: undefined
-  };
-
   // Carrega os dados dos cofres
   useEffect(() => {
     const loadVaults = async () => {
@@ -180,18 +173,6 @@ const VaultDiscovery: React.FC = () => {
     console.log('Caçada parada');
   }, []);
 
-  const handleProfileClick = useCallback(() => {
-    setLocation('/account');
-  }, [setLocation]);
-
-  const handleSettingsClick = useCallback(() => {
-    console.log('Configurações clicadas');
-  }, []);
-
-  const handleLogoutClick = useCallback(() => {
-    console.log('Logout clicado');
-  }, []);
-
   if (loading) {
     return (
       <div className="min-h-screen bg-gray-900 flex items-center justify-center">
@@ -204,22 +185,16 @@ const VaultDiscovery: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-900 flex flex-col">
-      {/* Navbar - altura automática */}
-      <div className="flex-shrink-0">
-        <Navbar 
-          onOpenSidebar={handleToggleMyVault} 
-          isMyVaultVisible={myVaultVisible}
-          user={mockUser}
-          onProfileClick={handleProfileClick}
-          onSettingsClick={handleSettingsClick}
-          onLogoutClick={handleLogoutClick}
-        />
-      </div>
+    <div className="min-h-screen bg-gray-900">
+      {/* Navbar */}
+      <Navbar 
+        onOpenSidebar={handleToggleMyVault} 
+        isMyVaultVisible={myVaultVisible}
+      />
       
       {/* Sidebar */}
       {sidebarOpen && (
-        <div className="fixed inset-0 z-40 lg:hidden">
+        <div className="fixed inset-0 z-30 lg:hidden">
           <div className="fixed inset-0 bg-black/50" onClick={handleCloseSidebar} />
           <div className="fixed left-0 top-0 h-full w-80 bg-slate-800">
             {/* Conteúdo do sidebar pode ser adicionado aqui */}
@@ -230,18 +205,15 @@ const VaultDiscovery: React.FC = () => {
         </div>
       )}
 
-      {/* Conteúdo principal - ocupa o resto do espaço disponível */}
-      <div className="flex-1 min-h-0 flex overflow-hidden">
+      {/* Conteúdo principal */}
+      <div className="pt-[60px] h-screen flex overflow-hidden"> {/* Espaço exato para navbar fixa */}
         {/* MyVault - Desktop: lado esquerdo | Mobile: tela completa quando visível */}
         <div className={`
           min-w-0 flex-shrink-0 border-r border-slate-700/50 transition-all duration-300 overflow-hidden
           md:${myVaultVisible ? 'w-1/3' : 'w-0'}
           ${myVaultVisible ? 'w-full md:w-1/3' : 'w-0'}
         `}>
-          <MyVaultMain 
-            onChatToggle={() => {}}
-            showChatToggle={false}
-          />
+          <MyVaultMain />
         </div>
 
         {/* Discovery Content - Desktop: lado direito | Mobile: tela completa quando MyVault oculto */}
