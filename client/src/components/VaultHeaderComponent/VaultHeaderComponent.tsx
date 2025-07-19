@@ -1,5 +1,5 @@
 import React from 'react';
-import { Crown, MessageCircle, Square } from 'lucide-react';
+import { Crown, MessageCircle, Square, Lock } from 'lucide-react';
 
 interface VaultHeaderComponentProps {
   vaultName: string;
@@ -44,17 +44,24 @@ const VaultHeaderComponent: React.FC<VaultHeaderComponentProps> = ({
             </div>
           </div>
           
-          {/* Botão Abandonar */}
-          {showAbandonButton && (
-            <button
-              onClick={onAbandon}
-              className="bg-red-500/20 hover:bg-red-500/30 active:bg-red-500/40 text-red-400 hover:text-red-300 px-2 rounded-lg text-xs font-medium transition-all duration-200 flex items-center gap-1 flex-shrink-0 leading-none"
-              style={{ height: '28px', minHeight: '28px', maxHeight: '28px' }}
-            >
-              <Square size={9} fill="currentColor" />
-              Abandonar
-            </button>
-          )}
+          <div className="flex items-center gap-3">
+            {/* Ícone de cadeado no lado direito */}
+            <div className="w-10 h-10 bg-violet-500/20 rounded-lg flex items-center justify-center">
+              <Lock className="h-5 w-5 text-violet-400" />
+            </div>
+            
+            {/* Botão Abandonar */}
+            {showAbandonButton && (
+              <button
+                onClick={onAbandon}
+                className="bg-red-500/20 hover:bg-red-500/30 active:bg-red-500/40 text-red-400 hover:text-red-300 px-2 rounded-lg text-xs font-medium transition-all duration-200 flex items-center gap-1 flex-shrink-0 leading-none"
+                style={{ height: '28px', minHeight: '28px', maxHeight: '28px' }}
+              >
+                <Square size={9} fill="currentColor" />
+                Abandonar
+              </button>
+            )}
+          </div>
         </div>
       </div>
     </div>
