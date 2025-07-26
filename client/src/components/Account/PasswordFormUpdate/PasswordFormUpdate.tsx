@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Lock, AlertCircle, Eye, EyeOff } from 'lucide-react';
+import { Lock, AlertCircle, Eye, EyeOff, X } from 'lucide-react';
 
 interface PasswordFormUpdateData {
   currentPassword: string;
@@ -172,7 +172,7 @@ const PasswordFormUpdate: React.FC<PasswordFormUpdateProps> = ({
       {/* Formulário de Senha (Condicional) */}
       {showPasswordFormUpdate && (
         <div className="animate-in slide-in-from-top-5 duration-300">
-          <div className="space-y-4 bg-slate-900 rounded-xl p-4 border border-slate-700">
+          <div className="space-y-4 bg-slate-800/80 backdrop-blur-sm rounded-2xl p-6 border border-slate-600/30">
             <div className="flex items-center gap-2 mb-3">
               <Lock className="h-5 w-5 text-violet-400" />
               <h3 className="text-violet-400 font-medium">Alterar Senha</h3>
@@ -189,11 +189,13 @@ const PasswordFormUpdate: React.FC<PasswordFormUpdateProps> = ({
                   value={passwordData.currentPassword}
                   onChange={(e) => handlePasswordChange('currentPassword', e.target.value)}
                   placeholder="Sua senha atual"
-                  className={`w-full px-4 py-3 pl-12 pr-12 bg-slate-700 border rounded-2xl text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-violet-500 transition-all duration-200 ${
-                    errors.currentPassword ? 'border-red-500' : 'border-slate-600'
+                  className={`w-full pl-11 pr-12 py-3 bg-slate-700/50 border rounded-xl text-white placeholder-slate-400 focus:outline-none focus:ring-2 transition-all duration-200 ${
+                    errors.currentPassword 
+                      ? 'border-red-400/50 focus:ring-red-400/50' 
+                      : 'border-slate-600/30 focus:ring-violet-400/50'
                   }`}
                 />
-                <Lock className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-slate-400" />
+                <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-slate-400" />
                 <button
                   type="button"
                   onClick={() => setShowCurrentPassword(!showCurrentPassword)}
@@ -203,10 +205,10 @@ const PasswordFormUpdate: React.FC<PasswordFormUpdateProps> = ({
                 </button>
               </div>
               {errors.currentPassword && (
-                <div className="flex items-center gap-1 mt-2 text-red-400 text-sm">
-                  <AlertCircle className="h-4 w-4" />
-                  {errors.currentPassword}
-                </div>
+                <p className="mt-2 text-sm text-red-400 flex items-center space-x-1">
+                  <X className="w-4 h-4" />
+                  <span>{errors.currentPassword}</span>
+                </p>
               )}
             </div>
 
@@ -221,11 +223,13 @@ const PasswordFormUpdate: React.FC<PasswordFormUpdateProps> = ({
                   value={passwordData.newPassword}
                   onChange={(e) => handlePasswordChange('newPassword', e.target.value)}
                   placeholder="Sua nova senha"
-                  className={`w-full px-4 py-3 pl-12 pr-12 bg-slate-700 border rounded-2xl text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-violet-500 transition-all duration-200 ${
-                    errors.newPassword ? 'border-red-500' : 'border-slate-600'
+                  className={`w-full pl-11 pr-12 py-3 bg-slate-700/50 border rounded-xl text-white placeholder-slate-400 focus:outline-none focus:ring-2 transition-all duration-200 ${
+                    errors.newPassword 
+                      ? 'border-red-400/50 focus:ring-red-400/50' 
+                      : 'border-slate-600/30 focus:ring-violet-400/50'
                   }`}
                 />
-                <Lock className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-slate-400" />
+                <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-slate-400" />
                 <button
                   type="button"
                   onClick={() => setShowNewPassword(!showNewPassword)}
@@ -235,10 +239,10 @@ const PasswordFormUpdate: React.FC<PasswordFormUpdateProps> = ({
                 </button>
               </div>
               {errors.newPassword && (
-                <div className="flex items-center gap-1 mt-2 text-red-400 text-sm">
-                  <AlertCircle className="h-4 w-4" />
-                  {errors.newPassword}
-                </div>
+                <p className="mt-2 text-sm text-red-400 flex items-center space-x-1">
+                  <X className="w-4 h-4" />
+                  <span>{errors.newPassword}</span>
+                </p>
               )}
             </div>
 
@@ -253,11 +257,13 @@ const PasswordFormUpdate: React.FC<PasswordFormUpdateProps> = ({
                   value={passwordData.confirmPassword}
                   onChange={(e) => handlePasswordChange('confirmPassword', e.target.value)}
                   placeholder="Confirme sua nova senha"
-                  className={`w-full px-4 py-3 pl-12 pr-12 bg-slate-700 border rounded-2xl text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-violet-500 transition-all duration-200 ${
-                    errors.confirmPassword ? 'border-red-500' : 'border-slate-600'
+                  className={`w-full pl-11 pr-12 py-3 bg-slate-700/50 border rounded-xl text-white placeholder-slate-400 focus:outline-none focus:ring-2 transition-all duration-200 ${
+                    errors.confirmPassword 
+                      ? 'border-red-400/50 focus:ring-red-400/50' 
+                      : 'border-slate-600/30 focus:ring-violet-400/50'
                   }`}
                 />
-                <Lock className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-slate-400" />
+                <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-slate-400" />
                 <button
                   type="button"
                   onClick={() => setShowConfirmPassword(!showConfirmPassword)}
@@ -267,10 +273,10 @@ const PasswordFormUpdate: React.FC<PasswordFormUpdateProps> = ({
                 </button>
               </div>
               {errors.confirmPassword && (
-                <div className="flex items-center gap-1 mt-2 text-red-400 text-sm">
-                  <AlertCircle className="h-4 w-4" />
-                  {errors.confirmPassword}
-                </div>
+                <p className="mt-2 text-sm text-red-400 flex items-center space-x-1">
+                  <X className="w-4 h-4" />
+                  <span>{errors.confirmPassword}</span>
+                </p>
               )}
             </div>
           </div>
@@ -282,19 +288,18 @@ const PasswordFormUpdate: React.FC<PasswordFormUpdateProps> = ({
         <button
           onClick={handleSubmit}
           disabled={isProcessing}
-          className={`w-full font-medium py-3 px-4 rounded-2xl transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-offset-2 focus:ring-offset-slate-800 ${
-            isProcessing
-              ? 'bg-slate-600 text-slate-400 cursor-not-allowed'
-              : 'bg-violet-600 hover:bg-violet-700 text-white'
-          }`}
+          className="w-full flex items-center justify-center space-x-2 py-3 bg-violet-500 hover:bg-violet-600 disabled:bg-violet-500/50 rounded-xl transition-all duration-200 disabled:cursor-not-allowed"
         >
           {isProcessing ? (
-            <div className="flex items-center justify-center gap-2">
-              <div className="w-5 h-5 border-2 border-slate-400 border-t-transparent rounded-full animate-spin"></div>
-              Processando...
-            </div>
+            <>
+              <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+              <span className="text-white font-medium">Processando...</span>
+            </>
           ) : (
-            submitButtonText
+            <>
+              <Lock className="w-5 h-5 text-white" />
+              <span className="text-white font-medium">{submitButtonText}</span>
+            </>
           )}
         </button>
       )}
