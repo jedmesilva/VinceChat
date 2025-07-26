@@ -206,8 +206,24 @@ const AccountScreen: React.FC = () => {
     }));
   };
 
-  const handleAddCard = () => {
-    alert('Adicionar novo cartão - Abrir modal');
+  const handleAddCard = (newCardData?: any) => {
+    if (newCardData) {
+      // Se dados do cartão são fornecidos, adiciona à lista
+      setUserData(prev => ({
+        ...prev,
+        savedCards: newCardData.isDefault 
+          ? [
+              // Novo cartão como padrão
+              newCardData,
+              // Remove padrão dos outros cartões
+              ...prev.savedCards.map(card => ({ ...card, isDefault: false }))
+            ]
+          : [...prev.savedCards, newCardData]
+      }));
+    } else {
+      // Fallback para compatibilidade
+      alert('Adicionar novo cartão - Abrir modal');
+    }
   };
 
   const handleRemoveCard = (cardId: string) => {

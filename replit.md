@@ -63,6 +63,10 @@ Preferred communication style: Simple, everyday language.
 - Created CardDeleteConfirmation component for safe card deletion
 - Replaced browser confirm() with custom modal showing card details and warnings
 - Added special warning for default card deletion requiring new default selection
+- Created AddCardModal component based on checkout PaymentForm for adding new cards
+- Implemented card validation, formatting, and brand detection in add card flow
+- Added option to set new card as default during creation process
+- Integrated modal with SavedCard component for seamless card management
 - Maintained all functionality while improving layout flow and user experience
 
 ### Project Migration (July 13, 2025)

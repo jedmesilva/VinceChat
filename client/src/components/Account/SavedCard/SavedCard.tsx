@@ -6,6 +6,7 @@ import {
   ChevronRight
 } from 'lucide-react';
 import CardDeleteConfirmation from './CardDeleteConfirmation';
+import AddCardModal from './AddCardModal';
 
 interface SavedCard {
   id: string;
@@ -18,7 +19,7 @@ interface SavedCard {
 
 interface SavedCardsProps {
   cards: SavedCard[];
-  onAddCard?: () => void;
+  onAddCard?: (cardData?: any) => void;
   onRemoveCard?: (cardId: string) => void;
   onSetDefaultCard?: (cardId: string) => void;
   isCollapsible?: boolean;
@@ -39,6 +40,7 @@ const SavedCards: React.FC<SavedCardsProps> = ({
 }) => {
   const [isExpanded, setIsExpanded] = useState(defaultExpanded);
   const [cardToDelete, setCardToDelete] = useState<SavedCard | null>(null);
+  const [showAddCardModal, setShowAddCardModal] = useState(false);
 
   const getCardBrandColor = (brand: string) => {
     switch(brand.toLowerCase()) {
@@ -66,6 +68,17 @@ const SavedCards: React.FC<SavedCardsProps> = ({
 
   const cancelDeleteCard = () => {
     setCardToDelete(null);
+  };
+
+  const handleAddCard = () => {
+    setShowAddCardModal(true);
+  };
+
+  const handleAddCardSubmit = (newCardData: any) => {
+    if (onAddCard) {
+      onAddCard(newCardData);
+    }
+    setShowAddCardModal(false);
   };
 
   const HeaderContent = () => (
@@ -123,7 +136,7 @@ const SavedCards: React.FC<SavedCardsProps> = ({
       
       {onAddCard && (
         <button
-          onClick={onAddCard}
+          onClick={handleAddCard}
           className="w-full flex items-center justify-center space-x-2 p-3 bg-slate-700/30 hover:bg-slate-700/50 rounded-xl border-2 border-dashed border-slate-600/30 transition-all duration-200"
         >
           <Plus className="w-5 h-5 text-slate-400" />
@@ -152,6 +165,13 @@ const SavedCards: React.FC<SavedCardsProps> = ({
             onCancel={cancelDeleteCard}
           />
         )}
+
+        {/* Add Card Modal */}
+        <AddCardModal
+          isOpen={showAddCardModal}
+          onClose={() => setShowAddCardModal(false)}
+          onAddCard={handleAddCardSubmit}
+        />
       </>
     );
   }
@@ -179,6 +199,13 @@ const SavedCards: React.FC<SavedCardsProps> = ({
           onCancel={cancelDeleteCard}
         />
       )}
+
+      {/* Add Card Modal */}
+      <AddCardModal
+        isOpen={showAddCardModal}
+        onClose={() => setShowAddCardModal(false)}
+        onAddCard={handleAddCardSubmit}
+      />
     </>
   );
 };
