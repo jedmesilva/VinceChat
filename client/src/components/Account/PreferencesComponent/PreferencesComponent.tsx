@@ -74,7 +74,7 @@ const PreferencesComponent: React.FC<PreferencesComponentProps> = ({
       )}
       
       {showPreferences && (
-        <div className="px-4 pb-4 space-y-4">
+        <div className="px-4 pt-4 pb-4 space-y-4">
           <div className="flex items-center justify-between p-3 bg-slate-700/30 rounded-xl hover:bg-slate-700/50 transition-colors min-h-[72px]">
             <div className="flex items-center space-x-3 flex-1 min-w-0">
               <Bell className="w-5 h-5 text-slate-400 flex-shrink-0" />
