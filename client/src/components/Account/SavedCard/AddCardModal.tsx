@@ -9,7 +9,6 @@ import {
   AlertCircle,
   Plus
 } from 'lucide-react';
-import { Switch } from '@/components/ui/switch';
 
 interface AddCardModalProps {
   isOpen: boolean;
@@ -318,25 +317,30 @@ const AddCardModal: React.FC<AddCardModalProps> = ({
           </div>
 
           {/* Opção de cartão padrão */}
-          <div className="flex items-center justify-between p-4 bg-slate-700/30 rounded-xl">
-            <div className="flex items-center space-x-3">
-              <div className="w-8 h-8 bg-violet-500/20 rounded-lg flex items-center justify-center">
-                <CreditCard className="w-4 h-4 text-violet-400" />
-              </div>
-              <div>
-                <label htmlFor="saveAsDefault" className="text-white text-sm font-medium cursor-pointer">
-                  Definir como cartão padrão
-                </label>
-                <p className="text-slate-400 text-xs">
-                  Este cartão será usado como padrão para pagamentos
-                </p>
+          <div className="flex items-center justify-between p-3 bg-slate-700/30 rounded-xl hover:bg-slate-700/50 transition-colors min-h-[72px]">
+            <div className="flex items-center space-x-3 flex-1 min-w-0">
+              <CreditCard className="w-5 h-5 text-slate-400 flex-shrink-0" />
+              <div className="flex-1 min-w-0">
+                <div className="text-sm font-medium text-white">Definir como cartão padrão</div>
+                <div className="text-xs text-slate-400">Este cartão será usado como padrão para pagamentos</div>
               </div>
             </div>
-            <Switch
-              id="saveAsDefault"
-              checked={saveAsDefault}
-              onCheckedChange={setSaveAsDefault}
-            />
+            <div className="flex-shrink-0 ml-4">
+              <button
+                type="button"
+                onClick={() => setSaveAsDefault(!saveAsDefault)}
+                className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-offset-2 focus:ring-offset-slate-800 ${
+                  saveAsDefault ? 'bg-violet-500' : 'bg-slate-600'
+                }`}
+                style={{ minWidth: '44px', minHeight: '24px', width: '44px', height: '24px' }}
+              >
+                <span
+                  className={`${
+                    saveAsDefault ? 'translate-x-6' : 'translate-x-1'
+                  } inline-block h-4 w-4 transform rounded-full bg-white transition`}
+                />
+              </button>
+            </div>
           </div>
         </div>
 
