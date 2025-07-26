@@ -275,17 +275,17 @@ const AccountScreen: React.FC = () => {
           }}
         />
 
-        {/* Billing Component */}
-        <BillingComponent 
-          transactions={userData.transactions}
-        />
-
         {/* Saved Cards Component */}
         <SavedCard 
           cards={userData.savedCards}
           onAddCard={handleAddCard}
           onRemoveCard={handleRemoveCard}
           onSetDefaultCard={handleSetDefaultCard}
+        />
+
+        {/* Billing Component */}
+        <BillingComponent 
+          transactions={userData.transactions}
         />
 
         {/* Preferences Component */}
