@@ -190,12 +190,12 @@ const VaultCard: React.FC<VaultCardProps> = React.memo(({ vault, onVaultClick, i
         {/* Status Badges */}
         <div className="absolute top-3 left-3 flex flex-col gap-1 z-10">
           {vault.isNew && (
-            <span className="px-2 py-1 rounded-md text-xs font-bold bg-green-500/20 text-green-300 border border-green-400/50">
+            <span className="px-2 py-1 rounded-full text-xs font-bold bg-green-500/20 text-green-300 border border-green-400/50">
               Novo
             </span>
           )}
           {vault.isPopular && (
-            <span className="px-2 py-1 rounded-md text-xs font-bold bg-orange-500/20 text-orange-300 border border-orange-400/50">
+            <span className="px-2 py-1 rounded-full text-xs font-bold bg-orange-500/20 text-orange-300 border border-orange-400/50">
               Popular
             </span>
           )}
@@ -203,7 +203,7 @@ const VaultCard: React.FC<VaultCardProps> = React.memo(({ vault, onVaultClick, i
 
         {/* Difficulty Badge */}
         <div className="absolute top-3 right-3 z-10">
-          <div className={`inline-flex items-center gap-2 px-3 py-1 rounded-md text-xs font-bold ${difficulty.bg} ${difficulty.text} border ${difficulty.border}`}>
+          <div className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold ${difficulty.bg} ${difficulty.text} border ${difficulty.border}`}>
             {difficulty.icon}
             {difficulty.label}
           </div>
