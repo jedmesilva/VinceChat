@@ -246,16 +246,9 @@ const AccountScreen: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 relative overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-gray-900 to-black" />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-slate-800/20 to-slate-900/40" />
-        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent transform skew-x-12" />
-      </div>
-
+    <div className="min-h-screen bg-gray-900">
       {/* Header */}
-      <div className="relative z-10 p-4">
+      <div className="p-4">
         <div className="flex items-center justify-between mb-6">
           <button
             onClick={handleBack}
