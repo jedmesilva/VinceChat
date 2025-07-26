@@ -1,0 +1,306 @@
+import React, { useState } from 'react';
+import { Lock, AlertCircle, Eye, EyeOff } from 'lucide-react';
+
+interface PasswordFormUpdateData {
+  currentPassword: string;
+  newPassword: string;
+  confirmPassword: string;
+}
+
+interface PasswordFormUpdateProps {
+  onSubmit?: (passwordData: PasswordFormUpdateData) => void | Promise<void>;
+  onToggle?: (isVisible: boolean) => void;
+  initiallyVisible?: boolean;
+  className?: string;
+  toggleButtonText?: {
+    show: string;
+    hide: string;
+  };
+  submitButtonText?: string;
+  validationRules?: {
+    minLength?: number;
+    requireDifferentPassword?: boolean;
+  };
+}
+
+const PasswordFormUpdate: React.FC<PasswordFormUpdateProps> = ({
+  onSubmit,
+  onToggle,
+  initiallyVisible = false,
+  className = '',
+  toggleButtonText = {
+    show: 'Alterar Senha',
+    hide: 'Ocultar Formulário de Senha'
+  },
+  submitButtonText = 'Alterar Senha',
+  validationRules = {
+    minLength: 8,
+    requireDifferentPassword: true
+  }
+}) => {
+  const [passwordData, setPasswordData] = useState<PasswordFormUpdateData>({
+    currentPassword: '',
+    newPassword: '',
+    confirmPassword: ''
+  });
+
+  const [showCurrentPassword, setShowCurrentPassword] = useState(false);
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [showPasswordFormUpdate, setShowPasswordFormUpdate] = useState(initiallyVisible);
+  const [isProcessing, setIsProcessing] = useState(false);
+
+  const [errors, setErrors] = useState<Record<string, string>>({});
+
+  const handlePasswordChange = (field: keyof PasswordFormData, value: string) => {
+    setPasswordData(prev => ({ ...prev, [field]: value }));
+    
+    // Limpar erro quando o usuário começa a digitar
+    if (errors[field]) {
+      setErrors(prev => ({ ...prev, [field]: '' }));
+    }
+  };
+
+  const togglePasswordFormUpdate = () => {
+    const newVisibility = !showPasswordFormUpdate;
+    setShowPasswordFormUpdate(newVisibility);
+    
+    if (!newVisibility) {
+      // Limpar campos de senha quando ocultar o formulário
+      setPasswordData({
+        currentPassword: '',
+        newPassword: '',
+        confirmPassword: ''
+      });
+      // Limpar erros relacionados à senha
+      setErrors({});
+      // Reset password visibility
+      setShowCurrentPassword(false);
+      setShowNewPassword(false);
+      setShowConfirmPassword(false);
+    }
+
+    // Chamar callback se fornecido
+    if (onToggle) {
+      onToggle(newVisibility);
+    }
+  };
+
+  const validateForm = () => {
+    const newErrors: Record<string, string> = {};
+    const { minLength, requireDifferentPassword } = validationRules;
+
+    if (!passwordData.currentPassword) {
+      newErrors.currentPassword = 'Senha atual é obrigatória';
+    }
+
+    if (!passwordData.newPassword) {
+      newErrors.newPassword = 'Nova senha é obrigatória';
+    } else if (minLength && passwordData.newPassword.length < minLength) {
+      newErrors.newPassword = `A senha deve ter pelo menos ${minLength} caracteres`;
+    }
+
+    if (!passwordData.confirmPassword) {
+      newErrors.confirmPassword = 'Confirmação de senha é obrigatória';
+    } else if (passwordData.newPassword !== passwordData.confirmPassword) {
+      newErrors.confirmPassword = 'As senhas não coincidem';
+    }
+
+    if (
+      requireDifferentPassword &&
+      passwordData.currentPassword && 
+      passwordData.newPassword && 
+      passwordData.currentPassword === passwordData.newPassword
+    ) {
+      newErrors.newPassword = 'A nova senha deve ser diferente da atual';
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleSubmit = async () => {
+    if (!validateForm()) return;
+
+    setIsProcessing(true);
+    
+    try {
+      if (onSubmit) {
+        await onSubmit(passwordData);
+      } else {
+        // Comportamento padrão se nenhum callback for fornecido
+        console.log('Dados da senha:', passwordData);
+        alert('Senha alterada com sucesso!');
+      }
+      
+      // Limpar formulário após sucesso
+      setPasswordData({
+        currentPassword: '',
+        newPassword: '',
+        confirmPassword: ''
+      });
+      setErrors({});
+    } catch (error) {
+      console.error('Erro ao alterar senha:', error);
+      alert('Erro ao alterar senha. Tente novamente.');
+    } finally {
+      setIsProcessing(false);
+    }
+  };
+
+  return (
+    <div className={`space-y-4 ${className}`}>
+      
+      {/* Botão para Mostrar/Ocultar Formulário de Senha */}
+      <button
+        type="button"
+        onClick={togglePasswordForm}
+        className={`w-full py-3 px-4 rounded-xl text-base font-medium transition-all duration-200 border-2 border-dashed ${
+          showPasswordForm 
+            ? 'border-violet-500 bg-violet-500/10 text-violet-400' 
+            : 'border-slate-600 bg-slate-700/50 text-slate-400 hover:border-slate-500 hover:text-slate-300'
+        }`}
+      >
+        <div className="flex items-center justify-center gap-2">
+          <Lock className="h-5 w-5" />
+          <span>
+            {showPasswordFormUpdate ? toggleButtonText.hide : toggleButtonText.show}
+          </span>
+        </div>
+      </button>
+
+      {/* Formulário de Senha (Condicional) */}
+      {showPasswordFormUpdate && (
+        <div className="animate-in slide-in-from-top-5 duration-300">
+          <div className="space-y-4 bg-slate-900 rounded-xl p-4 border border-slate-700">
+            <div className="flex items-center gap-2 mb-3">
+              <Lock className="h-5 w-5 text-violet-400" />
+              <h3 className="text-violet-400 font-medium">Alterar Senha</h3>
+            </div>
+
+            {/* Senha Atual */}
+            <div>
+              <label className="block text-slate-300 text-sm font-medium mb-2">
+                Senha Atual
+              </label>
+              <div className="relative">
+                <input
+                  type={showCurrentPassword ? 'text' : 'password'}
+                  value={passwordData.currentPassword}
+                  onChange={(e) => handlePasswordChange('currentPassword', e.target.value)}
+                  placeholder="Sua senha atual"
+                  className={`w-full px-4 py-3 pl-12 pr-12 bg-slate-700 border rounded-2xl text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-violet-500 transition-all duration-200 ${
+                    errors.currentPassword ? 'border-red-500' : 'border-slate-600'
+                  }`}
+                />
+                <Lock className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-slate-400" />
+                <button
+                  type="button"
+                  onClick={() => setShowCurrentPassword(!showCurrentPassword)}
+                  className="absolute right-4 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-slate-300 transition-colors"
+                >
+                  {showCurrentPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
+                </button>
+              </div>
+              {errors.currentPassword && (
+                <div className="flex items-center gap-1 mt-2 text-red-400 text-sm">
+                  <AlertCircle className="h-4 w-4" />
+                  {errors.currentPassword}
+                </div>
+              )}
+            </div>
+
+            {/* Nova Senha */}
+            <div>
+              <label className="block text-slate-300 text-sm font-medium mb-2">
+                Nova Senha
+              </label>
+              <div className="relative">
+                <input
+                  type={showNewPassword ? 'text' : 'password'}
+                  value={passwordData.newPassword}
+                  onChange={(e) => handlePasswordChange('newPassword', e.target.value)}
+                  placeholder="Sua nova senha"
+                  className={`w-full px-4 py-3 pl-12 pr-12 bg-slate-700 border rounded-2xl text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-violet-500 transition-all duration-200 ${
+                    errors.newPassword ? 'border-red-500' : 'border-slate-600'
+                  }`}
+                />
+                <Lock className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-slate-400" />
+                <button
+                  type="button"
+                  onClick={() => setShowNewPassword(!showNewPassword)}
+                  className="absolute right-4 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-slate-300 transition-colors"
+                >
+                  {showNewPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
+                </button>
+              </div>
+              {errors.newPassword && (
+                <div className="flex items-center gap-1 mt-2 text-red-400 text-sm">
+                  <AlertCircle className="h-4 w-4" />
+                  {errors.newPassword}
+                </div>
+              )}
+            </div>
+
+            {/* Confirmar Nova Senha */}
+            <div>
+              <label className="block text-slate-300 text-sm font-medium mb-2">
+                Confirmar Nova Senha
+              </label>
+              <div className="relative">
+                <input
+                  type={showConfirmPassword ? 'text' : 'password'}
+                  value={passwordData.confirmPassword}
+                  onChange={(e) => handlePasswordChange('confirmPassword', e.target.value)}
+                  placeholder="Confirme sua nova senha"
+                  className={`w-full px-4 py-3 pl-12 pr-12 bg-slate-700 border rounded-2xl text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-violet-500 transition-all duration-200 ${
+                    errors.confirmPassword ? 'border-red-500' : 'border-slate-600'
+                  }`}
+                />
+                <Lock className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-slate-400" />
+                <button
+                  type="button"
+                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                  className="absolute right-4 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-slate-300 transition-colors"
+                >
+                  {showConfirmPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
+                </button>
+              </div>
+              {errors.confirmPassword && (
+                <div className="flex items-center gap-1 mt-2 text-red-400 text-sm">
+                  <AlertCircle className="h-4 w-4" />
+                  {errors.confirmPassword}
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+      
+      {/* Botão Salvar (só aparece quando o formulário está visível) */}
+      {showPasswordFormUpdate && (
+        <button
+          onClick={handleSubmit}
+          disabled={isProcessing}
+          className={`w-full font-medium py-3 px-4 rounded-2xl transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-offset-2 focus:ring-offset-slate-800 ${
+            isProcessing
+              ? 'bg-slate-600 text-slate-400 cursor-not-allowed'
+              : 'bg-violet-600 hover:bg-violet-700 text-white'
+          }`}
+        >
+          {isProcessing ? (
+            <div className="flex items-center justify-center gap-2">
+              <div className="w-5 h-5 border-2 border-slate-400 border-t-transparent rounded-full animate-spin"></div>
+              Processando...
+            </div>
+          ) : (
+            submitButtonText
+          )}
+        </button>
+      )}
+    </div>
+  );
+};
+
+export default PasswordFormUpdate;
+export type { PasswordFormUpdateData, PasswordFormUpdateProps };
