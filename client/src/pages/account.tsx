@@ -261,6 +261,11 @@ const AccountScreen: React.FC = () => {
           titles={userData.titles}
         />
 
+        {/* Achievements Component */}
+        <AchievementsComponent 
+          achievements={userData.achievements}
+        />
+
         {/* Personal Information Component */}
         <PersonalInfoComponent 
           personalInfo={{
@@ -281,11 +286,6 @@ const AccountScreen: React.FC = () => {
           onAddCard={handleAddCard}
           onRemoveCard={handleRemoveCard}
           onSetDefaultCard={handleSetDefaultCard}
-        />
-
-        {/* Achievements Component */}
-        <AchievementsComponent 
-          achievements={userData.achievements}
         />
 
         {/* Preferences Component */}
