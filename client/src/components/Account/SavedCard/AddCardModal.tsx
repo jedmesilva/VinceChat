@@ -9,6 +9,7 @@ import {
   AlertCircle,
   Plus
 } from 'lucide-react';
+import { Switch } from '@/components/ui/switch';
 
 interface AddCardModalProps {
   isOpen: boolean;
@@ -326,20 +327,12 @@ const AddCardModal: React.FC<AddCardModalProps> = ({
               </div>
             </div>
             <div className="flex-shrink-0 ml-4">
-              <button
-                type="button"
-                onClick={() => setSaveAsDefault(!saveAsDefault)}
-                className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-offset-2 focus:ring-offset-slate-800 ${
-                  saveAsDefault ? 'bg-violet-500' : 'bg-slate-600'
-                }`}
+              <Switch
+                checked={saveAsDefault}
+                onCheckedChange={setSaveAsDefault}
+                className="!w-11 !h-6 [&>span]:bg-white [&>span]:border-white"
                 style={{ minWidth: '44px', minHeight: '24px', width: '44px', height: '24px' }}
-              >
-                <span
-                  className={`${
-                    saveAsDefault ? 'translate-x-6' : 'translate-x-1'
-                  } inline-block h-4 w-4 transform rounded-full bg-white transition`}
-                />
-              </button>
+              />
             </div>
           </div>
         </div>
