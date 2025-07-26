@@ -206,7 +206,7 @@ const VaultDiscovery: React.FC = () => {
       )}
 
       {/* Conteúdo principal */}
-      <div className="pt-[60px] h-screen flex overflow-hidden"> {/* Espaço exato para navbar fixa */}
+      <div className="pt-[72px] h-screen flex overflow-hidden"> {/* Espaço exato para navbar fixa */}
         {/* MyVault - Desktop: lado esquerdo | Mobile: tela completa quando visível */}
         <div className={`
           min-w-0 flex-shrink-0 border-r border-slate-700/50 transition-all duration-300 overflow-hidden
