@@ -92,16 +92,44 @@ const UserDataUpdateForm: React.FC<UserDataUpdateFormProps> = ({
     }
   };
 
-  const handleAvatarChange = async () => {
-    // Simular seleção de nova imagem - em uma implementação real, seria um file picker
-    const newAvatarUrl = prompt('Digite a URL do novo avatar:');
-    if (newAvatarUrl) {
-      try {
-        await onAvatarUpdate(newAvatarUrl);
-        setUserData(prev => ({ ...prev, avatar: newAvatarUrl }));
-      } catch (error) {
-        console.error('Erro ao atualizar avatar:', error);
-      }
+  const handleAvatarFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    // Validar tipo de arquivo
+    if (!file.type.startsWith('image/')) {
+      alert('Por favor, selecione apenas arquivos de imagem.');
+      return;
+    }
+
+    // Validar tamanho (máximo 5MB)
+    if (file.size > 5 * 1024 * 1024) {
+      alert('A imagem deve ter no máximo 5MB.');
+      return;
+    }
+
+    try {
+      // Criar URL temporário para preview
+      const tempUrl = URL.createObjectURL(file);
+      
+      // Atualizar preview imediatamente
+      setUserData(prev => ({ ...prev, avatar: tempUrl }));
+      
+      // Simular upload - em produção seria enviado para um servidor
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      
+      // Simular URL final (em produção viria do servidor)
+      const finalUrl = tempUrl; // Em produção: resultado do upload
+      
+      await onAvatarUpdate(finalUrl);
+      
+      // Limpar URL temporário após sucesso
+      // URL.revokeObjectURL(tempUrl); // Descomentado em produção
+      
+    } catch (error) {
+      console.error('Erro ao atualizar avatar:', error);
+      // Reverter para avatar anterior em caso de erro
+      setUserData(prev => ({ ...prev, avatar: initialUserData.avatar }));
     }
   };
 
@@ -120,12 +148,19 @@ const UserDataUpdateForm: React.FC<UserDataUpdateFormProps> = ({
                 alt="Avatar"
                 className="w-24 h-24 rounded-full object-cover border-2 border-violet-500/50"
               />
-              <button
-                onClick={handleAvatarChange}
-                className="absolute -bottom-1 -right-1 w-8 h-8 bg-violet-500 hover:bg-violet-600 rounded-full flex items-center justify-center transition-all duration-200 border-2 border-slate-800"
+              <label
+                htmlFor="avatar-upload"
+                className="absolute -bottom-1 -right-1 w-8 h-8 bg-violet-500 hover:bg-violet-600 rounded-full flex items-center justify-center transition-all duration-200 border-2 border-slate-800 cursor-pointer min-w-[32px] min-h-[32px] flex-shrink-0"
               >
-                <Camera className="w-4 h-4 text-white" />
-              </button>
+                <Camera className="w-4 h-4 text-white flex-shrink-0" />
+              </label>
+              <input
+                id="avatar-upload"
+                type="file"
+                accept="image/*"
+                onChange={handleAvatarFileChange}
+                className="hidden"
+              />
             </div>
             <p className="text-sm text-slate-400 text-center">Clique no ícone para alterar sua foto</p>
           </div>
