@@ -223,7 +223,7 @@ const ChatVaultPage: React.FC = () => {
           min-w-0
           md:flex-1
           ${mobileView === 'chat' ? 'flex-1 block' : 'w-0 hidden md:flex md:flex-col'}
-          ${showVaultMain ? 'overflow-y-auto' : ''}
+          ${showVaultMain ? 'overflow-y-auto scrollbar-hide' : ''}
         `}>
           {!showVaultMain ? (
             /* Tela do Chat */
