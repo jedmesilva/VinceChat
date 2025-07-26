@@ -124,7 +124,7 @@ const SavedCards: React.FC<SavedCardsProps> = ({
 
   if (!isCollapsible) {
     return (
-      <div className={`bg-slate-800/80 backdrop-blur-sm rounded-2xl border border-slate-600/30 ${className}`}>
+      <div className={`bg-slate-800/80 backdrop-blur-sm rounded-2xl border border-slate-600/30 mb-6 ${className}`}>
         <div className="p-4">
           <HeaderContent />
         </div>
@@ -134,7 +134,7 @@ const SavedCards: React.FC<SavedCardsProps> = ({
   }
 
   return (
-    <div className={`bg-slate-800/80 backdrop-blur-sm rounded-2xl border border-slate-600/30 ${className}`}>
+    <div className={`bg-slate-800/80 backdrop-blur-sm rounded-2xl border border-slate-600/30 mb-6 ${className}`}>
       <div 
         className="flex items-center justify-between p-4 cursor-pointer"
         onClick={() => setIsExpanded(!isExpanded)}

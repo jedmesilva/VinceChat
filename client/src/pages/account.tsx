@@ -296,7 +296,7 @@ const AccountScreen: React.FC = () => {
         />
 
         {/* Action Buttons */}
-        <div className="space-y-3">
+        <div className="space-y-3 mt-6">
           <button
             onClick={handleEditProfile}
             className="w-full flex items-center justify-center space-x-2 py-3 bg-violet-500/20 hover:bg-violet-500/30 rounded-xl border border-violet-400/30 transition-all duration-200"

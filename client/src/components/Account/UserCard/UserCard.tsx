@@ -65,7 +65,7 @@ const UserCard: React.FC<UserCardProps> = ({
   };
 
   return (
-    <div className={`bg-slate-800/80 backdrop-blur-sm rounded-2xl p-6 border border-slate-600/30 ${className}`}>
+    <div className={`bg-slate-800/80 backdrop-blur-sm rounded-2xl p-6 border border-slate-600/30 mb-6 ${className}`}>
       <div className="flex items-center space-x-4">
         <div className="relative">
           {avatar ? (

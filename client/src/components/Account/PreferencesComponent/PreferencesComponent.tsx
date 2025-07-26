@@ -86,11 +86,11 @@ const PreferencesComponent: React.FC<PreferencesComponentProps> = ({
             </div>
             <button
               onClick={handleToggleNotifications}
-              className={`w-12 h-6 rounded-full transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-violet-400 focus:ring-opacity-50 ${
+              className={`relative w-12 h-6 rounded-full transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-violet-400 focus:ring-opacity-50 flex-shrink-0 ${
                 localPreferences.notifications ? 'bg-violet-500' : 'bg-slate-600'
               }`}
             >
-              <div className={`w-5 h-5 bg-white rounded-full transform transition-transform ${
+              <div className={`absolute top-0.5 w-5 h-5 bg-white rounded-full transform transition-transform duration-200 ${
                 localPreferences.notifications ? 'translate-x-6' : 'translate-x-0.5'
               }`} />
             </button>
@@ -106,11 +106,11 @@ const PreferencesComponent: React.FC<PreferencesComponentProps> = ({
             </div>
             <button
               onClick={handleToggleEmailUpdates}
-              className={`w-12 h-6 rounded-full transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-violet-400 focus:ring-opacity-50 ${
+              className={`relative w-12 h-6 rounded-full transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-violet-400 focus:ring-opacity-50 flex-shrink-0 ${
                 localPreferences.emailUpdates ? 'bg-violet-500' : 'bg-slate-600'
               }`}
             >
-              <div className={`w-5 h-5 bg-white rounded-full transform transition-transform ${
+              <div className={`absolute top-0.5 w-5 h-5 bg-white rounded-full transform transition-transform duration-200 ${
                 localPreferences.emailUpdates ? 'translate-x-6' : 'translate-x-0.5'
               }`} />
             </button>
