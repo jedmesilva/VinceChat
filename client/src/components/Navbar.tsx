@@ -1,5 +1,6 @@
 import React from 'react';
 import { Lock, LockOpen } from 'lucide-react';
+import { useLocation } from 'wouter';
 import UserCardNavBar from '@/components/UserCardNavBar/UserCardNavBar';
 
 interface NavbarProps {
@@ -8,10 +9,16 @@ interface NavbarProps {
 }
 
 const Navbar: React.FC<NavbarProps> = ({ onOpenSidebar, isMyVaultVisible = true }) => {
+  const [, setLocation] = useLocation();
+  
   const handleTogglePanel = () => {
     if (onOpenSidebar) {
       onOpenSidebar();
     }
+  };
+
+  const handleUserCardClick = () => {
+    setLocation('/account');
   };
 
   return (
@@ -49,7 +56,7 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenSidebar, isMyVaultVisible = true 
                 { id: "2", name: "Explorador", type: "default" }
               ]
             }}
-            onDropdownToggle={() => console.log('User dropdown toggled')}
+            onDropdownToggle={handleUserCardClick}
           />
         </div>
       </div>
