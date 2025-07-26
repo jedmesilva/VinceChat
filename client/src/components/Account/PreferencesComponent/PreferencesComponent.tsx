@@ -4,6 +4,7 @@ import {
   Bell,
   Mail
 } from 'lucide-react';
+import { Switch } from '@/components/ui/switch';
 
 interface Preferences {
   notifications: boolean;
@@ -26,27 +27,25 @@ const PreferencesComponent: React.FC<PreferencesComponentProps> = ({
   const [showPreferences, setShowPreferences] = useState(!showCollapsed);
   const [localPreferences, setLocalPreferences] = useState(preferences);
 
-  const handleToggleNotifications = () => {
-    const newValue = !localPreferences.notifications;
+  const handleToggleNotifications = (value: boolean) => {
     setLocalPreferences(prev => ({
       ...prev,
-      notifications: newValue
+      notifications: value
     }));
     
     if (onToggleNotifications) {
-      onToggleNotifications(newValue);
+      onToggleNotifications(value);
     }
   };
 
-  const handleToggleEmailUpdates = () => {
-    const newValue = !localPreferences.emailUpdates;
+  const handleToggleEmailUpdates = (value: boolean) => {
     setLocalPreferences(prev => ({
       ...prev,
-      emailUpdates: newValue
+      emailUpdates: value
     }));
     
     if (onToggleEmailUpdates) {
-      onToggleEmailUpdates(newValue);
+      onToggleEmailUpdates(value);
     }
   };
 
@@ -84,18 +83,10 @@ const PreferencesComponent: React.FC<PreferencesComponentProps> = ({
                 <div className="text-xs text-slate-400">Receber notificações push</div>
               </div>
             </div>
-            <button
-              onClick={handleToggleNotifications}
-              className={`relative inline-flex h-6 w-12 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-offset-2 ${
-                localPreferences.notifications ? 'bg-violet-500' : 'bg-slate-600'
-              }`}
-            >
-              <span
-                className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${
-                  localPreferences.notifications ? 'translate-x-5' : 'translate-x-0'
-                }`}
-              />
-            </button>
+            <Switch
+              checked={localPreferences.notifications}
+              onCheckedChange={handleToggleNotifications}
+            />
           </div>
           
           <div className="flex items-center justify-between p-3 bg-slate-700/30 rounded-xl hover:bg-slate-700/50 transition-colors">
@@ -106,18 +97,10 @@ const PreferencesComponent: React.FC<PreferencesComponentProps> = ({
                 <div className="text-xs text-slate-400">Receber atualizações por email</div>
               </div>
             </div>
-            <button
-              onClick={handleToggleEmailUpdates}
-              className={`relative inline-flex h-6 w-12 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-offset-2 ${
-                localPreferences.emailUpdates ? 'bg-violet-500' : 'bg-slate-600'
-              }`}
-            >
-              <span
-                className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${
-                  localPreferences.emailUpdates ? 'translate-x-5' : 'translate-x-0'
-                }`}
-              />
-            </button>
+            <Switch
+              checked={localPreferences.emailUpdates}
+              onCheckedChange={handleToggleEmailUpdates}
+            />
           </div>
         </div>
       )}
