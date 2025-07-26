@@ -315,7 +315,7 @@ const VaultHunting: React.FC<VaultHuntingProps> = ({
       <div className="bg-slate-800 rounded-2xl border border-violet-500/20 p-6">
         <div className="text-center py-8">
           <div className="w-20 h-20 bg-slate-700/50 rounded-2xl mx-auto mb-4 flex items-center justify-center">
-            <Search className="h-10 w-10 text-slate-400" />
+            <Crosshair className="h-10 w-10 text-slate-400" />
           </div>
           <h3 className="text-xl font-bold text-slate-200 mb-2">Caça aos Cofres</h3>
           <p className="text-slate-400 mb-6 max-w-md mx-auto">
