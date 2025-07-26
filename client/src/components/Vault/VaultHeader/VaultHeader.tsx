@@ -28,17 +28,22 @@ const VaultHeader: React.FC<VaultHeaderProps> = ({
   return (
     <div className={`relative z-10 p-6 ${className}`}>
       {/* Title and Description */}
-      <div className="mb-6">
-        <div className="flex items-center gap-3 mb-4">
-          <div className="w-8 h-8 bg-violet-500 rounded-lg flex items-center justify-center">
-            <Crown className="h-5 w-5 text-white" />
+      <div className="mb-6 text-center">
+        {/* Ícone centralizado e maior */}
+        <div className="flex justify-center mb-4">
+          <div className="w-16 h-16 bg-violet-500 rounded-2xl flex items-center justify-center">
+            <Crown className="h-10 w-10 text-white" />
           </div>
-          <h1 className="text-3xl font-bold text-white">
-            {vault.name}
-          </h1>
         </div>
+        
+        {/* Nome do cofre centralizado */}
+        <h1 className="text-3xl font-bold text-white mb-3">
+          {vault.name}
+        </h1>
+        
+        {/* Descrição centralizada */}
         {vault.description && (
-          <p className="text-slate-400 text-base max-w-3xl leading-relaxed ml-11">
+          <p className="text-slate-400 text-base max-w-2xl mx-auto leading-relaxed">
             {vault.description}
           </p>
         )}
