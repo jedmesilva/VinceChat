@@ -5,6 +5,7 @@ import { Toaster } from "@/components/ui/toaster";
 import VaultDiscovery from "@/pages/vault-discovery";
 import ChatVaultPage from "@/pages/chat-vault";
 import AccountPage from "@/pages/account";
+import UserUpdatePage from "@/pages/user-update";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -12,6 +13,7 @@ function Router() {
     <Switch>
       <Route path="/" component={VaultDiscovery} />
       <Route path="/account" component={AccountPage} />
+      <Route path="/user-update" component={UserUpdatePage} />
       <Route path="/:vaultId" component={ChatVaultPage} />
       <Route component={NotFound} />
     </Switch>

@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { ArrowLeft } from 'lucide-react';
+import { useLocation } from 'wouter';
 
 // Importação do componente de atualização de dados
-import UserDataUpdateForm from '../components/Account/UserDataUpdateForm/UserDataUpdateForm';
+import UserDataUpdateForm from '@/components/Account/UserDataUpdateForm/UserDataUpdateForm';
 
 interface UserData {
   id: string;
@@ -14,6 +15,7 @@ interface UserData {
 }
 
 const UserDataUpdateScreen: React.FC = () => {
+  const [, setLocation] = useLocation();
   const [userData, setUserData] = useState<UserData>({
     id: 'user123',
     name: 'João Lukas',
@@ -26,7 +28,7 @@ const UserDataUpdateScreen: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleBack = () => {
-    alert('Voltar para a conta');
+    setLocation('/account');
   };
 
   const handleUpdateUserData = async (updatedData: Partial<UserData>) => {

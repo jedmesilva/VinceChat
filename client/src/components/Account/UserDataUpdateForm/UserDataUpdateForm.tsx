@@ -8,23 +8,31 @@ import {
   X,
   Camera
 } from 'lucide-react';
-import PasswordFormUpdate from '../../../client/src/components/Account/PasswordFormUpdate/PasswordFormUpdate';
+import PasswordFormUpdate from '../PasswordFormUpdate/PasswordFormUpdate';
 
 interface UserData {
+  id: string;
   name: string;
   email: string;
   phone: string;
   avatar: string;
+  joinDate: string;
 }
 
-const UserDataUpdateForm: React.FC = () => {
-  const [userData, setUserData] = useState<UserData>({
-    name: 'João Lukas',
-    email: 'joao.lukas@email.com',
-    phone: '+55 11 99999-9999',
-    avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=120&h=120&fit=crop&crop=face&auto=format'
-  });
+interface UserDataUpdateFormProps {
+  userData: UserData;
+  onUpdateUserData: (updatedData: Partial<UserData>) => Promise<void>;
+  onAvatarUpdate: (newAvatarUrl: string) => Promise<void>;
+  isLoading: boolean;
+}
 
+const UserDataUpdateForm: React.FC<UserDataUpdateFormProps> = ({
+  userData: initialUserData,
+  onUpdateUserData,
+  onAvatarUpdate,
+  isLoading: externalLoading
+}) => {
+  const [userData, setUserData] = useState<UserData>(initialUserData);
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
 
@@ -71,16 +79,10 @@ const UserDataUpdateForm: React.FC = () => {
   const handleSave = async () => {
     if (!validateForm()) return;
 
-    setIsLoading(true);
-    
     try {
-      // Simular chamada para API
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      alert('Dados atualizados com sucesso!');
+      await onUpdateUserData(userData);
     } catch (error) {
-      alert('Erro ao atualizar dados. Tente novamente.');
-    } finally {
-      setIsLoading(false);
+      console.error('Erro ao atualizar dados:', error);
     }
   };
 
@@ -90,8 +92,17 @@ const UserDataUpdateForm: React.FC = () => {
     }
   };
 
-  const handleAvatarChange = () => {
-    alert('Abrir seletor de imagem - Funcionalidade de upload de avatar');
+  const handleAvatarChange = async () => {
+    // Simular seleção de nova imagem - em uma implementação real, seria um file picker
+    const newAvatarUrl = prompt('Digite a URL do novo avatar:');
+    if (newAvatarUrl) {
+      try {
+        await onAvatarUpdate(newAvatarUrl);
+        setUserData(prev => ({ ...prev, avatar: newAvatarUrl }));
+      } catch (error) {
+        console.error('Erro ao atualizar avatar:', error);
+      }
+    }
   };
 
   return (
@@ -212,10 +223,10 @@ const UserDataUpdateForm: React.FC = () => {
         <div className="space-y-3">
           <button
             onClick={handleSave}
-            disabled={isLoading}
+            disabled={externalLoading}
             className="w-full flex items-center justify-center space-x-2 py-3 bg-violet-500 hover:bg-violet-600 disabled:bg-violet-500/50 rounded-xl transition-all duration-200 disabled:cursor-not-allowed"
           >
-            {isLoading ? (
+            {externalLoading ? (
               <>
                 <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
                 <span className="text-white font-medium">Salvando...</span>
@@ -230,7 +241,7 @@ const UserDataUpdateForm: React.FC = () => {
           
           <button
             onClick={handleCancel}
-            disabled={isLoading}
+            disabled={externalLoading}
             className="w-full flex items-center justify-center space-x-2 py-3 bg-slate-700/50 hover:bg-slate-700/70 disabled:bg-slate-700/30 rounded-xl border border-slate-600/30 transition-all duration-200 disabled:cursor-not-allowed"
           >
             <X className="w-5 h-5 text-slate-300" />

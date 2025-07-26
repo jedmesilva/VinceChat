@@ -6,12 +6,13 @@ import {
 } from 'lucide-react';
 
 // Importação dos componentes modulares
-import UserCard from '../components/Account/UserCard/UserCard';
-import PersonalInfoComponent from '../components/Account/PersonalInfoComponent/PersonalInfoComponent';
-import AchievementsComponent from '../components/Account/AchievementsComponent/AchievementsComponent';
-import SavedCard from '../components/Account/SavedCard/SavedCard';
-import BillingComponent from '../components/Account/BillingComponent/BillingComponent';
-import PreferencesComponent from '../components/Account/PreferencesComponent/PreferencesComponent';
+import { useLocation } from 'wouter';
+import UserCard from '@/components/Account/UserCard/UserCard';
+import PersonalInfoComponent from '@/components/Account/PersonalInfoComponent/PersonalInfoComponent';
+import AchievementsComponent from '@/components/Account/AchievementsComponent/AchievementsComponent';
+import SavedCard from '@/components/Account/SavedCard/SavedCard';
+import BillingComponent from '@/components/Account/BillingComponent/BillingComponent';
+import PreferencesComponent from '@/components/Account/PreferencesComponent/PreferencesComponent';
 
 interface UserData {
   id: string;
@@ -59,6 +60,7 @@ interface UserData {
 }
 
 const AccountScreen: React.FC = () => {
+  const [, setLocation] = useLocation();
   const [userData, setUserData] = useState<UserData>({
     id: 'user123',
     name: 'João Lukas',
@@ -171,11 +173,11 @@ const AccountScreen: React.FC = () => {
   });
 
   const handleBack = () => {
-    alert('Voltar para o menu principal');
+    setLocation('/');
   };
 
   const handleEditProfile = () => {
-    alert('Editar perfil - Abrir modal de edição');
+    setLocation('/user-update');
   };
 
   const handleLogout = () => {
@@ -253,17 +255,15 @@ const AccountScreen: React.FC = () => {
 
         {/* Profile Header - UserCard Component */}
         <UserCard 
-          userData={{
-            name: userData.name,
-            email: userData.email,
-            avatar: userData.avatar,
-            titles: userData.titles
-          }}
+          name={userData.name}
+          email={userData.email}
+          avatar={userData.avatar}
+          titles={userData.titles}
         />
 
         {/* Personal Information Component */}
         <PersonalInfoComponent 
-          userData={{
+          personalInfo={{
             email: userData.email,
             phone: userData.phone,
             joinDate: userData.joinDate
@@ -277,7 +277,7 @@ const AccountScreen: React.FC = () => {
 
         {/* Saved Cards Component */}
         <SavedCard 
-          savedCards={userData.savedCards}
+          cards={userData.savedCards}
           onAddCard={handleAddCard}
           onRemoveCard={handleRemoveCard}
           onSetDefaultCard={handleSetDefaultCard}
