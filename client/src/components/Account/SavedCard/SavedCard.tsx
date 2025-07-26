@@ -5,6 +5,7 @@ import {
   Trash2,
   ChevronRight
 } from 'lucide-react';
+import CardDeleteConfirmation from './CardDeleteConfirmation';
 
 interface SavedCard {
   id: string;
@@ -37,6 +38,7 @@ const SavedCards: React.FC<SavedCardsProps> = ({
   className = ""
 }) => {
   const [isExpanded, setIsExpanded] = useState(defaultExpanded);
+  const [cardToDelete, setCardToDelete] = useState<SavedCard | null>(null);
 
   const getCardBrandColor = (brand: string) => {
     switch(brand.toLowerCase()) {
@@ -51,10 +53,19 @@ const SavedCards: React.FC<SavedCardsProps> = ({
     }
   };
 
-  const handleRemoveCard = (cardId: string) => {
-    if (window.confirm('Tem certeza que deseja remover este cartão?')) {
-      onRemoveCard?.(cardId);
+  const handleRemoveCard = (card: SavedCard) => {
+    setCardToDelete(card);
+  };
+
+  const confirmDeleteCard = () => {
+    if (cardToDelete && onRemoveCard) {
+      onRemoveCard(cardToDelete.id);
+      setCardToDelete(null);
     }
+  };
+
+  const cancelDeleteCard = () => {
+    setCardToDelete(null);
   };
 
   const HeaderContent = () => (
@@ -100,7 +111,7 @@ const SavedCards: React.FC<SavedCardsProps> = ({
             )}
             {onRemoveCard && (
               <button
-                onClick={() => handleRemoveCard(card.id)}
+                onClick={() => handleRemoveCard(card)}
                 className="w-8 h-8 bg-red-500/20 text-red-300 rounded-lg flex items-center justify-center hover:bg-red-500/30 transition-colors"
               >
                 <Trash2 className="w-4 h-4" />
@@ -124,27 +135,51 @@ const SavedCards: React.FC<SavedCardsProps> = ({
 
   if (!isCollapsible) {
     return (
-      <div className={`bg-slate-800/80 backdrop-blur-sm rounded-2xl border border-slate-600/30 mb-6 ${className}`}>
-        <div className="p-4">
-          <HeaderContent />
+      <>
+        <div className={`bg-slate-800/80 backdrop-blur-sm rounded-2xl border border-slate-600/30 mb-6 ${className}`}>
+          <div className="p-4">
+            <HeaderContent />
+          </div>
+          <CardsContent />
         </div>
-        <CardsContent />
-      </div>
+
+        {/* Confirmation Modal */}
+        {cardToDelete && (
+          <CardDeleteConfirmation
+            card={cardToDelete}
+            isOpen={!!cardToDelete}
+            onConfirm={confirmDeleteCard}
+            onCancel={cancelDeleteCard}
+          />
+        )}
+      </>
     );
   }
 
   return (
-    <div className={`bg-slate-800/80 backdrop-blur-sm rounded-2xl border border-slate-600/30 mb-6 ${className}`}>
-      <div 
-        className="flex items-center justify-between p-4 cursor-pointer"
-        onClick={() => setIsExpanded(!isExpanded)}
-      >
-        <HeaderContent />
-        <ChevronRight className={`w-5 h-5 text-slate-400 transform transition-transform ${isExpanded ? 'rotate-90' : ''}`} />
+    <>
+      <div className={`bg-slate-800/80 backdrop-blur-sm rounded-2xl border border-slate-600/30 mb-6 ${className}`}>
+        <div 
+          className="flex items-center justify-between p-4 cursor-pointer"
+          onClick={() => setIsExpanded(!isExpanded)}
+        >
+          <HeaderContent />
+          <ChevronRight className={`w-5 h-5 text-slate-400 transform transition-transform ${isExpanded ? 'rotate-90' : ''}`} />
+        </div>
+        
+        {isExpanded && <CardsContent />}
       </div>
-      
-      {isExpanded && <CardsContent />}
-    </div>
+
+      {/* Confirmation Modal */}
+      {cardToDelete && (
+        <CardDeleteConfirmation
+          card={cardToDelete}
+          isOpen={!!cardToDelete}
+          onConfirm={confirmDeleteCard}
+          onCancel={cancelDeleteCard}
+        />
+      )}
+    </>
   );
 };
 

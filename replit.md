@@ -60,6 +60,9 @@ Preferred communication style: Simple, everyday language.
 - Configured default component visibility: only Achievements expanded on page load
 - All other components (Personal Info, Saved Cards, Billing, Preferences) start collapsed
 - Updated card selection button text from "Padrão" to "Selecionar" for better UX clarity
+- Created CardDeleteConfirmation component for safe card deletion
+- Replaced browser confirm() with custom modal showing card details and warnings
+- Added special warning for default card deletion requiring new default selection
 - Maintained all functionality while improving layout flow and user experience
 
 ### Project Migration (July 13, 2025)
