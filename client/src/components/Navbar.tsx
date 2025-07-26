@@ -1,5 +1,6 @@
 import React from 'react';
 import { Lock, LockOpen } from 'lucide-react';
+import UserCardNavBar from '@/components/UserCardNavBar/UserCardNavBar';
 
 interface NavbarProps {
   onOpenSidebar?: () => void;
@@ -37,9 +38,19 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenSidebar, isMyVaultVisible = true 
           </button>
         </div>
         
-        {/* Empty space to maintain layout balance */}
+        {/* User card on the right */}
         <div className="flex items-center">
-          {/* Space for future right-side elements */}
+          <UserCardNavBar 
+            userData={{
+              name: "João Silva",
+              avatar: undefined,
+              titles: [
+                { id: "1", name: "Guardião", type: "guardian" },
+                { id: "2", name: "Explorador", type: "default" }
+              ]
+            }}
+            onDropdownToggle={() => console.log('User dropdown toggled')}
+          />
         </div>
       </div>
     </div>
