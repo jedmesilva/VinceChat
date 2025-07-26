@@ -10,7 +10,7 @@ const VaultDiscovery: React.FC = () => {
   const [vaults, setVaults] = useState<Vault[]>([]);
   const [loading, setLoading] = useState(true);
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [myVaultVisible, setMyVaultVisible] = useState(true);
+  const [myVaultVisible, setMyVaultVisible] = useState(false);
 
   // Carrega os dados dos cofres
   useEffect(() => {
