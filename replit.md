@@ -10,6 +10,13 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes
 
+### VaultMain Scroll Fix (July 26, 2025)
+- Fixed VaultMain component scroll behavior to allow full page scrolling instead of just content area
+- Removed fixed header positioning to allow the vault header to scroll with content
+- Updated container layout to use overflow-y-auto when VaultMain is active
+- Changed from flex-col with fixed header to natural document flow for better scroll experience
+- Users can now scroll the entire vault page including the header, providing better mobile experience
+
 ### Navigation and Toggle System (July 19, 2025)
 - Implemented responsive navigation system for ChatVault page
 - Added toggle buttons in headers: chat icon in MyVaultHeader, vault icon in ChatVaultHeader  

@@ -205,7 +205,7 @@ const ChatVaultPage: React.FC = () => {
       </div>
 
       {/* Container principal - Desktop: lado a lado | Mobile: uma tela por vez */}
-      <div className="flex-1 min-h-0 w-full flex overflow-hidden">
+      <div className={`flex-1 min-h-0 w-full flex ${showVaultMain ? '' : 'overflow-hidden'}`}>
         {/* MyVault - Desktop: lado esquerdo | Mobile: tela completa quando selecionado */}
         <div className={`
           min-w-0 flex-shrink-0 border-r border-slate-700/50
@@ -223,6 +223,7 @@ const ChatVaultPage: React.FC = () => {
           min-w-0
           md:flex-1
           ${mobileView === 'chat' ? 'flex-1 block' : 'w-0 hidden md:flex md:flex-col'}
+          ${showVaultMain ? 'overflow-y-auto' : ''}
         `}>
           {!showVaultMain ? (
             /* Tela do Chat */

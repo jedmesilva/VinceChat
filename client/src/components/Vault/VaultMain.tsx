@@ -112,41 +112,37 @@ const VaultMain: React.FC<VaultMainProps> = ({
   };
 
   return (
-    <div className={`h-full bg-gray-900 flex flex-col ${className}`}>
+    <div className={`min-h-full bg-gray-900 ${className}`}>
       {/* Header */}
-      <div className="flex-shrink-0">
-        <VaultHeader
-          vault={vault}
-          onBack={onBack}
-          timerLabel={timerLabel}
-          closeButtonText={closeButtonText}
-          instructionText={instructionText}
-        />
-      </div>
+      <VaultHeader
+        vault={vault}
+        onBack={onBack}
+        timerLabel={timerLabel}
+        closeButtonText={closeButtonText}
+        instructionText={instructionText}
+      />
 
       {/* Main Content */}
-      <div className="flex-1 overflow-y-auto px-4 pb-4 scrollbar-hide">
-        <div className="w-full">
-          {/* Items List */}
-          <ItemList
-            items={items}
-            onItemClick={handleItemClick}
-            gridCols="2"
-            gap="medium"
-            className="w-full"
-          />
+      <div className="px-4 pb-4">
+        {/* Items List */}
+        <ItemList
+          items={items}
+          onItemClick={handleItemClick}
+          gridCols="2"
+          gap="medium"
+          className="w-full"
+        />
 
-          {/* Empty State */}
-          {items.length === 0 && (
-            <div className="text-center py-16">
-              <div className="w-24 h-24 bg-slate-700/30 rounded-full flex items-center justify-center mx-auto mb-6">
-                <CheckCircle className="h-12 w-12 text-green-400" />
-              </div>
-              <h3 className="text-2xl font-bold text-white mb-2">Cofre Saqueado!</h3>
-              <p className="text-slate-400 text-lg">Você saqueou todos os itens deste cofre!</p>
+        {/* Empty State */}
+        {items.length === 0 && (
+          <div className="text-center py-16">
+            <div className="w-24 h-24 bg-slate-700/30 rounded-full flex items-center justify-center mx-auto mb-6">
+              <CheckCircle className="h-12 w-12 text-green-400" />
             </div>
-          )}
-        </div>
+            <h3 className="text-2xl font-bold text-white mb-2">Cofre Saqueado!</h3>
+            <p className="text-slate-400 text-lg">Você saqueou todos os itens deste cofre!</p>
+          </div>
+        )}
       </div>
     </div>
   );
