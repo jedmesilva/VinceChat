@@ -15,7 +15,7 @@ const MyVaultHeader: React.FC<MyVaultHeaderProps> = ({
   showChatToggle = false
 }) => {
   return (
-    <div className={`bg-slate-800 border-b border-slate-700/50 ${className}`}>
+    <div className={`bg-gray-900 border-b border-slate-700/50 ${className}`}>
       {/* Cabeçalho principal usando o mesmo componente do ChatVault */}
       <VaultHeaderComponent 
         vaultName="Meu Cofre"
