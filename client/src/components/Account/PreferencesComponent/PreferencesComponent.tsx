@@ -24,7 +24,7 @@ const PreferencesComponent: React.FC<PreferencesComponentProps> = ({
   onToggleEmailUpdates,
   showCollapsed = false 
 }) => {
-  const [showPreferences, setShowPreferences] = useState(!showCollapsed);
+  const [showPreferences, setShowPreferences] = useState(true);
   const [localPreferences, setLocalPreferences] = useState(preferences);
 
   const handleToggleNotifications = (value: boolean) => {
