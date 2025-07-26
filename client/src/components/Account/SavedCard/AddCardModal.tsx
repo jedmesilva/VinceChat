@@ -9,6 +9,7 @@ import {
   AlertCircle,
   Plus
 } from 'lucide-react';
+import { Switch } from '@/components/ui/switch';
 
 interface AddCardModalProps {
   isOpen: boolean;
@@ -317,17 +318,25 @@ const AddCardModal: React.FC<AddCardModalProps> = ({
           </div>
 
           {/* Opção de cartão padrão */}
-          <div className="flex items-center space-x-3 p-3 bg-slate-700/30 rounded-xl">
-            <input
-              type="checkbox"
+          <div className="flex items-center justify-between p-4 bg-slate-700/30 rounded-xl">
+            <div className="flex items-center space-x-3">
+              <div className="w-8 h-8 bg-violet-500/20 rounded-lg flex items-center justify-center">
+                <CreditCard className="w-4 h-4 text-violet-400" />
+              </div>
+              <div>
+                <label htmlFor="saveAsDefault" className="text-white text-sm font-medium cursor-pointer">
+                  Definir como cartão padrão
+                </label>
+                <p className="text-slate-400 text-xs">
+                  Este cartão será usado como padrão para pagamentos
+                </p>
+              </div>
+            </div>
+            <Switch
               id="saveAsDefault"
               checked={saveAsDefault}
-              onChange={(e) => setSaveAsDefault(e.target.checked)}
-              className="w-4 h-4 text-violet-500 bg-slate-700 border-slate-600 rounded focus:ring-violet-500/50 focus:ring-2"
+              onCheckedChange={setSaveAsDefault}
             />
-            <label htmlFor="saveAsDefault" className="text-slate-300 text-sm cursor-pointer">
-              Definir como cartão padrão
-            </label>
           </div>
         </div>
 
