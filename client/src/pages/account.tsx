@@ -264,6 +264,7 @@ const AccountScreen: React.FC = () => {
         {/* Achievements Component */}
         <AchievementsComponent 
           achievements={userData.achievements}
+          showCollapsed={false}
         />
 
         {/* Personal Information Component */}
@@ -273,6 +274,7 @@ const AccountScreen: React.FC = () => {
             phone: userData.phone,
             joinDate: userData.joinDate
           }}
+          showCollapsed={true}
         />
 
         {/* Saved Cards Component */}
@@ -281,11 +283,14 @@ const AccountScreen: React.FC = () => {
           onAddCard={handleAddCard}
           onRemoveCard={handleRemoveCard}
           onSetDefaultCard={handleSetDefaultCard}
+          isCollapsible={true}
+          defaultExpanded={false}
         />
 
         {/* Billing Component */}
         <BillingComponent 
           transactions={userData.transactions}
+          showCollapsed={true}
         />
 
         {/* Preferences Component */}
@@ -293,6 +298,7 @@ const AccountScreen: React.FC = () => {
           preferences={userData.preferences}
           onToggleNotifications={handleToggleNotifications}
           onToggleEmailUpdates={handleToggleEmailUpdates}
+          showCollapsed={true}
         />
 
         {/* Action Buttons */}

@@ -57,8 +57,9 @@ Preferred communication style: Simple, everyday language.
 ### Account Page Layout Update (July 26, 2025)
 - Reorganized account page component order per user request
 - Moved Saved Cards component above Billing component
-- Maintained all functionality while improving layout flow
-- User preference: Saved Cards should appear before Billing section
+- Configured default component visibility: only Achievements expanded on page load
+- All other components (Personal Info, Saved Cards, Billing, Preferences) start collapsed
+- Maintained all functionality while improving layout flow and user experience
 
 ### Project Migration (July 13, 2025)
 - Successfully migrated project from Replit Agent to Replit environment
