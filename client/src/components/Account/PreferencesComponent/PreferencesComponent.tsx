@@ -109,7 +109,7 @@ const PreferencesComponent: React.FC<PreferencesComponentProps> = ({
                 className="absolute"
               />
             </div>
-          </div></div>
+          </div>
         </div>
       )}
     </div>
