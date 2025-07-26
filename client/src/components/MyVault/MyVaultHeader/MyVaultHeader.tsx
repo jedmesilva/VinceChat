@@ -21,6 +21,7 @@ const MyVaultHeader: React.FC<MyVaultHeaderProps> = ({
         vaultName="Meu Cofre"
         vaultIcon={Lock}
         chatLabel="Gerencie seus itens"
+        backgroundColor="bg-gray-900"
         showAbandonButton={false}
         showChatToggle={showChatToggle}
         onChatToggle={onChatToggle}
