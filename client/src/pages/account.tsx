@@ -1,13 +1,17 @@
 import React, { useState } from 'react';
-import AccountHeader from '@/components/Account/AccountHeader/AccountHeader';
-import ProfileHeader from '@/components/Account/ProfileHeader/ProfileHeader';
-import PersonalInfo from '@/components/Account/PersonalInfo/PersonalInfo';
-import BillingSection from '@/components/Account/BillingSection/BillingSection';
-import SavedCards from '@/components/Account/SavedCards/SavedCards';
-import Achievements from '@/components/Account/Achievements/Achievements';
-import Preferences from '@/components/Account/Preferences/Preferences';
-import ActionButtons from '@/components/Account/ActionButtons/ActionButtons';
-import UserUpdateForm from '@/components/Account/UserUpdateForm/UserUpdateForm';
+import { 
+  ArrowLeft,
+  Edit,
+  LogOut
+} from 'lucide-react';
+
+// Importação dos componentes modulares
+import UserCard from '../components/Account/UserCard/UserCard';
+import PersonalInfoComponent from '../components/Account/PersonalInfoComponent/PersonalInfoComponent';
+import AchievementsComponent from '../components/Account/AchievementsComponent/AchievementsComponent';
+import SavedCard from '../components/Account/SavedCard/SavedCard';
+import BillingComponent from '../components/Account/BillingComponent/BillingComponent';
+import PreferencesComponent from '../components/Account/PreferencesComponent/PreferencesComponent';
 
 interface UserData {
   id: string;
@@ -54,7 +58,7 @@ interface UserData {
   }>;
 }
 
-const AccountPage: React.FC = () => {
+const AccountScreen: React.FC = () => {
   const [userData, setUserData] = useState<UserData>({
     id: 'user123',
     name: 'João Lukas',
@@ -166,20 +170,12 @@ const AccountPage: React.FC = () => {
     ]
   });
 
-  // Estados para controlar seções expandidas
-  const [showPersonalInfo, setShowPersonalInfo] = useState(true);
-  const [showAchievements, setShowAchievements] = useState(true);
-  const [showBilling, setShowBilling] = useState(true);
-  const [showCards, setShowCards] = useState(true);
-  const [showUpdateForm, setShowUpdateForm] = useState(false);
-
-  // Handlers
   const handleBack = () => {
     alert('Voltar para o menu principal');
   };
 
   const handleEditProfile = () => {
-    setShowUpdateForm(true);
+    alert('Editar perfil - Abrir modal de edição');
   };
 
   const handleLogout = () => {
@@ -231,15 +227,6 @@ const AccountPage: React.FC = () => {
     }));
   };
 
-  const handleUpdateSubmit = (updatedData: any) => {
-    setUserData(prev => ({
-      ...prev,
-      name: updatedData.name,
-      email: updatedData.email
-    }));
-    setShowUpdateForm(false);
-  };
-
   return (
     <div className="min-h-screen bg-gray-900 relative overflow-hidden">
       {/* Background */}
@@ -249,72 +236,86 @@ const AccountPage: React.FC = () => {
         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent transform skew-x-12" />
       </div>
 
-      {/* Content */}
+      {/* Header */}
       <div className="relative z-10 p-4">
-        <AccountHeader onBack={handleBack} />
-        
-        <ProfileHeader 
-          name={userData.name}
-          email={userData.email}
-          avatar={userData.avatar}
-          titles={userData.titles}
+        <div className="flex items-center justify-between mb-6">
+          <button
+            onClick={handleBack}
+            className="w-10 h-10 bg-slate-800/80 hover:bg-slate-700/80 rounded-xl flex items-center justify-center transition-all duration-200 border border-slate-600/30"
+          >
+            <ArrowLeft className="w-5 h-5 text-slate-300" />
+          </button>
+          
+          <div className="flex-1">
+            <h1 className="text-2xl font-bold text-white text-left ml-4">Minha Conta</h1>
+          </div>
+        </div>
+
+        {/* Profile Header - UserCard Component */}
+        <UserCard 
+          userData={{
+            name: userData.name,
+            email: userData.email,
+            avatar: userData.avatar,
+            titles: userData.titles
+          }}
         />
 
-        <PersonalInfo 
-          email={userData.email}
-          phone={userData.phone}
-          joinDate={userData.joinDate}
-          isExpanded={showPersonalInfo}
-          onToggle={() => setShowPersonalInfo(!showPersonalInfo)}
+        {/* Personal Information Component */}
+        <PersonalInfoComponent 
+          userData={{
+            email: userData.email,
+            phone: userData.phone,
+            joinDate: userData.joinDate
+          }}
         />
 
-        <BillingSection 
+        {/* Billing Component */}
+        <BillingComponent 
           transactions={userData.transactions}
-          isExpanded={showBilling}
-          onToggle={() => setShowBilling(!showBilling)}
         />
 
-        <SavedCards 
-          cards={userData.savedCards}
-          isExpanded={showCards}
-          onToggle={() => setShowCards(!showCards)}
+        {/* Saved Cards Component */}
+        <SavedCard 
+          savedCards={userData.savedCards}
           onAddCard={handleAddCard}
           onRemoveCard={handleRemoveCard}
           onSetDefaultCard={handleSetDefaultCard}
         />
 
-        <Achievements 
+        {/* Achievements Component */}
+        <AchievementsComponent 
           achievements={userData.achievements}
-          isExpanded={showAchievements}
-          onToggle={() => setShowAchievements(!showAchievements)}
         />
 
-        <Preferences 
+        {/* Preferences Component */}
+        <PreferencesComponent 
           preferences={userData.preferences}
           onToggleNotifications={handleToggleNotifications}
           onToggleEmailUpdates={handleToggleEmailUpdates}
         />
 
-        <ActionButtons 
-          onEditProfile={handleEditProfile}
-          onLogout={handleLogout}
-        />
+        {/* Action Buttons */}
+        <div className="space-y-3">
+          <button
+            onClick={handleEditProfile}
+            className="w-full flex items-center justify-center space-x-2 py-3 bg-violet-500/20 hover:bg-violet-500/30 rounded-xl border border-violet-400/30 transition-all duration-200"
+          >
+            <Edit className="w-5 h-5 text-violet-400" />
+            <span className="text-white font-medium">Atualizar Dados</span>
+          </button>
+          
+          <button
+            onClick={handleLogout}
+            className="w-full flex items-center justify-center space-x-2 py-3 bg-red-500/20 hover:bg-red-500/30 rounded-xl border border-red-400/30 transition-all duration-200"
+          >
+            <LogOut className="w-5 h-5 text-red-400" />
+            <span className="text-red-400 font-medium">Sair da Conta</span>
+          </button>
+        </div>
       </div>
-
-      {/* Modal de atualização */}
-      {showUpdateForm && (
-        <UserUpdateForm 
-          currentUser={{
-            name: userData.name,
-            email: userData.email,
-            nickname: ''
-          }}
-          onUpdateSubmit={handleUpdateSubmit}
-          onClose={() => setShowUpdateForm(false)}
-        />
-      )}
     </div>
   );
 };
 
-export default AccountPage;
+export default AccountScreen;
