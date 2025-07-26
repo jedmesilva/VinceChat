@@ -52,7 +52,7 @@ const PasswordFormUpdate: React.FC<PasswordFormUpdateProps> = ({
 
   const [errors, setErrors] = useState<Record<string, string>>({});
 
-  const handlePasswordChange = (field: keyof PasswordFormData, value: string) => {
+  const handlePasswordChange = (field: keyof PasswordFormUpdateData, value: string) => {
     setPasswordData(prev => ({ ...prev, [field]: value }));
     
     // Limpar erro quando o usuário começa a digitar
@@ -154,9 +154,9 @@ const PasswordFormUpdate: React.FC<PasswordFormUpdateProps> = ({
       {/* Botão para Mostrar/Ocultar Formulário de Senha */}
       <button
         type="button"
-        onClick={togglePasswordForm}
+        onClick={togglePasswordFormUpdate}
         className={`w-full py-3 px-4 rounded-xl text-base font-medium transition-all duration-200 border-2 border-dashed ${
-          showPasswordForm 
+          showPasswordFormUpdate 
             ? 'border-violet-500 bg-violet-500/10 text-violet-400' 
             : 'border-slate-600 bg-slate-700/50 text-slate-400 hover:border-slate-500 hover:text-slate-300'
         }`}
