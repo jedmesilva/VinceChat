@@ -75,38 +75,38 @@ const PreferencesComponent: React.FC<PreferencesComponentProps> = ({
       
       {showPreferences && (
         <div className="px-4 pb-4 space-y-4">
-          <div className="relative p-3 bg-slate-700/30 rounded-xl hover:bg-slate-700/50 transition-colors pr-16">
-            <div className="flex items-center space-x-3 mr-4">
+          <div className="flex items-center justify-between p-3 bg-slate-700/30 rounded-xl hover:bg-slate-700/50 transition-colors min-h-[72px]">
+            <div className="flex items-center space-x-3 flex-1 min-w-0">
               <Bell className="w-5 h-5 text-slate-400 flex-shrink-0" />
-              <div>
+              <div className="flex-1 min-w-0">
                 <div className="text-sm font-medium text-white">Notificações</div>
                 <div className="text-xs text-slate-400">Receber notificações push</div>
               </div>
             </div>
-            <div className="absolute right-3 top-1/2 -translate-y-1/2" style={{ width: '44px', height: '24px' }}>
+            <div className="flex-shrink-0 ml-4">
               <Switch
                 checked={localPreferences.notifications}
                 onCheckedChange={handleToggleNotifications}
-                style={{ width: '44px', height: '24px' }}
-                className="absolute"
+                className="!w-11 !h-6"
+                style={{ minWidth: '44px', minHeight: '24px', width: '44px', height: '24px' }}
               />
             </div>
           </div>
           
-          <div className="relative p-3 bg-slate-700/30 rounded-xl hover:bg-slate-700/50 transition-colors pr-16">
-            <div className="flex items-center space-x-3 mr-4">
+          <div className="flex items-center justify-between p-3 bg-slate-700/30 rounded-xl hover:bg-slate-700/50 transition-colors min-h-[72px]">
+            <div className="flex items-center space-x-3 flex-1 min-w-0">
               <Mail className="w-5 h-5 text-slate-400 flex-shrink-0" />
-              <div>
+              <div className="flex-1 min-w-0">
                 <div className="text-sm font-medium text-white">Email Updates</div>
                 <div className="text-xs text-slate-400">Receber atualizações por email</div>
               </div>
             </div>
-            <div className="absolute right-3 top-1/2 -translate-y-1/2" style={{ width: '44px', height: '24px' }}>
+            <div className="flex-shrink-0 ml-4">
               <Switch
                 checked={localPreferences.emailUpdates}
                 onCheckedChange={handleToggleEmailUpdates}
-                style={{ width: '44px', height: '24px' }}
-                className="absolute"
+                className="!w-11 !h-6"
+                style={{ minWidth: '44px', minHeight: '24px', width: '44px', height: '24px' }}
               />
             </div>
           </div>
