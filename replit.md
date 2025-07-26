@@ -59,6 +59,7 @@ Preferred communication style: Simple, everyday language.
 - Moved Saved Cards component above Billing component
 - Configured default component visibility: only Achievements expanded on page load
 - All other components (Personal Info, Saved Cards, Billing, Preferences) start collapsed
+- Updated card selection button text from "Padrão" to "Selecionar" for better UX clarity
 - Maintained all functionality while improving layout flow and user experience
 
 ### Project Migration (July 13, 2025)

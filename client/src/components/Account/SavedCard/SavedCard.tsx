@@ -95,7 +95,7 @@ const SavedCards: React.FC<SavedCardsProps> = ({
                 onClick={() => onSetDefaultCard(card.id)}
                 className="px-3 py-1 bg-violet-500/20 text-violet-300 rounded-lg text-xs font-medium hover:bg-violet-500/30 transition-colors"
               >
-                Padrão
+                Selecionar
               </button>
             )}
             {onRemoveCard && (
