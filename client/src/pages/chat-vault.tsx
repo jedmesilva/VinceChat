@@ -261,7 +261,7 @@ const ChatVaultPage: React.FC = () => {
               }}
               onBack={handleBackToChat}
               timerLabel="Cofre aberto"
-              closeButtonText="Voltar ao Chat"
+              closeButtonText="Sair do cofre"
               instructionText="Mantenha pressionado por 3 segundos para saquear o item"
             />
           )}
