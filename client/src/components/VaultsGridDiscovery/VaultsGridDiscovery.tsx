@@ -389,8 +389,8 @@ const VaultGrid: React.FC<VaultGridProps> = ({
       {title && (
         <div className="relative z-10 p-4">
           <div className="flex items-center gap-3 mb-6">
-            <div className="w-7 h-7 bg-violet-500 rounded-lg flex items-center justify-center flex-shrink-0">
-              <Target className="h-4 w-4 text-white" />
+            <div className="w-9 h-9 bg-violet-500 rounded-xl flex items-center justify-center flex-shrink-0">
+              <Lock className="h-5 w-5 text-white" />
             </div>
             <h1 className="text-2xl font-bold text-white leading-tight">
               {title}
