@@ -86,13 +86,15 @@ const PreferencesComponent: React.FC<PreferencesComponentProps> = ({
             </div>
             <button
               onClick={handleToggleNotifications}
-              className={`relative w-12 h-6 rounded-full transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-violet-400 focus:ring-opacity-50 flex-shrink-0 ${
+              className={`relative inline-flex h-6 w-12 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-offset-2 ${
                 localPreferences.notifications ? 'bg-violet-500' : 'bg-slate-600'
               }`}
             >
-              <div className={`absolute top-0.5 w-5 h-5 bg-white rounded-full transform transition-transform duration-200 ${
-                localPreferences.notifications ? 'translate-x-6' : 'translate-x-0.5'
-              }`} />
+              <span
+                className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${
+                  localPreferences.notifications ? 'translate-x-5' : 'translate-x-0'
+                }`}
+              />
             </button>
           </div>
           
@@ -106,13 +108,15 @@ const PreferencesComponent: React.FC<PreferencesComponentProps> = ({
             </div>
             <button
               onClick={handleToggleEmailUpdates}
-              className={`relative w-12 h-6 rounded-full transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-violet-400 focus:ring-opacity-50 flex-shrink-0 ${
+              className={`relative inline-flex h-6 w-12 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-offset-2 ${
                 localPreferences.emailUpdates ? 'bg-violet-500' : 'bg-slate-600'
               }`}
             >
-              <div className={`absolute top-0.5 w-5 h-5 bg-white rounded-full transform transition-transform duration-200 ${
-                localPreferences.emailUpdates ? 'translate-x-6' : 'translate-x-0.5'
-              }`} />
+              <span
+                className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${
+                  localPreferences.emailUpdates ? 'translate-x-5' : 'translate-x-0'
+                }`}
+              />
             </button>
           </div>
         </div>
