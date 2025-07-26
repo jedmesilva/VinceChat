@@ -87,7 +87,7 @@ const PreferencesComponent: React.FC<PreferencesComponentProps> = ({
               <Switch
                 checked={localPreferences.notifications}
                 onCheckedChange={handleToggleNotifications}
-                className="!w-11 !h-6"
+                className="!w-11 !h-6 [&>span]:bg-white [&>span]:border-white"
                 style={{ minWidth: '44px', minHeight: '24px', width: '44px', height: '24px' }}
               />
             </div>
@@ -105,7 +105,7 @@ const PreferencesComponent: React.FC<PreferencesComponentProps> = ({
               <Switch
                 checked={localPreferences.emailUpdates}
                 onCheckedChange={handleToggleEmailUpdates}
-                className="!w-11 !h-6"
+                className="!w-11 !h-6 [&>span]:bg-white [&>span]:border-white"
                 style={{ minWidth: '44px', minHeight: '24px', width: '44px', height: '24px' }}
               />
             </div>
