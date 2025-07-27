@@ -251,32 +251,13 @@ const VaultCard: React.FC<VaultCardProps> = React.memo(({ vault, onVaultClick, i
           <div className="flex-1 flex flex-col">
             {vault.itemsVisible === false ? (
               // Versão misteriosa
-              <div className="flex flex-col h-full justify-between space-y-3">
+              <div className="flex flex-col h-full justify-center">
                 <div className="flex items-center justify-center p-6 bg-slate-600/20 rounded-xl border-2 border-dashed border-slate-500/40">
                   <div className="text-center">
                     <HelpCircle className="h-8 w-8 text-slate-400 mx-auto mb-2" />
                     <p className="text-sm text-slate-400 mb-1">Conteúdo Desconhecido</p>
                     <p className="text-xs text-slate-500">Os itens serão revelados ao abrir o cofre</p>
                   </div>
-                </div>
-                
-                <div className="grid grid-cols-3 gap-2">
-                  {[1, 2, 3].map((index) => (
-                    <div 
-                      key={index}
-                      className="flex items-center justify-center p-3 bg-slate-600/20 rounded-lg border border-slate-500/30"
-                    >
-                      <div className="w-6 h-6 bg-slate-500/30 rounded-full flex items-center justify-center">
-                        <div className="w-2 h-2 bg-slate-400 rounded-full animate-pulse" />
-                      </div>
-                    </div>
-                  ))}
-                </div>
-                
-                <div className="text-center">
-                  <span className="text-xs text-slate-500 px-2 py-1 bg-slate-600/20 rounded-full">
-                    ??? itens misteriosos
-                  </span>
                 </div>
               </div>
             ) : (
