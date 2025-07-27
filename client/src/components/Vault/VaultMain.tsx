@@ -231,21 +231,7 @@ const VaultMain: React.FC<VaultMainProps> = ({
 
       {/* Main Content */}
       <div className="px-4 pb-4">
-        {/* Instruction Card */}
-        {items.length > 0 && (
-          <div className="bg-gradient-to-r from-violet-500/10 to-purple-500/10 backdrop-blur-sm rounded-2xl p-4 mb-6 border border-violet-500/20">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-violet-500/20 rounded-full flex items-center justify-center flex-shrink-0">
-                <Target className="h-5 w-5 text-violet-400" />
-              </div>
-              <div>
-                <p className="text-slate-300 text-sm">
-                  {instructionText}
-                </p>
-              </div>
-            </div>
-          </div>
-        )}
+        
 
         {/* Items Grid */}
         {items.length > 0 && (
