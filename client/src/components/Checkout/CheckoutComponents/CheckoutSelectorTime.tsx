@@ -6,7 +6,7 @@ interface CheckoutSelectorTimeProps {
   className?: string;
 }
 
-const CheckoutSelectorTime: React.FC<CheckoutProps> = ({ onPurchase, className = '' }) => {
+const CheckoutSelectorTime: React.FC<CheckoutSelectorTimeProps> = ({ onPurchase, className = '' }) => {
   const [selectedBlocks, setSelectedBlocks] = useState(1);
   const [isPressed, setIsPressed] = useState(false);
   const minutesPerBlock = 2.5;

@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { QrCode, Copy, Clock, CheckCircle, AlertCircle, CreditCard, RefreshCw, X } from 'lucide-react';
 
 interface PaymentConfirmationProps {
+  selectedTime?: string;
+  totalPrice?: number;
   paymentData?: {
     method: 'card' | 'pix';
     amount: number;
@@ -13,14 +15,18 @@ interface PaymentConfirmationProps {
   onPaymentConfirmed?: () => void;
   onPaymentFailed?: () => void;
   onCancel?: () => void;
+  onClose?: () => void;
   className?: string;
 }
 
 const PaymentConfirmation: React.FC<PaymentConfirmationProps> = ({
+  selectedTime,
+  totalPrice,
   paymentData,
   onPaymentConfirmed,
   onPaymentFailed,
   onCancel,
+  onClose,
   className = ''
 }) => {
   // Dados de teste padrão caso não sejam fornecidos

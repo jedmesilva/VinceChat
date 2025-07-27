@@ -2,12 +2,24 @@ import React, { useState } from 'react';
 import { CreditCard, Smartphone, User, Calendar, Lock, QrCode, CheckCircle, AlertCircle, Shield } from 'lucide-react';
 
 interface PaymentFormProps {
+  selectedTime?: string;
+  totalPrice?: number;
   amount?: number;
+  onPaymentCompleted?: () => void;
   onPaymentSubmit?: (paymentData: any) => void;
+  onBack?: () => void;
   className?: string;
 }
 
-const PaymentForm: React.FC<PaymentFormProps> = ({ amount = 299.99, onPaymentSubmit, className = '' }) => {
+const PaymentForm: React.FC<PaymentFormProps> = ({ 
+  selectedTime, 
+  totalPrice, 
+  amount = 299.99, 
+  onPaymentCompleted, 
+  onPaymentSubmit, 
+  onBack,
+  className = '' 
+}) => {
   const [paymentMethod, setPaymentMethod] = useState<'card' | 'pix'>('card');
   const [cardData, setCardData] = useState({
     number: '',
