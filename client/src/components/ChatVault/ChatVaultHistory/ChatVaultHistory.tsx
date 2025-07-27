@@ -6,6 +6,7 @@ import {
   Crown,
   Brain
 } from 'lucide-react';
+import VaultActivityMain, { VaultActivity } from '../VaultActivity/VaultActivityMain';
 
 interface Message {
   id: string;
@@ -21,6 +22,7 @@ interface Message {
 
 interface ChatVaultHistoryProps {
   messages: Message[];
+  activities?: VaultActivity[];
   emptyStateText?: string;
   className?: string;
 }
@@ -193,6 +195,7 @@ const ChatMessage: React.FC<{ message: Message }> = ({ message }) => {
 
 const ChatVaultHistory: React.FC<ChatVaultHistoryProps> = ({ 
   messages, 
+  activities = [],
   emptyStateText = "Inicie uma conversa para convencer a IA",
   className = ""
 }) => {
@@ -204,11 +207,35 @@ const ChatVaultHistory: React.FC<ChatVaultHistoryProps> = ({
 
   useEffect(() => {
     scrollToBottom();
-  }, [messages]);
+  }, [messages, activities]);
+
+  // Combina mensagens e atividades, ordenando por timestamp
+  const getAllItems = () => {
+    const allItems: Array<{ type: 'message'; data: Message } | { type: 'activity'; data: VaultActivity }> = [];
+    
+    // Adiciona mensagens
+    messages.forEach(msg => {
+      allItems.push({ type: 'message', data: msg });
+    });
+    
+    // Adiciona atividades
+    activities.forEach(activity => {
+      allItems.push({ type: 'activity', data: activity });
+    });
+    
+    // Ordena por timestamp
+    return allItems.sort((a, b) => {
+      const timestampA = a.type === 'message' ? a.data.timestamp : a.data.timestamp;
+      const timestampB = b.type === 'message' ? b.data.timestamp : b.data.timestamp;
+      return timestampA.getTime() - timestampB.getTime();
+    });
+  };
+
+  const allItems = getAllItems();
 
   return (
     <div className={`h-full overflow-y-auto px-4 py-6 space-y-6 chat-history ${className}`}>
-      {messages.length === 0 ? (
+      {allItems.length === 0 ? (
         <div className="flex items-center justify-center h-full">
           <div className="text-center">
             <div className="w-16 h-16 bg-slate-700 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -221,9 +248,13 @@ const ChatVaultHistory: React.FC<ChatVaultHistoryProps> = ({
         </div>
       ) : (
         <>
-          {messages.map((message) => (
-            <ChatMessage key={message.id} message={message} />
-          ))}
+          {allItems.map((item, index) => {
+            if (item.type === 'message') {
+              return <ChatMessage key={`msg-${item.data.id}`} message={item.data} />;
+            } else {
+              return <VaultActivityMain key={`activity-${item.data.id}`} activity={item.data} />;
+            }
+          })}
           <div ref={messagesEndRef} />
         </>
       )}

@@ -10,6 +10,16 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes
 
+### VaultActivity System Implementation (July 27, 2025)
+- Criado sistema centralizado VaultActivityMain para componentes de atividade do chat
+- Substituído importações múltiplas por um único componente coordenador
+- Implementadas interfaces TypeScript para type safety completo
+- Sistema suporta 4 tipos: vault_opened, vault_failed, item_looted, offensive_ended
+- Integrado diretamente no histórico do chat (ChatVaultHistory)
+- Criados utilitários VaultActivityFactory para criação fácil de atividades
+- Histórico combina mensagens e atividades ordenadas por timestamp
+- Documentação completa com exemplos de uso
+
 ### Masonry Grid Implementation (July 27, 2025)
 - Implementado sistema Masonry para resolver problemas de espaçamento desigual entre cards
 - Substituído CSS Grid tradicional por react-masonry-css para layout dinâmico
