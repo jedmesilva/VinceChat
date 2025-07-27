@@ -326,7 +326,7 @@ const VaultMain: React.FC<VaultMainProps> = ({
               return (
                 <div
                   key={item.id}
-                  className={`relative ${isClaimed ? 'bg-slate-800/30' : 'bg-slate-800/90'} backdrop-blur-sm rounded-3xl p-6 border-2 ${isClaimed ? 'border-slate-600/30' : rarity.border} ${isClaimed ? '' : 'hover:scale-105'} transition-all duration-300 ${isClaimed ? 'cursor-not-allowed' : 'cursor-pointer'} group ${isClaimed ? 'shadow-slate-500/10' : rarity.glow} select-none`}
+                  className={`relative ${isClaimed ? 'bg-slate-800/30' : 'bg-slate-800/90'} backdrop-blur-sm rounded-3xl p-6 border-2 ${isClaimed ? 'border-slate-600/30' : rarity.border} transition-all duration-300 ${isClaimed ? 'cursor-not-allowed' : 'cursor-pointer'} group ${isClaimed ? 'shadow-slate-500/10' : rarity.glow} select-none`}
                   onMouseDown={isClaimed ? undefined : (e) => handleMouseDown(item.id, e)}
                   onMouseMove={isClaimed ? undefined : handleMouseMove}
                   onMouseUp={isClaimed ? undefined : handleMouseUp}
