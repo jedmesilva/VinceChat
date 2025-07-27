@@ -28,7 +28,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
     cvv: ''
   });
   const [pixData, setPixData] = useState({});
-  const [saveCard, setSaveCard] = useState(false);
+  const [saveCard, setSaveCard] = useState(true);
   const [isProcessing, setIsProcessing] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
 
@@ -379,29 +379,42 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
             </>
           )}
 
-          {/* Botão de Pagamento */}
-          <button
-            type="button"
-            onClick={handleSubmit}
-            disabled={isProcessing}
-            className={`w-full py-3 px-6 rounded-xl text-base font-bold transition-all duration-200 shadow-lg transform focus:outline-none focus:ring-2 focus:ring-violet-500/50 ${
-              isProcessing
-                ? 'bg-slate-600 text-slate-400 cursor-not-allowed'
-                : 'bg-violet-500 hover:bg-violet-400 active:bg-violet-600 text-white shadow-violet-500/25 hover:scale-105 active:scale-95'
-            }`}
-          >
-            {isProcessing ? (
-              <div className="flex items-center justify-center gap-2">
-                <div className="w-5 h-5 border-2 border-slate-400 border-t-transparent rounded-full animate-spin"></div>
-                Processando...
-              </div>
-            ) : (
-              <div className="flex items-center justify-center gap-2">
-                <CheckCircle className="h-5 w-5" />
-                {paymentMethod === 'card' ? 'Pagar com Cartão' : 'Gerar PIX'}
-              </div>
-            )}
-          </button>
+          {/* Botões de Ação */}
+          <div className="flex gap-3">
+            {/* Botão Voltar */}
+            <button
+              type="button"
+              onClick={onBack}
+              disabled={isProcessing}
+              className="flex-1 py-3 px-4 bg-slate-700 hover:bg-slate-600 active:bg-slate-800 text-slate-300 hover:text-white rounded-xl text-base font-medium transition-all duration-200 shadow-lg transform focus:outline-none focus:ring-2 focus:ring-slate-500/50 hover:scale-105 active:scale-95"
+            >
+              Voltar
+            </button>
+
+            {/* Botão de Pagamento */}
+            <button
+              type="button"
+              onClick={handleSubmit}
+              disabled={isProcessing}
+              className={`flex-[2] py-3 px-6 rounded-xl text-base font-bold transition-all duration-200 shadow-lg transform focus:outline-none focus:ring-2 focus:ring-violet-500/50 ${
+                isProcessing
+                  ? 'bg-slate-600 text-slate-400 cursor-not-allowed'
+                  : 'bg-violet-500 hover:bg-violet-400 active:bg-violet-600 text-white shadow-violet-500/25 hover:scale-105 active:scale-95'
+              }`}
+            >
+              {isProcessing ? (
+                <div className="flex items-center justify-center gap-2">
+                  <div className="w-5 h-5 border-2 border-slate-400 border-t-transparent rounded-full animate-spin"></div>
+                  Processando...
+                </div>
+              ) : (
+                <div className="flex items-center justify-center gap-2">
+                  <CheckCircle className="h-5 w-5" />
+                  {paymentMethod === 'card' ? 'Pagar com Cartão' : 'Gerar PIX'}
+                </div>
+              )}
+            </button>
+          </div>
         </div>
       </div>
     </div>
