@@ -29,7 +29,7 @@ const VaultHeaderComponent: React.FC<VaultHeaderComponentProps> = ({
   onVaultToggle = () => {}
 }) => {
   return (
-    <div className={`${backgroundColor} border-b ${borderColor}`}>
+    <div className={`${backgroundColor}`}>
       <div className="px-4 py-3">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
