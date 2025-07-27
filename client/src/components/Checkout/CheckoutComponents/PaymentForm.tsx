@@ -386,7 +386,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
               type="button"
               onClick={onBack}
               disabled={isProcessing}
-              className="flex-1 py-3 px-4 bg-slate-700 hover:bg-slate-600 active:bg-slate-800 text-slate-300 hover:text-white rounded-xl text-base font-medium transition-all duration-200 shadow-lg transform focus:outline-none focus:ring-2 focus:ring-slate-500/50 hover:scale-105 active:scale-95"
+              className="flex-1 py-3 px-4 bg-slate-700 hover:bg-slate-600 active:bg-slate-800 text-slate-300 hover:text-white rounded-xl text-base font-medium transition-all duration-200 transform focus:outline-none focus:ring-2 focus:ring-slate-500/50 hover:scale-105 active:scale-95"
             >
               Voltar
             </button>
@@ -396,10 +396,10 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
               type="button"
               onClick={handleSubmit}
               disabled={isProcessing}
-              className={`flex-[2] py-3 px-6 rounded-xl text-base font-bold transition-all duration-200 shadow-lg transform focus:outline-none focus:ring-2 focus:ring-violet-500/50 ${
+              className={`flex-[2] py-3 px-6 rounded-xl text-base font-bold transition-all duration-200 transform focus:outline-none focus:ring-2 focus:ring-violet-500/50 ${
                 isProcessing
                   ? 'bg-slate-600 text-slate-400 cursor-not-allowed'
-                  : 'bg-violet-500 hover:bg-violet-400 active:bg-violet-600 text-white shadow-violet-500/25 hover:scale-105 active:scale-95'
+                  : 'bg-violet-500 hover:bg-violet-400 active:bg-violet-600 text-white hover:scale-105 active:scale-95'
               }`}
             >
               {isProcessing ? (
