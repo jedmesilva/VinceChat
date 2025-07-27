@@ -353,10 +353,13 @@ const VaultMain: React.FC<VaultMainProps> = ({
 
                   {/* Item info */}
                   <div className={`relative z-10 text-center ${isClaimed ? 'opacity-30' : ''}`}>
-                    <h3 className="text-xl font-bold text-white mb-2">{item.name}</h3>
-                    <div className="text-2xl font-bold text-violet-400 mb-3">
-                      R$ {item.value.toLocaleString()}
-                    </div>
+                    {item.type === 'money' ? (
+                      <h3 className="text-2xl font-bold text-violet-400 mb-5">
+                        R$ {item.value.toLocaleString()}
+                      </h3>
+                    ) : (
+                      <h3 className="text-xl font-bold text-white mb-5">{item.name}</h3>
+                    )}
                     <p className="text-slate-400 text-sm mb-4 line-clamp-2">
                       {item.description}
                     </p>
