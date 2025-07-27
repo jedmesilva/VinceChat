@@ -4,6 +4,7 @@ import ChatVaultHeader from './ChatVaultHeader/ChatVaultHeader';
 import ChatVaultMessageInput from './ChatVaultMessageInput/ChatVaultMessageInput';
 import ChatVaultHistory from './ChatVaultHistory/ChatVaultHistory';
 import VaultSectionChat from '../VaultSectionChat/VaultSectionChat';
+import AbandonConfirmationModal from './AbandonConfirmationModal/AbandonConfirmationModal';
 
 interface Message {
   id: string;
@@ -48,6 +49,7 @@ const MainChatVault: React.FC<MainChatVaultProps> = ({
 }) => {
   const [messages, setMessages] = useState<Message[]>(initialMessages);
   const [currentConviction, setCurrentConviction] = useState(conviction);
+  const [showAbandonModal, setShowAbandonModal] = useState(false);
 
   const handleSendMessage = (message: string) => {
     const newUserMessage: Message = {
@@ -103,6 +105,10 @@ const MainChatVault: React.FC<MainChatVaultProps> = ({
   };
 
   const handleAbandon = () => {
+    setShowAbandonModal(true);
+  };
+
+  const handleConfirmAbandon = () => {
     if (onAbandon) {
       onAbandon();
     } else {
@@ -147,7 +153,13 @@ const MainChatVault: React.FC<MainChatVaultProps> = ({
         />
       </div>
 
-
+      {/* Modal de confirmação de abandono */}
+      <AbandonConfirmationModal
+        isOpen={showAbandonModal}
+        onClose={() => setShowAbandonModal(false)}
+        onConfirm={handleConfirmAbandon}
+        vaultName={vaultName}
+      />
     </div>
   );
 };
