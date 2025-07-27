@@ -224,7 +224,7 @@ const VaultDiscovery: React.FC = () => {
         `}>
           <div className="h-full overflow-y-auto">
             {/* Componente de caça de cofres no topo */}
-            <div className="p-4">
+            <div className="p-4 pt-8">
               <VaultHunting
                 onVaultFound={handleVaultFound}
                 onHuntComplete={handleHuntComplete}

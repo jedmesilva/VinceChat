@@ -112,7 +112,7 @@ const MyVaultMain: React.FC<MyVaultMainProps> = ({
   return (
     <div className="h-full bg-gray-900 flex flex-col">
       {/* Header */}
-      <div className="flex-shrink-0">
+      <div className="flex-shrink-0 pt-4">
         <MyVaultHeader 
           onChatToggle={onChatToggle}
           showChatToggle={showChatToggle}
