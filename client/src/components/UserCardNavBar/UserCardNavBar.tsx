@@ -53,7 +53,7 @@ const UserCardNavBar: React.FC<UserCardNavBarProps> = ({ userData, onDropdownTog
       className="flex items-center space-x-3 cursor-pointer hover:bg-slate-700/30 rounded-lg px-3 py-2 transition-all duration-200"
       onClick={onDropdownToggle}
     >
-      <div className="text-right flex-1">
+      <div className="text-right">
         <h3 className="text-sm font-semibold text-white truncate max-w-[120px]">{userData.name}</h3>
         <div className="flex items-center justify-end space-x-1 mt-1">
           {userData.titles.slice(0, 2).map((title: Title) => (
