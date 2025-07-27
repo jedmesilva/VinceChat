@@ -244,35 +244,35 @@ const VaultMain: React.FC<VaultMainProps> = ({
               // Configurações de raridade
               const rarityConfig = {
                 common: {
-                  color: 'from-slate-500 to-slate-600',
-                  border: 'border-slate-400/50',
-                  glow: 'shadow-slate-500/30',
-                  bg: 'bg-slate-500/10',
-                  text: 'text-slate-300',
+                  color: 'from-violet-400 to-violet-500',
+                  border: 'border-violet-400/30',
+                  glow: 'shadow-violet-500/20',
+                  bg: 'bg-violet-500/10',
+                  text: 'text-violet-300',
                   label: 'Comum'
                 },
                 rare: {
-                  color: 'from-blue-500 to-blue-600',
-                  border: 'border-blue-400/50',
-                  glow: 'shadow-blue-500/30',
-                  bg: 'bg-blue-500/10',
-                  text: 'text-blue-300',
+                  color: 'from-violet-500 to-violet-600',
+                  border: 'border-violet-400/40',
+                  glow: 'shadow-violet-500/25',
+                  bg: 'bg-violet-500/15',
+                  text: 'text-violet-300',
                   label: 'Raro'
                 },
                 epic: {
                   color: 'from-purple-500 to-purple-600',
                   border: 'border-purple-400/50',
                   glow: 'shadow-purple-500/30',
-                  bg: 'bg-purple-500/10',
+                  bg: 'bg-purple-500/20',
                   text: 'text-purple-300',
                   label: 'Épico'
                 },
                 legendary: {
-                  color: 'from-amber-400 to-yellow-500',
-                  border: 'border-yellow-400/50',
-                  glow: 'shadow-yellow-500/30',
-                  bg: 'bg-yellow-500/10',
-                  text: 'text-yellow-300',
+                  color: 'from-violet-600 to-purple-700',
+                  border: 'border-violet-400/60',
+                  glow: 'shadow-violet-500/40',
+                  bg: 'bg-violet-500/25',
+                  text: 'text-violet-200',
                   label: 'Lendário'
                 }
               };
@@ -282,8 +282,8 @@ const VaultMain: React.FC<VaultMainProps> = ({
                 money: {
                   icon: () => <svg className="h-8 w-8" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>,
                   label: 'Dinheiro',
-                  color: 'text-green-400',
-                  bg: 'bg-green-500/10'
+                  color: 'text-violet-400',
+                  bg: 'bg-violet-500/10'
                 },
                 product: {
                   icon: () => <svg className="h-8 w-8" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>,
@@ -294,14 +294,14 @@ const VaultMain: React.FC<VaultMainProps> = ({
                 voucher: {
                   icon: () => <svg className="h-8 w-8" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/></svg>,
                   label: 'Vale',
-                  color: 'text-orange-400',
-                  bg: 'bg-orange-500/10'
+                  color: 'text-violet-400',
+                  bg: 'bg-violet-500/10'
                 },
                 special: {
                   icon: () => <svg className="h-8 w-8" fill="currentColor" viewBox="0 0 24 24"><path d="M5 16L3 5l5.5 2L12 4l3.5 3L21 5l-2 11H5zm2.7-2h8.6l.9-5.4-2.1-.8L12 9l-3.1-1.2-2.1.8L7.7 14z"/></svg>,
                   label: 'Especial',
-                  color: 'text-yellow-400',
-                  bg: 'bg-yellow-500/10'
+                  color: 'text-violet-400',
+                  bg: 'bg-violet-500/10'
                 }
               };
 
