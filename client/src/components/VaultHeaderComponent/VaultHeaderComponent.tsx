@@ -35,7 +35,7 @@ const VaultHeaderComponent: React.FC<VaultHeaderComponentProps> = ({
           <div className="flex items-center gap-3">
             <div className="flex items-center gap-3">
               <div className="relative">
-                <div className="w-10 h-10 bg-violet-500 rounded-xl flex items-center justify-center shadow-lg shadow-violet-500/25">
+                <div className="w-10 h-10 bg-violet-500 rounded-xl flex items-center justify-center">
                   <VaultIcon className="h-6 w-6 text-white" />
                 </div>
               </div>
