@@ -201,12 +201,6 @@ const VaultItemCard: React.FC<VaultItemCardProps> = ({
           <span className={`px-3 py-1 rounded-lg ${typeConfig[item.type].bg} ${typeConfig[item.type].color} font-medium`}>
             {typeConfig[item.type].label}
           </span>
-
-          {item.vaultSource && (
-            <span className="text-slate-500">
-              • {item.vaultSource}
-            </span>
-          )}
         </div>
 
         {/* Descrição */}
