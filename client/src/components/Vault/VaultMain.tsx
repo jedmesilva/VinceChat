@@ -402,7 +402,7 @@ const VaultMain: React.FC<VaultMainProps> = ({
         {items.length === 0 && (
           <div className="text-center py-16">
             <div className="w-24 h-24 bg-slate-700/30 rounded-full flex items-center justify-center mx-auto mb-6">
-              <CheckCircle className="h-12 w-12 text-green-400" />
+              <Skull className="h-12 w-12 text-slate-400" />
             </div>
             <h3 className="text-2xl font-bold text-white mb-2">Cofre Saqueado!</h3>
             <p className="text-slate-400 text-lg">Você saqueou todos os itens deste cofre!</p>
