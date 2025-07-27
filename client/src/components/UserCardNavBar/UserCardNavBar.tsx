@@ -50,11 +50,11 @@ const UserCardNavBar: React.FC<UserCardNavBarProps> = ({ userData, onDropdownTog
 
   return (
     <div 
-      className="flex items-center space-x-3 cursor-pointer hover:bg-slate-700/30 rounded-lg px-3 py-2 transition-all duration-200"
+      className="flex items-center space-x-2 cursor-pointer hover:bg-slate-700/30 rounded-lg px-3 py-2 transition-all duration-200"
       onClick={onDropdownToggle}
     >
-      <div className="text-right">
-        <h3 className="text-sm font-semibold text-white truncate max-w-[120px]">{userData.name}</h3>
+      <div className="text-right min-w-0">
+        <h3 className="text-sm font-semibold text-white truncate">{userData.name}</h3>
         <div className="flex items-center justify-end space-x-1 mt-1">
           {userData.titles.slice(0, 2).map((title: Title) => (
             <div key={title.id} className={`flex items-center space-x-1 px-1.5 py-0.5 rounded text-xs font-medium border ${getTitleColor(title.type)}`}>
@@ -65,7 +65,7 @@ const UserCardNavBar: React.FC<UserCardNavBarProps> = ({ userData, onDropdownTog
         </div>
       </div>
       
-      <div className="relative">
+      <div className="relative flex-shrink-0">
         <div className="w-10 h-10 rounded-full bg-slate-600 flex items-center justify-center">
           {!imageError && userData.avatar ? (
             <img 
