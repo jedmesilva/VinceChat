@@ -123,13 +123,6 @@ const CheckoutSelectorTime: React.FC<CheckoutSelectorTimeProps> = ({ onPurchase,
               <Plus className="w-6 h-6 text-slate-300" />
             </button>
           </div>
-
-          <div className="text-center">
-            <div className="inline-flex items-center gap-2 text-slate-500 text-sm bg-slate-900/30 px-3 py-2 rounded-lg">
-              <Timer className="h-4 w-4" />
-              <span>Incrementos de {formatTimeShort(minutesPerBlock)} cada</span>
-            </div>
-          </div>
         </div>
 
         {/* Resumo - Seção secundária mas importante */}
@@ -140,15 +133,6 @@ const CheckoutSelectorTime: React.FC<CheckoutSelectorTimeProps> = ({ onPurchase,
           </h3>
           
           <div className="space-y-3">
-
-            
-            <div className="flex justify-between items-center text-sm">
-              <span className="text-slate-400">Valor por minuto:</span>
-              <span className="text-white font-medium">
-                R$ {(pricePerBlock / minutesPerBlock).toFixed(2)}
-              </span>
-            </div>
-            
             <div className="flex justify-between items-center text-sm">
               <span className="text-slate-400">Tempo total:</span>
               <span className="text-white font-medium">
