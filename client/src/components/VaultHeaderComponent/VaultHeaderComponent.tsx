@@ -39,7 +39,7 @@ const VaultHeaderComponent: React.FC<VaultHeaderComponentProps> = ({
                   <VaultIcon className="h-6 w-6 text-white" />
                 </div>
               </div>
-              
+
               <div className="flex flex-col">
                 <h2 className="text-lg font-bold text-white leading-tight">
                   {vaultName}
@@ -51,7 +51,7 @@ const VaultHeaderComponent: React.FC<VaultHeaderComponentProps> = ({
               </div>
             </div>
           </div>
-          
+
           {/* Botões do lado direito */}
           <div className="flex items-center gap-2">
             {/* Botão para alternar para Chat (apenas no MyVault no mobile) */}
