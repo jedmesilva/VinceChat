@@ -10,6 +10,15 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes
 
+### Masonry Grid Implementation (July 27, 2025)
+- Implementado sistema Masonry para resolver problemas de espaçamento desigual entre cards
+- Substituído CSS Grid tradicional por react-masonry-css para layout dinâmico
+- Cards agora se ajustam perfeitamente sem espaços vazios grandes entre diferentes alturas
+- Mantida responsividade completa: 4 colunas (xl), 3 colunas (lg), 2 colunas (md/sm), 1 coluna (mobile)
+- Adicionados estilos CSS customizados para espaçamento otimizado em diferentes breakpoints
+- Barra de rolagem da tela de cofres ocultada para melhor experiência visual
+- Solução permite expansão/retração dinâmica dos cards mantendo layout organizado
+
 ### VaultMain Scroll Fix (July 26, 2025)
 - Fixed VaultMain component scroll behavior to allow full page scrolling instead of just content area
 - Removed fixed header positioning to allow the vault header to scroll with content

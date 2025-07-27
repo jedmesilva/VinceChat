@@ -222,7 +222,7 @@ const VaultDiscovery: React.FC = () => {
           md:flex-1
           ${myVaultVisible ? 'hidden md:flex md:flex-col' : 'flex-1'}
         `}>
-          <div className="h-full overflow-y-auto">
+          <div className="h-full overflow-y-auto scrollbar-hide">
             {/* Componente de caça de cofres no topo */}
             <div className="p-4 pt-8">
               <VaultHunting
