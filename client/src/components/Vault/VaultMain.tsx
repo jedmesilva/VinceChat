@@ -364,20 +364,15 @@ const VaultMain: React.FC<VaultMainProps> = ({
                       {item.description}
                     </p>
 
-                    {/* Quantity and deadline */}
-                    <div className="flex items-center justify-between text-xs text-slate-500">
-                      {item.quantity && (
-                        <span>Qtd: {item.quantity}</span>
-                      )}
-                      {item.claimDeadline && (
-                        <div className="flex items-center gap-1">
-                          <svg className="h-3 w-3" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M16.2,16.2L11,13V7H12.5V12.2L17,14.9L16.2,16.2Z"/>
-                          </svg>
-                          <span>{item.claimDeadline}</span>
-                        </div>
-                      )}
-                    </div>
+                    {/* Deadline */}
+                    {item.claimDeadline && (
+                      <div className="flex items-center justify-center gap-1 text-xs text-slate-500">
+                        <svg className="h-3 w-3" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M16.2,16.2L11,13V7H12.5V12.2L17,14.9L16.2,16.2Z"/>
+                        </svg>
+                        <span>{item.claimDeadline}</span>
+                      </div>
+                    )}
                   </div>
 
                   {/* Claim Progress Indicator */}
