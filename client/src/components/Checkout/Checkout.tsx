@@ -62,7 +62,7 @@ const Checkout: React.FC<CheckoutProps> = ({ isOpen, onClose, onTimeAdded }) => 
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 overflow-y-auto">
+    <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 overflow-y-auto scrollbar-hide">
       <div className="min-h-full flex flex-col">
         {/* Header com botão de fechar - fixo no topo */}
         <div className="flex-shrink-0 flex justify-end p-4">
