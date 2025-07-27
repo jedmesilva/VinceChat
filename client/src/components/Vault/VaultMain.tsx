@@ -345,7 +345,7 @@ const VaultMain: React.FC<VaultMainProps> = ({
                   </div>
 
                   {/* Item icon */}
-                  <div className={`relative z-10 w-16 h-16 rounded-2xl ${typeInfo.bg} flex items-center justify-center mb-4 mx-auto ${isClaimed ? 'opacity-30' : 'group-hover:scale-110'} transition-transform`}>
+                  <div className={`relative z-10 w-16 h-16 rounded-2xl ${typeInfo.bg} flex items-center justify-center mb-4 mx-auto ${isClaimed ? 'opacity-30' : ''} transition-transform`}>
                     <div className={`${typeInfo.color} ${isClaimed ? 'opacity-30' : ''}`}>
                       <ItemIcon />
                     </div>
