@@ -257,3 +257,26 @@ html {
 ::-webkit-scrollbar-thumb:hover {
   background: hsl(263, 70%, 60%);
 }
+
+/* ===== MASONRY GRID STYLES ===== */
+.vault-masonry-grid {
+  display: flex;
+  margin-left: -24px; /* Gutter size offset - equivale a gap-6 (24px) */
+  width: auto;
+}
+
+.vault-masonry-grid-column {
+  padding-left: 24px; /* Gutter size - equivale a gap-6 (24px) */
+  background-clip: padding-box;
+}
+
+/* Breakpoint específico para dispositivos muito pequenos */
+@media (max-width: 480px) {
+  .vault-masonry-grid {
+    margin-left: -16px; /* Gutter menor para mobile - equivale a gap-4 (16px) */
+  }
+  
+  .vault-masonry-grid-column {
+    padding-left: 16px; /* Gutter menor para mobile - equivale a gap-4 (16px) */
+  }
+}

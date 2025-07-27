@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import Masonry from 'react-masonry-css';
 import { 
   Lock, 
   LockOpen, 
@@ -352,8 +353,14 @@ const VaultGrid: React.FC<VaultGridProps> = ({
   showBackground = true,
   className = ""
 }) => {
-  const gridCols = `grid-cols-1 sm:grid-cols-${gridConfig.cols?.sm || 2} md:grid-cols-${gridConfig.cols?.md || 2} lg:grid-cols-${gridConfig.cols?.lg || 3} xl:grid-cols-${gridConfig.cols?.xl || 4}`;
-  const gridGap = `gap-${gridConfig.gap || 6}`;
+  // Configuração do Masonry para diferentes breakpoints
+  const masonryBreakpointCols = {
+    default: gridConfig.cols?.xl || 4,    // xl: 4 colunas
+    1280: gridConfig.cols?.lg || 3,       // lg: 3 colunas
+    768: gridConfig.cols?.md || 2,        // md: 2 colunas  
+    640: gridConfig.cols?.sm || 2,        // sm: 2 colunas
+    480: 1                                // xs: 1 coluna
+  };
 
   return (
     <div className={`${showBackground ? 'min-h-screen bg-gray-900' : ''} relative overflow-hidden ${className}`}>
@@ -396,9 +403,13 @@ const VaultGrid: React.FC<VaultGridProps> = ({
               </p>
             </div>
           ) : (
-            <div className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 auto-rows-fr`}>
+            <Masonry
+              breakpointCols={masonryBreakpointCols}
+              className="vault-masonry-grid"
+              columnClassName="vault-masonry-grid-column"
+            >
               {vaults.map((vault, index) => (
-                <div className="w-full" key={vault.id}>
+                <div key={vault.id} className="mb-6 max-[480px]:mb-4">
                   <VaultCard 
                     vault={vault} 
                     onVaultClick={onVaultClick}
@@ -406,7 +417,7 @@ const VaultGrid: React.FC<VaultGridProps> = ({
                   />
                 </div>
               ))}
-            </div>
+            </Masonry>
           )}
         </div>
       </div>
