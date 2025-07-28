@@ -67,53 +67,31 @@ const Checkout: React.FC<CheckoutProps> = ({ isOpen, onClose, onTimeAdded }) => 
         <div className="w-full max-w-md relative">
           {/* Conteúdo dinâmico baseado no step */}
           {currentStep === 'time-selection' && (
-            <div className="relative">
-              {/* Botão de fechar integrado ao conteúdo */}
-              <button
-                onClick={handleClose}
-                className="absolute top-4 right-4 w-8 h-8 bg-slate-700/80 hover:bg-slate-600 rounded-full flex items-center justify-center text-slate-300 hover:text-white transition-all duration-200 z-20"
-              >
-                <X size={16} />
-              </button>
-              <CheckoutSelectorTime onPurchase={handleTimeSelected} className="w-full" />
-            </div>
+            <CheckoutSelectorTime 
+              onPurchase={handleTimeSelected} 
+              onClose={handleClose}
+              className="w-full" 
+            />
           )}
 
           {currentStep === 'payment' && (
-            <div className="relative">
-              {/* Botão de fechar integrado ao conteúdo */}
-              <button
-                onClick={handleClose}
-                className="absolute top-4 right-4 w-8 h-8 bg-slate-700/80 hover:bg-slate-600 rounded-full flex items-center justify-center text-slate-300 hover:text-white transition-all duration-200 z-20"
-              >
-                <X size={16} />
-              </button>
-              <PaymentForm 
-                selectedTime={selectedTime}
-                totalPrice={totalPrice}
-                onPaymentCompleted={handlePaymentCompleted}
-                onBack={() => setCurrentStep('time-selection')}
-                className="w-full"
-              />
-            </div>
+            <PaymentForm 
+              selectedTime={selectedTime}
+              totalPrice={totalPrice}
+              onPaymentCompleted={handlePaymentCompleted}
+              onBack={() => setCurrentStep('time-selection')}
+              onClose={handleClose}
+              className="w-full"
+            />
           )}
 
           {currentStep === 'confirmation' && (
-            <div className="relative">
-              {/* Botão de fechar integrado ao conteúdo */}
-              <button
-                onClick={handleClose}
-                className="absolute top-4 right-4 w-8 h-8 bg-slate-700/80 hover:bg-slate-600 rounded-full flex items-center justify-center text-slate-300 hover:text-white transition-all duration-200 z-20"
-              >
-                <X size={16} />
-              </button>
-              <PaymentConfirmation 
-                selectedTime={selectedTime}
-                totalPrice={totalPrice}
-                onClose={handleConfirmationClose}
-                className="w-full"
-              />
-            </div>
+            <PaymentConfirmation 
+              selectedTime={selectedTime}
+              totalPrice={totalPrice}
+              onClose={handleConfirmationClose}
+              className="w-full"
+            />
           )}
         </div>
       </div>
