@@ -11,7 +11,8 @@ import {
   Package,
   Shield,
   Zap,
-  Star
+  Star,
+  Skull
 } from 'lucide-react';
 
 interface VaultItem {
@@ -34,12 +35,33 @@ interface VaultItemCardProps {
   item: VaultItem;
   onItemClick?: (item: VaultItem) => void;
   className?: string;
+  // Props para funcionalidade de press-and-hold (usada no VaultMain)
+  onMouseDown?: (itemId: string, event: React.MouseEvent | React.TouchEvent) => void;
+  onMouseMove?: (event: React.MouseEvent | React.TouchEvent) => void;
+  onMouseUp?: () => void;
+  onTouchStart?: (itemId: string, event: React.TouchEvent) => void;
+  onTouchMove?: (event: React.TouchEvent) => void;
+  onTouchEnd?: () => void;
+  claimProgress?: number;
+  isBeingClaimed?: boolean;
+  isClaimed?: boolean;
+  showProgressBar?: boolean;
 }
 
 const VaultItemCard: React.FC<VaultItemCardProps> = ({
   item,
   onItemClick,
-  className = ''
+  className = '',
+  onMouseDown,
+  onMouseMove,
+  onMouseUp,
+  onTouchStart,
+  onTouchMove,
+  onTouchEnd,
+  claimProgress = 0,
+  isBeingClaimed = false,
+  isClaimed: propIsClaimed,
+  showProgressBar = false
 }) => {
   const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
 
@@ -152,27 +174,48 @@ const VaultItemCard: React.FC<VaultItemCardProps> = ({
   const rarity = rarityConfig[item.rarity];
   const status = statusConfig[item.status];
   const isExpired = item.status === 'expired';
-  const isClaimed = item.status === 'claimed';
+  const isClaimed = propIsClaimed !== undefined ? propIsClaimed : item.status === 'claimed';
   const isClickable = onItemClick && item.status === 'available';
 
   return (
     <div
       onClick={handleItemClick}
-      className={`bg-slate-800/95 backdrop-blur-md rounded-3xl p-6 border ${rarity.border} ${isClickable ? 'cursor-pointer hover:border-violet-300' : isExpired || isClaimed ? 'cursor-not-allowed' : 'cursor-default'} transition-all duration-300 group relative ${className}`}
+      onMouseDown={onMouseDown ? (e) => onMouseDown(item.id, e) : undefined}
+      onMouseMove={onMouseMove}
+      onMouseUp={onMouseUp}
+      onMouseLeave={onMouseUp}
+      onTouchStart={onTouchStart ? (e) => onTouchStart(item.id, e) : undefined}
+      onTouchMove={onTouchMove}
+      onTouchEnd={onTouchEnd}
+      className={`bg-slate-800/95 backdrop-blur-md rounded-3xl p-6 border ${rarity.border} ${isClickable || onMouseDown ? 'cursor-pointer hover:border-violet-300' : isExpired || isClaimed ? 'cursor-not-allowed' : 'cursor-default'} transition-all duration-300 group relative select-none ${className}`}
     >
+      {/* Progress Bar Background */}
+      {showProgressBar && (
+        <div className="absolute inset-0 rounded-3xl overflow-hidden z-5">
+          <div 
+            className={`absolute inset-y-0 left-0 bg-gradient-to-r ${rarity.color} opacity-30 transition-all duration-75 ease-linear`}
+            style={{ width: `${claimProgress}%` }}
+          />
+        </div>
+      )}
+
       {/* Claimed/Expired Overlay */}
       {(isClaimed || isExpired) && (
         <div className="absolute inset-0 rounded-3xl flex items-center justify-center z-20">
           <div 
-            className={`${isClaimed ? 'bg-purple-600' : 'bg-red-600'} rounded-xl px-3 py-2 flex items-center gap-2`}
+            className={`${isClaimed ? 'bg-purple-600' : 'bg-red-600'} rounded-xl px-3 py-2 flex items-center gap-2 ${showProgressBar ? 'animate-[scale-up_0.5s_ease-out]' : ''}`}
           >
             {isClaimed ? (
-              <CheckCircle className="h-5 w-5 text-white" />
+              showProgressBar ? (
+                <Skull className="h-5 w-5 text-white" />
+              ) : (
+                <CheckCircle className="h-5 w-5 text-white" />
+              )
             ) : (
               <X className="h-5 w-5 text-white" />
             )}
             <div className="text-white font-bold text-sm">
-              {isClaimed ? 'RESGATADO' : 'EXPIRADO'}
+              {isClaimed ? (showProgressBar ? 'SAQUEADO' : 'RESGATADO') : 'EXPIRADO'}
             </div>
           </div>
         </div>
@@ -248,7 +291,37 @@ const VaultItemCard: React.FC<VaultItemCardProps> = ({
             </div>
           </div>
         )}
+
+        {/* Claim Progress Indicator - específico para VaultMain */}
+        {isBeingClaimed && showProgressBar && (
+          <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-10">
+            <div className="bg-black/70 backdrop-blur-sm rounded-full px-4 py-2">
+              <div className="text-white text-sm font-medium">
+                {claimProgress >= 100 ? 'SAQUEANDO...' : `${Math.round(claimProgress)}%`}
+              </div>
+            </div>
+          </div>
+        )}
       </div>
+
+      {/* CSS for scale-up animation */}
+      {showProgressBar && (
+        <style>{`
+          @keyframes scale-up {
+            0% {
+              transform: scale(0);
+              opacity: 0;
+            }
+            50% {
+              opacity: 1;
+            }
+            100% {
+              transform: scale(1);
+              opacity: 1;
+            }
+          }
+        `}</style>
+      )}
     </div>
   );
 };

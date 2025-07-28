@@ -88,6 +88,17 @@ Preferred communication style: Simple, everyday language.
 - Integrated modal with SavedCard component for seamless card management
 - Maintained all functionality while improving layout flow and user experience
 
+### VaultItemCard Consistency Implementation (July 28, 2025)
+- Unificado sistema de cards entre VaultMain e MyVault para consistência visual completa
+- VaultMain agora usa o mesmo VaultItemCard utilizado no MyVault em vez de cards customizados
+- Estendido VaultItemCard com props opcionais para funcionalidade press-and-hold específica do VaultMain
+- Adicionadas propriedades: onMouseDown, onMouseMove, onMouseUp, onTouchStart, onTouchMove, onTouchEnd
+- Implementado suporte a barra de progresso (showProgressBar) e indicadores de progresso (claimProgress, isBeingClaimed)
+- Mantida funcionalidade original de saque por press-and-hold no VaultMain com visual consistente
+- Cards de itens agora têm aparência idêntica em ambos contextos (MyVault e VaultMain)
+- Overlay "SAQUEADO" vs "RESGATADO" diferenciado por contexto usando showProgressBar
+- Removidos cards customizados duplicados, código mais limpo e manutenível
+
 ### Chat Abandon Functionality (July 28, 2025)
 - Implementada funcionalidade de abandono do chat com modal de confirmação
 - Adicionado redirecionamento automático para tela inicial (vault-discovery) após confirmação
