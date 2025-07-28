@@ -35,6 +35,7 @@ interface MainChatVaultProps {
   onVaultToggle?: () => void;
   isTimeUp?: boolean;
   onAddTime?: () => void;
+  onTimeAdded?: (timeInSeconds: number) => void;
 }
 
 const MainChatVault: React.FC<MainChatVaultProps> = ({
@@ -51,7 +52,8 @@ const MainChatVault: React.FC<MainChatVaultProps> = ({
   onAbandon,
   onVaultToggle = () => {},
   isTimeUp = false,
-  onAddTime = () => {}
+  onAddTime = () => {},
+  onTimeAdded
 }) => {
   const [, setLocation] = useLocation();
   const [messages, setMessages] = useState<Message[]>(initialMessages);
