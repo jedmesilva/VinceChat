@@ -180,7 +180,7 @@ const VaultCard: React.FC<VaultCardProps> = React.memo(({ vault, onVaultClick, i
       }`}
     >
       <div 
-        className={`relative min-h-[420px] w-full bg-slate-800/90 backdrop-blur-sm rounded-3xl p-5 border-2 ${difficulty.border} transition-all duration-300 cursor-pointer group ${difficulty.glow} flex flex-col`}
+        className={`relative min-h-[420px] bg-slate-800/90 backdrop-blur-sm rounded-3xl p-5 border-2 ${difficulty.border} transition-all duration-300 cursor-pointer group ${difficulty.glow} flex flex-col`}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         onClick={handleClick}
@@ -355,14 +355,14 @@ const VaultGrid: React.FC<VaultGridProps> = ({
   className = "",
   myVaultVisible = false
 }) => {
-  // Configuração do Masonry para diferentes breakpoints com larguras mínimas
+  // Configuração do Masonry baseada na visibilidade do MyVault
   const masonryBreakpointCols = {
-    default: gridConfig.cols?.xl || 4,    // xl: 4 colunas (tela cheia)
-    1280: gridConfig.cols?.lg || 3,       // lg: 3 colunas (desktop)
-    1024: 2,                              // lg: 2 colunas (desktop com sidebar)
-    768: gridConfig.cols?.md || 2,        // md: 2 colunas (tablet)
-    640: 1,                               // sm: 1 coluna (mobile)
-    480: 1                                // xs: 1 coluna (mobile pequeno)
+    default: myVaultVisible ? 3 : (gridConfig.cols?.xl || 4),  // xl: ajusta baseado no MyVault
+    1280: myVaultVisible ? 2 : (gridConfig.cols?.lg || 3),     // lg: ajusta baseado no MyVault  
+    1024: myVaultVisible ? 2 : 3,                              // lg: reduz quando MyVault visível
+    768: gridConfig.cols?.md || 2,                             // md: 2 colunas (tablet)
+    640: 1,                                                    // sm: 1 coluna (mobile)
+    480: 1                                                     // xs: 1 coluna (mobile pequeno)
   };
 
   return (
@@ -406,13 +406,13 @@ const VaultGrid: React.FC<VaultGridProps> = ({
               </p>
             </div>
           ) : (
-            <div className={`grid gap-4 ${
-              myVaultVisible 
-                ? 'xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-2 grid-cols-1'
-                : 'xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 grid-cols-1'
-            }`}>
+            <Masonry
+              breakpointCols={masonryBreakpointCols}
+              className="vault-masonry-grid"
+              columnClassName="vault-masonry-grid-column"
+            >
               {vaults.map((vault, index) => (
-                <div key={vault.id}>
+                <div key={vault.id} className="mb-4">
                   <VaultCard 
                     vault={vault} 
                     onVaultClick={onVaultClick}
@@ -420,7 +420,7 @@ const VaultGrid: React.FC<VaultGridProps> = ({
                   />
                 </div>
               ))}
-            </div>
+            </Masonry>
           )}
         </div>
       </div>
