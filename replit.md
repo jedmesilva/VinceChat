@@ -95,6 +95,7 @@ Preferred communication style: Simple, everyday language.
 - Usuário agora pode sair do chat clicando em "Abandonar" → confirmar no pop-up → volta à tela inicial
 - Funcionalidade integrada tanto no MainChatVault quanto na página chat-vault
 - Navegação usando useLocation() do wouter para setLocation('/')
+- Texto da descrição do modal otimizado para ser mais conciso e direto
 
 ### Project Migration (July 13, 2025)
 - Successfully migrated project from Replit Agent to Replit environment

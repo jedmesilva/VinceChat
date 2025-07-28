@@ -54,7 +54,7 @@ const AbandonConfirmationModal: React.FC<AbandonConfirmationModalProps> = ({
 
         {/* Description */}
         <p className="text-slate-400 text-center mb-6">
-          Você tem certeza que deseja abandonar este cofre? Todo o progresso de convencimento será perdido e você precisará começar novamente.
+          Todo o progresso de convencimento será perdido e você precisará começar novamente.
         </p>
 
         {/* Actions */}
