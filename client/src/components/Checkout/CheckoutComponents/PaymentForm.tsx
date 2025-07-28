@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { CreditCard, Smartphone, User, Calendar, Lock, QrCode, CheckCircle, AlertCircle, Shield, X } from 'lucide-react';
+import { CreditCard, Smartphone, User, Calendar, Lock, QrCode, CheckCircle, AlertCircle, Shield } from 'lucide-react';
 
 interface PaymentFormProps {
   selectedTime?: string;
@@ -8,7 +8,6 @@ interface PaymentFormProps {
   onPaymentCompleted?: () => void;
   onPaymentSubmit?: (paymentData: any) => void;
   onBack?: () => void;
-  onClose?: () => void;
   className?: string;
 }
 
@@ -19,7 +18,6 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
   onPaymentCompleted, 
   onPaymentSubmit, 
   onBack,
-  onClose,
   className = '' 
 }) => {
   const [paymentMethod, setPaymentMethod] = useState<'card' | 'pix'>('card');
@@ -99,11 +97,11 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
     if (!validateForm()) return;
 
     setIsProcessing(true);
-
+    
     try {
       // Simular processamento
       await new Promise(resolve => setTimeout(resolve, 2000));
-
+      
       const paymentData = {
         method: paymentMethod,
         amount: amount || 0,
@@ -132,7 +130,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
 
   const handleCardInputChange = (field: keyof typeof cardData, value: string) => {
     let formattedValue = value;
-
+    
     if (field === 'number') {
       formattedValue = formatCardNumber(value);
     } else if (field === 'expiry') {
@@ -140,7 +138,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
     } else if (field === 'cvv') {
       formattedValue = value.replace(/\D/g, '').substring(0, 4);
     }
-
+    
     setCardData(prev => ({ ...prev, [field]: formattedValue }));
     if (errors[field]) {
       setErrors(prev => ({ ...prev, [field]: '' }));
@@ -154,26 +152,23 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
   return (
     <div className={`w-full max-w-md mx-auto ${className}`}>
       <div className="bg-slate-800/95 backdrop-blur-md rounded-3xl p-8 border border-slate-700/50 shadow-2xl shadow-black/50">
-
+        
         {/* Header */}
-        <div className="flex items-center justify-between mb-6">
-          <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 bg-green-500/20 rounded-xl flex items-center justify-center">
-              <CreditCard className="w-5 h-5 text-green-400" />
+        <div className="mb-6">
+          <div className="flex items-start gap-4">
+            <div className="w-12 h-12 bg-violet-500 rounded-2xl flex items-center justify-center shadow-lg flex-shrink-0">
+              <CreditCard className="h-6 w-6 text-white" />
             </div>
-            <div>
-              <h3 className="text-lg font-semibold text-white">Finalizar Pagamento</h3>
-              <p className="text-sm text-slate-400">Complete sua compra de tempo</p>
+            
+            <div className="flex-1">
+              <h1 className="text-2xl font-bold text-white mb-2 leading-tight">
+                Finalizar Pagamento
+              </h1>
+              <p className="text-slate-400 text-base leading-relaxed">
+                Escolha sua forma de pagamento preferida
+              </p>
             </div>
           </div>
-          {onClose && (
-            <button
-              onClick={onClose}
-              className="w-8 h-8 bg-slate-700/50 hover:bg-slate-700/80 rounded-lg flex items-center justify-center text-slate-300 hover:text-white transition-colors"
-            >
-              <X className="w-4 h-4" />
-            </button>
-          )}
         </div>
 
         {/* Valor */}
@@ -189,7 +184,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
           <label className="block text-slate-300 text-sm font-medium mb-3">
             Método de Pagamento
           </label>
-
+          
           <div className="flex gap-3">
             <button
               type="button"
@@ -203,7 +198,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
               <CreditCard className="h-5 w-5" />
               <span className="font-medium">Cartão</span>
             </button>
-
+            
             <button
               type="button"
               onClick={() => setPaymentMethod('pix')}
@@ -300,7 +295,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
                     </div>
                   )}
                 </div>
-
+                
                 <div>
                   <label className="block text-slate-300 text-sm font-medium mb-2">
                     CVV

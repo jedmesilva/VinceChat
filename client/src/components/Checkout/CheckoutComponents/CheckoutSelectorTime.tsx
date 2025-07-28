@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
-import { Clock, Plus, Minus, Star, Timer, X } from 'lucide-react';
+import { Clock, Plus, Minus, Star, Timer } from 'lucide-react';
 
 interface CheckoutSelectorTimeProps {
-  onPurchase: (time: string, price: number) => void;
-  onClose?: () => void;
+  onPurchase?: (time: string, price: number) => void;
   className?: string;
 }
 
-const CheckoutSelectorTime: React.FC<CheckoutSelectorTimeProps> = ({ onPurchase, onClose, className = '' }) => {
+const CheckoutSelectorTime: React.FC<CheckoutSelectorTimeProps> = ({ onPurchase, className = '' }) => {
   const [selectedBlocks, setSelectedBlocks] = useState(1);
   const [isPressed, setIsPressed] = useState(false);
   const minutesPerBlock = 2.5;
@@ -21,7 +20,7 @@ const CheckoutSelectorTime: React.FC<CheckoutSelectorTimeProps> = ({ onPurchase,
     const hours = Math.floor(minutes / 60);
     const remainingMinutes = Math.floor(minutes % 60);
     const seconds = Math.round((minutes - Math.floor(minutes)) * 60);
-
+    
     if (hours > 0) {
       if (seconds === 0) {
         return `${hours}h ${remainingMinutes}min`;
@@ -40,7 +39,7 @@ const CheckoutSelectorTime: React.FC<CheckoutSelectorTimeProps> = ({ onPurchase,
     const hours = Math.floor(minutes / 60);
     const remainingMinutes = Math.floor(minutes % 60);
     const seconds = Math.round((minutes - Math.floor(minutes)) * 60);
-
+    
     if (hours > 0) {
       return `${hours.toString().padStart(2, '0')}:${remainingMinutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
     } else {
@@ -60,7 +59,7 @@ const CheckoutSelectorTime: React.FC<CheckoutSelectorTimeProps> = ({ onPurchase,
 
   const handlePurchase = () => {
     const timeString = formatTime(totalMinutes);
-
+    
     if (onPurchase) {
       onPurchase(timeString, totalPrice);
     } else {
@@ -72,34 +71,33 @@ const CheckoutSelectorTime: React.FC<CheckoutSelectorTimeProps> = ({ onPurchase,
   return (
     <div className={`w-full ${className}`}>
       <div className="bg-slate-800/95 backdrop-blur-md rounded-3xl p-4 sm:p-6 md:p-8 border border-slate-700/50 shadow-2xl shadow-black/50">
-
+        
         {/* Header */}
-        <div className="flex items-center justify-between mb-6">
-          <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 bg-violet-500/20 rounded-xl flex items-center justify-center">
-              <Clock className="w-5 h-5 text-violet-400" />
+        <div className="mb-6">
+          <div className="flex items-start gap-4">
+            <div className="w-12 h-12 bg-violet-500 rounded-2xl flex items-center justify-center shadow-lg flex-shrink-0">
+              <Clock className="h-6 w-6 text-white" />
             </div>
-            <div>
-              <h3 className="text-lg font-semibold text-white">Adicionar Tempo</h3>
-              <p className="text-sm text-slate-400">Selecione o tempo que deseja adicionar</p>
+            
+            <div className="flex-1">
+              <h1 className="text-2xl font-bold text-white mb-2 leading-tight">
+                Adicionar Tempo
+              </h1>
+              <p className="text-slate-400 text-base leading-relaxed">
+                Adicione mais tempo para continuar sua sessão
+              </p>
             </div>
           </div>
-          {onClose && (
-            <button
-              onClick={onClose}
-              className="w-8 h-8 bg-slate-700/50 hover:bg-slate-700/80 rounded-lg flex items-center justify-center text-slate-300 hover:text-white transition-colors"
-            >
-              <X className="w-4 h-4" />
-            </button>
-          )}
         </div>
+
+
 
         {/* Seletor de Tempo - Elemento Principal */}
         <div className="mb-8">
           <label className="block text-slate-300 text-sm font-medium mb-4">
             Tempo a adicionar
           </label>
-
+          
           <div className="flex items-center justify-center gap-3 sm:gap-6 mb-4">
             <button
               onClick={handleDecrease}
@@ -108,7 +106,7 @@ const CheckoutSelectorTime: React.FC<CheckoutSelectorTimeProps> = ({ onPurchase,
             >
               <Minus className="w-5 h-5 sm:w-6 sm:h-6 text-slate-300" />
             </button>
-
+            
             <div className="text-center px-4 py-3 sm:px-6 sm:py-4 bg-slate-900/50 rounded-2xl border border-slate-700/30 min-w-[100px] sm:min-w-[120px] flex-1 max-w-[140px]">
               <div className="text-2xl sm:text-4xl font-bold text-white mb-1">
                 {formatTimeShort(totalMinutes)}
@@ -117,7 +115,7 @@ const CheckoutSelectorTime: React.FC<CheckoutSelectorTimeProps> = ({ onPurchase,
                 {formatTime(totalMinutes)}
               </div>
             </div>
-
+            
             <button
               onClick={handleIncrease}
               className="w-12 h-12 sm:w-14 sm:h-14 bg-slate-700/80 hover:bg-slate-600/80 rounded-2xl flex items-center justify-center transition-all duration-200 transform hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-violet-500/50"
@@ -133,7 +131,7 @@ const CheckoutSelectorTime: React.FC<CheckoutSelectorTimeProps> = ({ onPurchase,
             <Star className="h-5 w-5 text-violet-400" />
             Resumo
           </h3>
-
+          
           <div className="space-y-3">
             <div className="flex justify-between items-center text-sm">
               <span className="text-slate-400">Tempo total:</span>
@@ -141,7 +139,7 @@ const CheckoutSelectorTime: React.FC<CheckoutSelectorTimeProps> = ({ onPurchase,
                 {formatTime(totalMinutes)}
               </span>
             </div>
-
+            
             <div className="border-t border-slate-700/50 pt-3 mt-3">
               <div className="flex justify-between items-center">
                 <span className="text-slate-300 font-bold">Total:</span>
