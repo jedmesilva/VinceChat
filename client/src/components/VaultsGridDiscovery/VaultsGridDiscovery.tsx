@@ -179,7 +179,7 @@ const VaultCard: React.FC<VaultCardProps> = React.memo(({ vault, onVaultClick, i
       }`}
     >
       <div 
-        className={`relative min-h-[480px] min-w-[280px] bg-slate-800/90 backdrop-blur-sm rounded-3xl p-6 border-2 ${difficulty.border} transition-all duration-300 cursor-pointer group ${difficulty.glow} flex flex-col`}
+        className={`relative min-h-[420px] min-w-[260px] bg-slate-800/90 backdrop-blur-sm rounded-3xl p-5 border-2 ${difficulty.border} transition-all duration-300 cursor-pointer group ${difficulty.glow} flex flex-col`}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         onClick={handleClick}
@@ -239,7 +239,7 @@ const VaultCard: React.FC<VaultCardProps> = React.memo(({ vault, onVaultClick, i
         </div>
 
         {/* Items Section - Flexible */}
-        <div className="flex-1 bg-slate-700/30 rounded-2xl p-4 mb-4 flex flex-col min-h-[200px]">
+        <div className="flex-1 bg-slate-700/30 rounded-2xl p-3 mb-3 flex flex-col min-h-[160px]">
           <h4 className="text-sm font-bold text-white mb-3 flex items-center gap-2">
             {vault.itemsVisible === false ? (
               <EyeOff className="h-4 w-4 text-slate-400" />
@@ -410,7 +410,7 @@ const VaultGrid: React.FC<VaultGridProps> = ({
               columnClassName="vault-masonry-grid-column"
             >
               {vaults.map((vault, index) => (
-                <div key={vault.id} className="mb-6 max-[480px]:mb-4">
+                <div key={vault.id} className="mb-4 max-[480px]:mb-3">
                   <VaultCard 
                     vault={vault} 
                     onVaultClick={onVaultClick}

@@ -245,11 +245,11 @@ const VaultDiscovery: React.FC = () => {
               gridConfig={{
                 cols: { 
                   sm: 1, 
-                  md: myVaultVisible ? 1 : 2, 
+                  md: myVaultVisible ? 2 : 2, 
                   lg: myVaultVisible ? 2 : 3, 
-                  xl: myVaultVisible ? 2 : 4 
+                  xl: myVaultVisible ? 3 : 4 
                 },
-                gap: 6
+                gap: 4
               }}
               showBackground={false} // Removemos o background do grid já que a página tem seu próprio background
             />
