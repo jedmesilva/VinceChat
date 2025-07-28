@@ -53,18 +53,20 @@ body {
 /* Vault Cards Masonry Grid */
 .vault-masonry-grid {
   display: flex;
-  margin-left: -16px; /* gutter size offset reduzido */
+  margin-left: -12px; /* gutter size pequeno */
   width: auto;
 }
 
 .vault-masonry-grid-column {
-  padding-left: 16px; /* gutter size reduzido */
+  padding-left: 12px; /* gutter size pequeno */
   background-clip: padding-box;
+  width: 100% !important; /* força a largura igual */
 }
 
 .vault-masonry-grid-column > div {
-  min-width: 260px; /* Largura mínima menor */
-  max-width: 320px; /* Largura máxima menor para melhor densidade */
+  width: 100%; /* usa toda a largura da coluna */
+  min-width: unset; /* remove min-width que estava causando problema */
+  max-width: unset; /* remove max-width que estava causando problema */
 }
 
 /* Scrollbar hide utility class */

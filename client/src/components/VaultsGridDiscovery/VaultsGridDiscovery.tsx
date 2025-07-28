@@ -68,6 +68,7 @@ interface VaultGridProps {
   };
   showBackground?: boolean;
   className?: string;
+  myVaultVisible?: boolean;
 }
 
 // ===== CONFIGURAÇÕES DE DIFICULDADE =====
@@ -179,7 +180,7 @@ const VaultCard: React.FC<VaultCardProps> = React.memo(({ vault, onVaultClick, i
       }`}
     >
       <div 
-        className={`relative min-h-[420px] min-w-[260px] bg-slate-800/90 backdrop-blur-sm rounded-3xl p-5 border-2 ${difficulty.border} transition-all duration-300 cursor-pointer group ${difficulty.glow} flex flex-col`}
+        className={`relative min-h-[420px] w-full bg-slate-800/90 backdrop-blur-sm rounded-3xl p-5 border-2 ${difficulty.border} transition-all duration-300 cursor-pointer group ${difficulty.glow} flex flex-col`}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         onClick={handleClick}
@@ -351,7 +352,8 @@ const VaultGrid: React.FC<VaultGridProps> = ({
     gap: 6
   },
   showBackground = true,
-  className = ""
+  className = "",
+  myVaultVisible = false
 }) => {
   // Configuração do Masonry para diferentes breakpoints com larguras mínimas
   const masonryBreakpointCols = {
@@ -404,13 +406,13 @@ const VaultGrid: React.FC<VaultGridProps> = ({
               </p>
             </div>
           ) : (
-            <Masonry
-              breakpointCols={masonryBreakpointCols}
-              className="vault-masonry-grid"
-              columnClassName="vault-masonry-grid-column"
-            >
+            <div className={`grid gap-4 ${
+              myVaultVisible 
+                ? 'xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-2 grid-cols-1'
+                : 'xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 grid-cols-1'
+            }`}>
               {vaults.map((vault, index) => (
-                <div key={vault.id} className="mb-4 max-[480px]:mb-3">
+                <div key={vault.id}>
                   <VaultCard 
                     vault={vault} 
                     onVaultClick={onVaultClick}
@@ -418,7 +420,7 @@ const VaultGrid: React.FC<VaultGridProps> = ({
                   />
                 </div>
               ))}
-            </Masonry>
+            </div>
           )}
         </div>
       </div>
