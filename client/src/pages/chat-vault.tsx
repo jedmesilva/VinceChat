@@ -4,6 +4,7 @@ import MainChatVault from '../components/ChatVault/MainChatVault';
 import MyVaultMain from '../components/MyVault/MyVaultMain';
 import VaultMain from '../components/Vault/VaultMain';
 import Timer from '../components/Timer/Timer';
+import Checkout from '../components/Checkout/Checkout';
 import { Crown, Gem, Shield, Trophy, Gift } from 'lucide-react';
 
 interface VaultData {
@@ -22,6 +23,9 @@ const ChatVaultPage: React.FC = () => {
   const [timerActive, setTimerActive] = useState(false);
   const [showVaultMain, setShowVaultMain] = useState(false); // Estado para controlar qual tela mostrar
   const [mobileView, setMobileView] = useState<'chat' | 'myvault'>('chat'); // Estado para controlar a vista no mobile
+  const [isTimeUp, setIsTimeUp] = useState(false);
+  const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
+  const [additionalTime, setAdditionalTime] = useState(0);
 
   useEffect(() => {
     const loadVault = async () => {
@@ -174,8 +178,26 @@ const ChatVaultPage: React.FC = () => {
 
   const handleTimerTimeUp = () => {
     setTimerActive(false);
-    // Aqui você pode adicionar lógica para quando o tempo acabar
+    setIsTimeUp(true);
     console.log('Tempo esgotado!');
+  };
+
+  const handleAddTime = () => {
+    setIsCheckoutOpen(true);
+  };
+
+  const handleTimeAdded = (timeInSeconds: number) => {
+    setIsTimeUp(false);
+    setIsCheckoutOpen(false);
+    setAdditionalTime(timeInSeconds);
+  };
+
+  const handleCheckoutClose = () => {
+    setIsCheckoutOpen(false);
+  };
+
+  const handleAdditionalTimeUsed = () => {
+    setAdditionalTime(0);
   };
 
   if (loading) {
@@ -205,6 +227,8 @@ const ChatVaultPage: React.FC = () => {
           onStart={handleTimerStart}
           onAbandon={handleTimerAbandon}
           onTimeUp={handleTimerTimeUp}
+          additionalTime={additionalTime}
+          onAdditionalTimeUsed={handleAdditionalTimeUsed}
         />
       </div>
 
@@ -242,6 +266,8 @@ const ChatVaultPage: React.FC = () => {
               onVaultAction={handleVaultAction}
               onVaultToggle={handleToggleToMyVault}
               onAbandon={handleAbandonChat}
+              isTimeUp={isTimeUp}
+              onAddTime={handleAddTime}
               initialMessages={[
                 {
                   id: 'welcome',
@@ -272,6 +298,13 @@ const ChatVaultPage: React.FC = () => {
           )}
         </div>
       </div>
+
+      {/* Checkout Modal */}
+      <Checkout 
+        isOpen={isCheckoutOpen}
+        onClose={handleCheckoutClose}
+        onTimeAdded={handleTimeAdded}
+      />
     </div>
   );
 };

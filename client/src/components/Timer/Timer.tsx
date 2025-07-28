@@ -7,13 +7,17 @@ interface TimerProps {
   onStart?: () => void;
   onAbandon?: () => void;
   onTimeUp?: () => void;
+  additionalTime?: number;
+  onAdditionalTimeUsed?: () => void;
 }
 
 const Timer: React.FC<TimerProps> = ({ 
   initialTime = 300, 
   onStart = () => {}, 
   onAbandon = () => {}, 
-  onTimeUp = () => {} 
+  onTimeUp = () => {},
+  additionalTime = 0,
+  onAdditionalTimeUsed = () => {}
 }) => {
   const [timeLeft, setTimeLeft] = useState(initialTime);
   const [isActive, setIsActive] = useState(true);
@@ -23,6 +27,17 @@ const Timer: React.FC<TimerProps> = ({
   const handleTimeUp = useCallback(() => {
     onTimeUp();
   }, [onTimeUp]);
+
+  // Effect para adicionar tempo extra quando necessário
+  useEffect(() => {
+    if (additionalTime > 0) {
+      setTimeLeft(prevTime => prevTime + additionalTime);
+      if (timeLeft === 0) {
+        setIsActive(true); // Reativar o timer se estava parado
+      }
+      onAdditionalTimeUsed();
+    }
+  }, [additionalTime, onAdditionalTimeUsed, timeLeft]);
 
   useEffect(() => {
     let interval: NodeJS.Timeout | null = null;

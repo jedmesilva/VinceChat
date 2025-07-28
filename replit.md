@@ -88,6 +88,16 @@ Preferred communication style: Simple, everyday language.
 - Integrated modal with SavedCard component for seamless card management
 - Maintained all functionality while improving layout flow and user experience
 
+### InsufficientTimeCard Integration (July 28, 2025)
+- Implementada funcionalidade para exibir InsufficientTimeCard quando timer esgotar
+- Card de tempo insuficiente substitui input de chat quando tempo acaba
+- Botão "Adicionar Tempo" abre modal Checkout para comprar mais tempo
+- Timer reinicia automaticamente quando tempo adicional é comprado
+- Integração completa entre Timer, MainChatVault, InsufficientTimeCard e Checkout
+- Sistema permite continuidade da conversa após compra de tempo adicional
+- Estados de tempo gerenciados centralmente na página chat-vault
+- Timer reativa e continua contagem com tempo adicionado
+
 ### VaultItemCard Consistency Implementation (July 28, 2025)
 - Unificado sistema de cards entre VaultMain e MyVault para consistência visual completa
 - VaultMain agora usa o mesmo VaultItemCard utilizado no MyVault em vez de cards customizados

@@ -6,6 +6,7 @@ import ChatVaultMessageInput from './ChatVaultMessageInput/ChatVaultMessageInput
 import ChatVaultHistory from './ChatVaultHistory/ChatVaultHistory';
 import VaultSectionChat from '../VaultSectionChat/VaultSectionChat';
 import AbandonConfirmationModal from './AbandonConfirmationModal/AbandonConfirmationModal';
+import InsufficientTimeCard from '../InsufficientTimeCard/InsufficientTimeCard';
 
 interface Message {
   id: string;
@@ -32,6 +33,8 @@ interface MainChatVaultProps {
   inputPlaceholder?: string;
   onAbandon?: () => void;
   onVaultToggle?: () => void;
+  isTimeUp?: boolean;
+  onAddTime?: () => void;
 }
 
 const MainChatVault: React.FC<MainChatVaultProps> = ({
@@ -46,7 +49,9 @@ const MainChatVault: React.FC<MainChatVaultProps> = ({
   vaultActionLabel = "Saquear",
   inputPlaceholder = "Digite sua mensagem para convencer...",
   onAbandon,
-  onVaultToggle = () => {}
+  onVaultToggle = () => {},
+  isTimeUp = false,
+  onAddTime = () => {}
 }) => {
   const [, setLocation] = useLocation();
   const [messages, setMessages] = useState<Message[]>(initialMessages);
@@ -146,11 +151,18 @@ const MainChatVault: React.FC<MainChatVaultProps> = ({
           actionLabel={vaultActionLabel}
           vaultName={vaultName}
         />
-        <ChatVaultMessageInput
-          onSendMessage={handleSendMessage}
-          placeholder={inputPlaceholder}
-          disabled={!isVaultLocked}
-        />
+        {isTimeUp ? (
+          <InsufficientTimeCard 
+            onAddTime={onAddTime}
+            vaultName={vaultName}
+          />
+        ) : (
+          <ChatVaultMessageInput
+            onSendMessage={handleSendMessage}
+            placeholder={inputPlaceholder}
+            disabled={!isVaultLocked}
+          />
+        )}
       </div>
 
       {/* Modal de confirmação de abandono */}
