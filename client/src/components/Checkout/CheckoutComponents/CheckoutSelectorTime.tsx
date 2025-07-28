@@ -79,7 +79,7 @@ const CheckoutSelectorTime: React.FC<CheckoutSelectorTimeProps> = ({ onPurchase,
               <Clock className="h-6 w-6 text-white" />
             </div>
             
-            <div className="flex-1">
+            <div className="flex-1 pr-10">
               <h1 className="text-2xl font-bold text-white mb-2 leading-tight">
                 Adicionar Tempo
               </h1>

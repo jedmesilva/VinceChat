@@ -68,12 +68,12 @@ const Checkout: React.FC<CheckoutProps> = ({ isOpen, onClose, onTimeAdded }) => 
           {/* Conteúdo dinâmico baseado no step */}
           {currentStep === 'time-selection' && (
             <div className="relative">
-              {/* Botão de fechar integrado ao conteúdo */}
+              {/* Botão de fechar no canto direito do header */}
               <button
                 onClick={handleClose}
-                className="absolute top-4 right-4 w-8 h-8 bg-slate-700/80 hover:bg-slate-600 rounded-full flex items-center justify-center text-slate-300 hover:text-white transition-all duration-200 z-20"
+                className="absolute top-8 right-8 w-6 h-6 hover:bg-slate-700 rounded-full flex items-center justify-center text-slate-400 hover:text-white transition-all duration-200 z-20"
               >
-                <X size={16} />
+                <X size={14} />
               </button>
               <CheckoutSelectorTime onPurchase={handleTimeSelected} className="w-full" />
             </div>
@@ -81,12 +81,12 @@ const Checkout: React.FC<CheckoutProps> = ({ isOpen, onClose, onTimeAdded }) => 
 
           {currentStep === 'payment' && (
             <div className="relative">
-              {/* Botão de fechar integrado ao conteúdo */}
+              {/* Botão de fechar no canto direito do header */}
               <button
                 onClick={handleClose}
-                className="absolute top-4 right-4 w-8 h-8 bg-slate-700/80 hover:bg-slate-600 rounded-full flex items-center justify-center text-slate-300 hover:text-white transition-all duration-200 z-20"
+                className="absolute top-8 right-8 w-6 h-6 hover:bg-slate-700 rounded-full flex items-center justify-center text-slate-400 hover:text-white transition-all duration-200 z-20"
               >
-                <X size={16} />
+                <X size={14} />
               </button>
               <PaymentForm 
                 selectedTime={selectedTime}
@@ -100,12 +100,12 @@ const Checkout: React.FC<CheckoutProps> = ({ isOpen, onClose, onTimeAdded }) => 
 
           {currentStep === 'confirmation' && (
             <div className="relative">
-              {/* Botão de fechar integrado ao conteúdo */}
+              {/* Botão de fechar no canto direito do header */}
               <button
                 onClick={handleClose}
-                className="absolute top-4 right-4 w-8 h-8 bg-slate-700/80 hover:bg-slate-600 rounded-full flex items-center justify-center text-slate-300 hover:text-white transition-all duration-200 z-20"
+                className="absolute top-8 right-8 w-6 h-6 hover:bg-slate-700 rounded-full flex items-center justify-center text-slate-400 hover:text-white transition-all duration-200 z-20"
               >
-                <X size={16} />
+                <X size={14} />
               </button>
               <PaymentConfirmation 
                 selectedTime={selectedTime}
