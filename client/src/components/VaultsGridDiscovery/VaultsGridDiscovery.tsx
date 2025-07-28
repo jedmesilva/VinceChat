@@ -355,14 +355,14 @@ const VaultGrid: React.FC<VaultGridProps> = ({
   className = "",
   myVaultVisible = false
 }) => {
-  // Configuração do Masonry baseada na visibilidade do MyVault
+  // Configuração estática do Masonry - usa CSS puro para responsividade
   const masonryBreakpointCols = {
-    default: myVaultVisible ? 3 : (gridConfig.cols?.xl || 4),  // xl: ajusta baseado no MyVault
-    1280: myVaultVisible ? 2 : (gridConfig.cols?.lg || 3),     // lg: ajusta baseado no MyVault  
-    1024: myVaultVisible ? 2 : 3,                              // lg: reduz quando MyVault visível
-    768: gridConfig.cols?.md || 2,                             // md: 2 colunas (tablet)
-    640: 1,                                                    // sm: 1 coluna (mobile)
-    480: 1                                                     // xs: 1 coluna (mobile pequeno)
+    default: 4,     // xl: 4 colunas por padrão, será ajustado via CSS
+    1280: 3,        // lg: 3 colunas por padrão, será ajustado via CSS
+    1024: 2,        // lg: sempre 2 colunas em telas médias
+    768: 2,         // md: 2 colunas (tablet)
+    640: 1,         // sm: 1 coluna (mobile)
+    480: 1          // xs: 1 coluna (mobile pequeno)
   };
 
   return (
@@ -392,7 +392,7 @@ const VaultGrid: React.FC<VaultGridProps> = ({
 
       {/* Content */}
       <div className={`relative z-10 ${title ? 'px-4 pb-4' : 'p-4'}`}>
-        <div className="max-w-7xl mx-auto">
+        <div className={`max-w-7xl mx-auto vault-discovery-content ${myVaultVisible ? 'with-myvault' : ''}`}>
           {vaults.length === 0 ? (
             <div className="text-center py-16">
               <div className="w-24 h-24 bg-slate-700/30 rounded-full flex items-center justify-center mx-auto mb-6">

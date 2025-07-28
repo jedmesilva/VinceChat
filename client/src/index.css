@@ -62,7 +62,32 @@ body {
   background-clip: padding-box;
 }
 
-/* Não definir larguras específicas nos cards - deixar o Masonry gerenciar */
+/* Responsividade dinâmica para o Masonry via largura flexível */
+.vault-masonry-grid-column {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Ajuste do Masonry quando MyVault está visível */
+@media (min-width: 1280px) {
+  .with-myvault .vault-masonry-grid-column {
+    flex: 1 1 33.333%; /* 3 colunas quando MyVault visível */
+  }
+  
+  .vault-discovery-content:not(.with-myvault) .vault-masonry-grid-column {
+    flex: 1 1 25%; /* 4 colunas quando MyVault oculto */
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .with-myvault .vault-masonry-grid-column {
+    flex: 1 1 50%; /* 2 colunas quando MyVault visível */
+  }
+  
+  .vault-discovery-content:not(.with-myvault) .vault-masonry-grid-column {
+    flex: 1 1 33.333%; /* 3 colunas quando MyVault oculto */
+  }
+}
 
 /* Scrollbar hide utility class */
 .scrollbar-hide {
