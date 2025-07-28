@@ -63,44 +63,38 @@ const Checkout: React.FC<CheckoutProps> = ({ isOpen, onClose, onTimeAdded }) => 
 
   return (
     <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 overflow-y-auto scrollbar-hide">
-      <div className="min-h-full flex flex-col">
-        {/* Header com botão de fechar - fixo no topo */}
-        <div className="flex-shrink-0 flex justify-end p-4">
+      <div className="min-h-full flex items-center justify-center px-4 py-8">
+        <div className="w-full max-w-md relative">
+          {/* Botão de fechar no canto superior direito do modal */}
           <button
             onClick={handleClose}
-            className="w-10 h-10 bg-slate-700 hover:bg-slate-600 rounded-full flex items-center justify-center text-slate-300 hover:text-white transition-all duration-200"
+            className="absolute -top-2 -right-2 w-8 h-8 bg-slate-700 hover:bg-slate-600 rounded-full flex items-center justify-center text-slate-300 hover:text-white transition-all duration-200 z-10"
           >
-            <X size={20} />
+            <X size={16} />
           </button>
-        </div>
-
-        {/* Container principal - centralizado e responsivo */}
-        <div className="flex-1 flex items-center justify-center px-4 pb-8">
-          <div className="w-full max-w-md">
             {/* Conteúdo dinâmico baseado no step */}
-            {currentStep === 'time-selection' && (
-              <CheckoutSelectorTime onPurchase={handleTimeSelected} className="w-full" />
-            )}
+          {currentStep === 'time-selection' && (
+            <CheckoutSelectorTime onPurchase={handleTimeSelected} className="w-full" />
+          )}
 
-            {currentStep === 'payment' && (
-              <PaymentForm 
-                selectedTime={selectedTime}
-                totalPrice={totalPrice}
-                onPaymentCompleted={handlePaymentCompleted}
-                onBack={() => setCurrentStep('time-selection')}
-                className="w-full"
-              />
-            )}
+          {currentStep === 'payment' && (
+            <PaymentForm 
+              selectedTime={selectedTime}
+              totalPrice={totalPrice}
+              onPaymentCompleted={handlePaymentCompleted}
+              onBack={() => setCurrentStep('time-selection')}
+              className="w-full"
+            />
+          )}
 
-            {currentStep === 'confirmation' && (
-              <PaymentConfirmation 
-                selectedTime={selectedTime}
-                totalPrice={totalPrice}
-                onClose={handleConfirmationClose}
-                className="w-full"
-              />
-            )}
-          </div>
+          {currentStep === 'confirmation' && (
+            <PaymentConfirmation 
+              selectedTime={selectedTime}
+              totalPrice={totalPrice}
+              onClose={handleConfirmationClose}
+              className="w-full"
+            />
+          )}
         </div>
       </div>
     </div>

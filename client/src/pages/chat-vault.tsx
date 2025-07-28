@@ -4,7 +4,6 @@ import MainChatVault from '../components/ChatVault/MainChatVault';
 import MyVaultMain from '../components/MyVault/MyVaultMain';
 import VaultMain from '../components/Vault/VaultMain';
 import Timer from '../components/Timer/Timer';
-import Checkout from '../components/Checkout/Checkout';
 import { Crown, Gem, Shield, Trophy, Gift } from 'lucide-react';
 
 interface VaultData {
@@ -24,7 +23,6 @@ const ChatVaultPage: React.FC = () => {
   const [showVaultMain, setShowVaultMain] = useState(false); // Estado para controlar qual tela mostrar
   const [mobileView, setMobileView] = useState<'chat' | 'myvault'>('chat'); // Estado para controlar a vista no mobile
   const [isTimeUp, setIsTimeUp] = useState(false);
-  const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
   const [additionalTime, setAdditionalTime] = useState(0);
 
   useEffect(() => {
@@ -183,17 +181,12 @@ const ChatVaultPage: React.FC = () => {
   };
 
   const handleAddTime = () => {
-    setIsCheckoutOpen(true);
+    // Timer component will handle opening its own checkout
   };
 
   const handleTimeAdded = (timeInSeconds: number) => {
     setIsTimeUp(false);
-    setIsCheckoutOpen(false);
     setAdditionalTime(timeInSeconds);
-  };
-
-  const handleCheckoutClose = () => {
-    setIsCheckoutOpen(false);
   };
 
   const handleAdditionalTimeUsed = () => {
@@ -298,13 +291,6 @@ const ChatVaultPage: React.FC = () => {
           )}
         </div>
       </div>
-
-      {/* Checkout Modal */}
-      <Checkout 
-        isOpen={isCheckoutOpen}
-        onClose={handleCheckoutClose}
-        onTimeAdded={handleTimeAdded}
-      />
     </div>
   );
 };
