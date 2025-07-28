@@ -154,6 +154,7 @@ const MainChatVault: React.FC<MainChatVaultProps> = ({
         {isTimeUp ? (
           <InsufficientTimeCard 
             onAddTime={onAddTime}
+            onTimeAdded={onTimeAdded}
             vaultName={vaultName}
           />
         ) : (
