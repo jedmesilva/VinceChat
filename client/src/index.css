@@ -50,6 +50,23 @@ body {
   display: none;
 }
 
+/* Vault Cards Masonry Grid */
+.vault-masonry-grid {
+  display: flex;
+  margin-left: -24px; /* gutter size offset */
+  width: auto;
+}
+
+.vault-masonry-grid-column {
+  padding-left: 24px; /* gutter size */
+  background-clip: padding-box;
+}
+
+.vault-masonry-grid-column > div {
+  min-width: 280px; /* Largura mínima para os cards */
+  max-width: 350px; /* Largura máxima para manter proporções */
+}
+
 /* Scrollbar hide utility class */
 .scrollbar-hide {
   -ms-overflow-style: none;

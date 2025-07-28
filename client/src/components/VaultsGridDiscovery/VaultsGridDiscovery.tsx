@@ -179,7 +179,7 @@ const VaultCard: React.FC<VaultCardProps> = React.memo(({ vault, onVaultClick, i
       }`}
     >
       <div 
-        className={`relative min-h-[480px] bg-slate-800/90 backdrop-blur-sm rounded-3xl p-6 border-2 ${difficulty.border} transition-all duration-300 cursor-pointer group ${difficulty.glow} flex flex-col`}
+        className={`relative min-h-[480px] min-w-[280px] bg-slate-800/90 backdrop-blur-sm rounded-3xl p-6 border-2 ${difficulty.border} transition-all duration-300 cursor-pointer group ${difficulty.glow} flex flex-col`}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         onClick={handleClick}
@@ -353,13 +353,14 @@ const VaultGrid: React.FC<VaultGridProps> = ({
   showBackground = true,
   className = ""
 }) => {
-  // Configuração do Masonry para diferentes breakpoints
+  // Configuração do Masonry para diferentes breakpoints com larguras mínimas
   const masonryBreakpointCols = {
-    default: gridConfig.cols?.xl || 4,    // xl: 4 colunas
-    1280: gridConfig.cols?.lg || 3,       // lg: 3 colunas
-    768: gridConfig.cols?.md || 2,        // md: 2 colunas  
-    640: gridConfig.cols?.sm || 2,        // sm: 2 colunas
-    480: 1                                // xs: 1 coluna
+    default: gridConfig.cols?.xl || 4,    // xl: 4 colunas (tela cheia)
+    1280: gridConfig.cols?.lg || 3,       // lg: 3 colunas (desktop)
+    1024: 2,                              // lg: 2 colunas (desktop com sidebar)
+    768: gridConfig.cols?.md || 2,        // md: 2 colunas (tablet)
+    640: 1,                               // sm: 1 coluna (mobile)
+    480: 1                                // xs: 1 coluna (mobile pequeno)
   };
 
   return (

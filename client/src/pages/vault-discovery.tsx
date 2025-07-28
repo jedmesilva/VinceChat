@@ -243,7 +243,12 @@ const VaultDiscovery: React.FC = () => {
                 description: "Inicie uma caçada para encontrar cofres disponíveis, ou aguarde que eles apareçam para você esporadicamente"
               }}
               gridConfig={{
-                cols: { sm: 2, md: 2, lg: 3, xl: 4 },
+                cols: { 
+                  sm: 1, 
+                  md: myVaultVisible ? 1 : 2, 
+                  lg: myVaultVisible ? 2 : 3, 
+                  xl: myVaultVisible ? 2 : 4 
+                },
                 gap: 6
               }}
               showBackground={false} // Removemos o background do grid já que a página tem seu próprio background
