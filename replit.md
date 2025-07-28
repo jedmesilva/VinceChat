@@ -88,6 +88,14 @@ Preferred communication style: Simple, everyday language.
 - Integrated modal with SavedCard component for seamless card management
 - Maintained all functionality while improving layout flow and user experience
 
+### Chat Abandon Functionality (July 28, 2025)
+- Implementada funcionalidade de abandono do chat com modal de confirmação
+- Adicionado redirecionamento automático para tela inicial (vault-discovery) após confirmação
+- Modal AbandonConfirmationModal já existia, integrado com navegação wouter
+- Usuário agora pode sair do chat clicando em "Abandonar" → confirmar no pop-up → volta à tela inicial
+- Funcionalidade integrada tanto no MainChatVault quanto na página chat-vault
+- Navegação usando useLocation() do wouter para setLocation('/')
+
 ### Project Migration (July 13, 2025)
 - Successfully migrated project from Replit Agent to Replit environment
 - Verified all packages are installed and working correctly

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Crown } from 'lucide-react';
+import { useLocation } from 'wouter';
 import ChatVaultHeader from './ChatVaultHeader/ChatVaultHeader';
 import ChatVaultMessageInput from './ChatVaultMessageInput/ChatVaultMessageInput';
 import ChatVaultHistory from './ChatVaultHistory/ChatVaultHistory';
@@ -47,6 +48,7 @@ const MainChatVault: React.FC<MainChatVaultProps> = ({
   onAbandon,
   onVaultToggle = () => {}
 }) => {
+  const [, setLocation] = useLocation();
   const [messages, setMessages] = useState<Message[]>(initialMessages);
   const [currentConviction, setCurrentConviction] = useState(conviction);
   const [showAbandonModal, setShowAbandonModal] = useState(false);
@@ -112,10 +114,8 @@ const MainChatVault: React.FC<MainChatVaultProps> = ({
     if (onAbandon) {
       onAbandon();
     } else {
-      // Comportamento padrão: resetar estado do chat
-      setMessages([]);
-      setCurrentConviction(conviction);
-      console.log('Chat abandonado - reiniciando...');
+      // Comportamento padrão: voltar para a tela inicial (vault-discovery)
+      setLocation('/');
     }
   };
 

@@ -159,6 +159,10 @@ const ChatVaultPage: React.FC = () => {
     setLocation('/');
   };
 
+  const handleAbandonChat = () => {
+    setLocation('/');
+  };
+
   const handleTimerStart = () => {
     setTimerActive(true);
   };
@@ -237,6 +241,7 @@ const ChatVaultPage: React.FC = () => {
               inputPlaceholder={vault.isLocked ? "Digite sua mensagem para convencer..." : "Este cofre já foi conquistado!"}
               onVaultAction={handleVaultAction}
               onVaultToggle={handleToggleToMyVault}
+              onAbandon={handleAbandonChat}
               initialMessages={[
                 {
                   id: 'welcome',
