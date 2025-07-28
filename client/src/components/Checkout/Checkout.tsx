@@ -65,35 +65,55 @@ const Checkout: React.FC<CheckoutProps> = ({ isOpen, onClose, onTimeAdded }) => 
     <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 overflow-y-auto scrollbar-hide">
       <div className="min-h-full flex items-center justify-center px-4 py-8">
         <div className="w-full max-w-md relative">
-          {/* Botão de fechar no canto superior direito do modal */}
-          <button
-            onClick={handleClose}
-            className="absolute -top-2 -right-2 w-8 h-8 bg-slate-700 hover:bg-slate-600 rounded-full flex items-center justify-center text-slate-300 hover:text-white transition-all duration-200 z-10"
-          >
-            <X size={16} />
-          </button>
-            {/* Conteúdo dinâmico baseado no step */}
+          {/* Conteúdo dinâmico baseado no step */}
           {currentStep === 'time-selection' && (
-            <CheckoutSelectorTime onPurchase={handleTimeSelected} className="w-full" />
+            <div className="relative">
+              {/* Botão de fechar integrado ao conteúdo */}
+              <button
+                onClick={handleClose}
+                className="absolute top-4 right-4 w-8 h-8 bg-slate-700/80 hover:bg-slate-600 rounded-full flex items-center justify-center text-slate-300 hover:text-white transition-all duration-200 z-20"
+              >
+                <X size={16} />
+              </button>
+              <CheckoutSelectorTime onPurchase={handleTimeSelected} className="w-full" />
+            </div>
           )}
 
           {currentStep === 'payment' && (
-            <PaymentForm 
-              selectedTime={selectedTime}
-              totalPrice={totalPrice}
-              onPaymentCompleted={handlePaymentCompleted}
-              onBack={() => setCurrentStep('time-selection')}
-              className="w-full"
-            />
+            <div className="relative">
+              {/* Botão de fechar integrado ao conteúdo */}
+              <button
+                onClick={handleClose}
+                className="absolute top-4 right-4 w-8 h-8 bg-slate-700/80 hover:bg-slate-600 rounded-full flex items-center justify-center text-slate-300 hover:text-white transition-all duration-200 z-20"
+              >
+                <X size={16} />
+              </button>
+              <PaymentForm 
+                selectedTime={selectedTime}
+                totalPrice={totalPrice}
+                onPaymentCompleted={handlePaymentCompleted}
+                onBack={() => setCurrentStep('time-selection')}
+                className="w-full"
+              />
+            </div>
           )}
 
           {currentStep === 'confirmation' && (
-            <PaymentConfirmation 
-              selectedTime={selectedTime}
-              totalPrice={totalPrice}
-              onClose={handleConfirmationClose}
-              className="w-full"
-            />
+            <div className="relative">
+              {/* Botão de fechar integrado ao conteúdo */}
+              <button
+                onClick={handleClose}
+                className="absolute top-4 right-4 w-8 h-8 bg-slate-700/80 hover:bg-slate-600 rounded-full flex items-center justify-center text-slate-300 hover:text-white transition-all duration-200 z-20"
+              >
+                <X size={16} />
+              </button>
+              <PaymentConfirmation 
+                selectedTime={selectedTime}
+                totalPrice={totalPrice}
+                onClose={handleConfirmationClose}
+                className="w-full"
+              />
+            </div>
           )}
         </div>
       </div>
